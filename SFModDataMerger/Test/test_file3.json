@@ -1,0 +1,19 @@
+{
+  "Machines": [
+  ],
+  "MultiMachines": [
+  ],
+  "Parts": [
+  ],
+  "Recipes": [
+    {
+      "Name": "Iron Ore",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "1"}
+      ]
+    }
+  ]
+}

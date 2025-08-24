@@ -1,0 +1,122 @@
+{
+  "Machines": [
+    {
+      "Name": "Miner Mk.1",
+      "Tier": "0-5",
+      "AveragePower": "-5",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {
+          "Part": "Portable Miner",
+          "Amount": "1"
+        },
+        {
+          "Part": "Iron Plate",
+          "Amount": "10"
+        },
+        {
+          "Part": "Concrete",
+          "Amount": "10"
+        }
+      ]
+    },
+    {
+      "Name": "Miner Mk.2",
+      "Tier": "4-3",
+      "AveragePower": "-15",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {
+          "Part": "Portable Miner",
+          "Amount": "2"
+        },
+        {
+          "Part": "Encased Industrial Beam",
+          "Amount": "10"
+        },
+        {
+          "Part": "Steel Pipe",
+          "Amount": "20"
+        },
+        {
+          "Part": "Modular Frame",
+          "Amount": "10"
+        }
+      ]
+    },
+    {
+      "Name": "Miner Mk.3",
+      "Tier": "8-4",
+      "AveragePower": "-45",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {
+          "Part": "Portable Miner",
+          "Amount": "3"
+        },
+        {
+          "Part": "Steel Pipe",
+          "Amount": "50"
+        },
+        {
+          "Part": "Supercomputer",
+          "Amount": "5"
+        },
+        {
+          "Part": "Fused Modular Frame",
+          "Amount": "10"
+        },
+        {
+          "Part": "Turbo Motor",
+          "Amount": "3"
+        }
+      ]
+    }
+  ],
+  "MultiMachines": [
+    {
+      "Name": "Miner",
+      "ShowPpm": true,
+      "DefaultMax": "60",
+      "Machines": [
+        {
+          "Name": "Miner Mk.1",
+          "PartsRatio": "60",
+          "Default": true
+        },
+        {
+          "Name": "Miner Mk.2",
+          "PartsRatio": "120"
+        },
+        {
+          "Name": "Miner Mk.3",
+          "PartsRatio": "240"
+        }
+      ],
+      "Capacities": [
+        {
+          "Name": "Impure",
+          "PartsRatio": "1/2",
+          "Color": 13775920
+        },
+        {
+          "Name": "Normal",
+          "Default": true
+        },
+        {
+          "Name": "Pure",
+          "PartsRatio": "2",
+          "Color": 8433977
+        }
+      ]
+    }
+  ],
+  "Parts": [
+    {
+      "Name": "Portable Miner",
+      "Tier": "3-3",
+      "SinkPoints": 56
+    }
+  ],
+  "Recipes": []
+}
