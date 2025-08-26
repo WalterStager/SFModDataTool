@@ -57,7 +57,8 @@ public class Program {
 
         GameData data = GameData.ReadGameData(FilePaths.First());
         foreach (string filePath in FilePaths.Skip(1)) {
-            data = data.Concat(GameData.ReadGameData(filePath));
+            // Console.WriteLine($"{data.Machines.Count()},{data.MultiMachines.Count()},{data.Parts.Count()},{data.Recipes.Count()}");
+            data = data.Union(GameData.ReadGameData(filePath));
         }
         data.WriteGameData(OutputFilePath);
     }
@@ -147,7 +148,7 @@ public class GameData {
         File.WriteAllText(filename, JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
     }
 
-    public GameData Concat(GameData data) {
+    public GameData Union(GameData data) {
         return new GameData {
             Machines = Machines.Union(data.Machines),
             MultiMachines = MultiMachines.Union(data.MultiMachines),
