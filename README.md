@@ -1,5 +1,4 @@
-Merges files in the Sataisfactory Modeler game data format
-
+SFModDataMerger: Merges files in the Sataisfactory Modeler game data format
 ```
 Usage: SFModDataMerger [options] <Output file> <Input files>
 
