@@ -1,0 +1,5 @@
+[*.cs]
+
+# IDE0090: Use 'new(...)'
+dotnet_diagnostic.IDE0090.severity = silent
+csharp_new_line_before_open_brace = none
