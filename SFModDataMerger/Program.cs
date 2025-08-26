@@ -64,25 +64,31 @@ public class Program {
     }
 }
 
-public class GameDataRecipePart {
-    public required string? Part;
-    public required string? Amount;
+public class GameDataRecipePart : IEquatable<GameDataRecipePart> {
+    public required string Part;
+    public required string Amount;
+
+    public bool Equals(GameDataRecipePart? other) => Part.Equals(other?.Part);
 }
 
-public class GameDataMMMachine {
+public class GameDataMMMachine : IEquatable<GameDataRecipe> {
     public required string Name;
     public string? PartsRatio;
     public bool? Default;
+
+    public bool Equals(GameDataRecipe? other) => Name.Equals(other?.Name);
 }
 
-public class GameDataMMCapacity {
+public class GameDataMMCapacity : IEquatable<GameDataMMCapacity> {
     public required string Name;
     public string? PartsRatio;
     public bool? Default;
     public int? Color;
+
+    public bool Equals(GameDataMMCapacity? other) => Name.Equals(other?.Name);
 }
 
-public class GameDataMachine {
+public class GameDataMachine : IEquatable<GameDataMachine> {
     public required string Name;
     public required string Tier;
     public string? AveragePower;
@@ -95,24 +101,30 @@ public class GameDataMachine {
     public string? BasePower;
     public string? BasePowerBoost;
     public string? FueledBasePowerBoost;
+
+    public bool Equals(GameDataMachine? other) => Name.Equals(other?.Name);
 }
 
-public class GameDataMultiMachine {
+public class GameDataMultiMachine : IEquatable<GameDataMultiMachine> {
     public required string Name;
     public bool? ShowPpm;
     public bool? AutoRound;
     public string? DefaultMax;
     public IEnumerable<GameDataMMMachine>? Machines;
     public IEnumerable<GameDataMMCapacity>? Capacities;
+
+    public bool Equals(GameDataMultiMachine? other) => Name.Equals(other?.Name);
 }
 
-public class GameDataItem {
+public class GameDataItem : IEquatable<GameDataItem> {
     public required string Name;
     public required string Tier;
     public required int? SinkPoints;
+
+    public bool Equals(GameDataItem? other) => Name.Equals(other?.Name);
 }
 
-public class GameDataRecipe {
+public class GameDataRecipe : IEquatable<GameDataRecipe> {
     public required string Name;
     public required string Tier;
     public string? Machine;
@@ -121,6 +133,8 @@ public class GameDataRecipe {
     public string? MinPower;
     public bool? Alternate;
     public bool? Ficsmas;
+
+    public bool Equals(GameDataRecipe? other) => Name.Equals(other?.Name);
 }
 
 public class GameData {
