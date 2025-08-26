@@ -52,7 +52,7 @@ public class Program {
                 Path.GetFileNameWithoutExtension(OutputFilePath) + timestamp + Path.GetExtension(OutputFilePath)
             );
             File.Copy(OutputFilePath, BackupFilePath);
-            FilePaths.Append(OutputFilePath);
+            FilePaths = FilePaths.Append(OutputFilePath);
         }
 
         GameData data = GameData.ReadGameData(FilePaths.First());
