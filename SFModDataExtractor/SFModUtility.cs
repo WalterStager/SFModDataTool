@@ -12,4 +12,12 @@ class SFModUtility {
         }
         return count;
     }
+
+    public static int GetAssetPathIndex(string assetPath) {
+        string? ext = Path.GetExtension(assetPath)?.Substring(1);
+        if (ext == null) {
+            throw new Exception($"Failed to get index from asset path {assetPath}");
+        }
+        return int.Parse(ext);
+    }
 }

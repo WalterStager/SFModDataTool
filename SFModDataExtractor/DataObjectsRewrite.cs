@@ -1,9 +1,20 @@
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using CUE4Parse.FileProvider;
 using CUE4Parse.UE4.Assets.Exports;
 using Newtonsoft.Json.Linq;
+using ZstdSharp.Unsafe;
 
 namespace SFModDataExtractor;
+
+enum UassetType {
+    RecipeDesc,
+    MachineDesc,
+    MachineBuild,
+    ItemDesc,
+    Schematic,
+    Other
+}
 
 class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     public string File { get; set; }
@@ -21,6 +32,58 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
 
             return _exports;
         }
+    }
+    public UassetFile? _super;
+    public UassetFile? super {
+        get {
+            if (_super == null) {
+                JToken? superPathToken = exports[0].SelectToken("Super.ObjectPath");
+                if (superPathToken == null || superPathToken.Type != JTokenType.String || superPathToken.ToString() == "") {
+                    return null;
+                }
+                _super = _provider.NormalizeAndMatchPath(superPathToken.ToString());
+            }
+            return _super;
+        }
+    }
+    public UassetType? _type;
+    public UassetType type {
+        get {
+            if (_type == null) {
+                string? superStruct = GetString(0, "SuperStruct.ObjectName");
+                _type = superStruct switch {
+                    "Class'FGRecipe'" => UassetType.RecipeDesc,
+                    "Class'FGBuildableManufacturer'" => UassetType.MachineBuild,
+                    "Class'FGBuildingDescriptor'" => UassetType.MachineDesc,
+                    "Class'FGItemDescriptor'" => UassetType.ItemDesc,
+                    "Class'FGSchematic'" => UassetType.Schematic,
+                    _ => UassetType.Other,
+                };
+            }
+            return (UassetType)_type;
+        }
+    }
+
+    public JToken? GetToken(int exportIndex, string tokenPath, bool searchSuper = true) {
+        if (exportIndex >= exports.Count()) {
+            throw new Exception($"Exports index ({exportIndex}) out of range ({exports.Count()})");
+        }
+        JToken? result = exports[exportIndex].SelectToken(tokenPath);
+        if (result != null && result.ToString() != "") {
+            return result;
+        }
+        if (searchSuper) {
+            result = super?.GetToken(exportIndex, tokenPath, searchSuper);
+        }
+        return result;
+    }
+
+    public string? GetString(int exportIndex, string tokenPath, bool searchSuper = true) {
+        JToken? result = GetToken(exportIndex, tokenPath, searchSuper);
+        if (result?.Type is JTokenType.String) {
+            return result.ToString();
+        }
+        return null;
     }
 
     public int CompareTo(UassetFile? other) {

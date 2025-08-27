@@ -39,22 +39,28 @@ class SFModDataProvider {
         }
     }
 
-    public Dictionary<string, UassetRecipe> Recipes = new Dictionary<string, UassetRecipe>();
-    public Dictionary<string, UassetPart> Parts = new Dictionary<string, UassetPart>();
-    public Dictionary<string, UAssetMachine> Machines = new Dictionary<string, UAssetMachine>();
-    public Dictionary<string, HashSet<UassetFile>> ModFiles = new Dictionary<string, HashSet<UassetFile>>();
+    public Dictionary<string, UassetRecipe> NameToRecipe = new Dictionary<string, UassetRecipe>();
+    public Dictionary<string, UassetPart> NameToPart = new Dictionary<string, UassetPart>();
+    public Dictionary<string, UAssetMachine> NameToMachine = new Dictionary<string, UAssetMachine>();
+    public Dictionary<string, HashSet<UassetFile>> FilesByMod = new Dictionary<string, HashSet<UassetFile>>();
     public HashSet<UassetFile> AllUassetFiles = new HashSet<UassetFile>();
     public HashSet<string> CsvFiles = new HashSet<string>();
-    public Dictionary<string, UassetFile> assetPathToFileCache = new Dictionary<string, UassetFile>();
+    public Dictionary<string, UassetFile> AssetPathToFile = new Dictionary<string, UassetFile>();
 
     public string GetModName(string filename) {
         if (filename.Contains("Mods")) {
-            Match modNameMatch = Regex.Match(filename, @"/Mods/(\w+)/");
-            string? modName = modNameMatch.Groups[1].Value;
+            string? modName = null;
+            string[] parts = filename.Split(Path.AltDirectorySeparatorChar);
+            for (int i = 0; i < parts.Length; i++) {
+                if (parts[i] == "Mods") {
+                    modName = parts[i + 1];
+                    break;
+                }
+            }
             if (modName == null || modName == "") {
                 throw new Exception($"Could not get mod from filename {filename}");
             }
-            return modNameMatch.Groups[1].Value;
+            return modName;
         }
         else {
             return "FactoryGame";
@@ -63,26 +69,32 @@ class SFModDataProvider {
 
     public UassetFile NormalizeAndMatchPath(string assetPath) {
         UassetFile? result;
-        if (assetPathToFileCache.TryGetValue(Path.ChangeExtension(assetPath, null), out result)) {
+        if (AssetPathToFile.TryGetValue(Path.ChangeExtension(assetPath, null), out result)) {
             return result;
         }
 
         string path = Path.ChangeExtension(assetPath, ".uasset").Replace('\\', '/');
         IEnumerable<string> parts = assetPath.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Reverse();
         string mod = GetModName(path);
-
-        int? maxCount = null;
-        foreach (UassetFile c in ModFiles[mod]) {
-            int newCount = SFModUtility.CountCommonPrefix(parts, c.File.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Reverse());
-            if (result == null || newCount > maxCount) {
-                result = c;
-                maxCount = newCount;
+        try {
+            int? maxCount = null;
+            foreach (UassetFile c in FilesByMod[mod]) {
+                int newCount = SFModUtility.CountCommonPrefix(parts, c.File.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Reverse());
+                if (result == null || newCount > maxCount) {
+                    result = c;
+                    maxCount = newCount;
+                }
             }
+        }
+        catch (Exception e) {
+            throw new Exception($"ERROR {assetPath} : {e.Message}");
         }
 
         if (result == null) {
             throw new Exception($"Could not match asset path {assetPath}");
         }
+
+        AssetPathToFile.Add(Path.ChangeExtension(assetPath, null), result);
 
         return result;
     }
@@ -108,25 +120,49 @@ class SFModDataExtract {
                 continue;
             }
 
-            UassetFile uassetFile = new UassetFile(prov, filename);
+            UassetFile uf = new UassetFile(prov, filename);
 
-            if (!prov.ModFiles.ContainsKey(uassetFile.Mod)) {
-                prov.ModFiles.Add(uassetFile.Mod, new HashSet<UassetFile>());
+            if (!prov.FilesByMod.ContainsKey(uf.Mod)) {
+                prov.FilesByMod.Add(uf.Mod, new HashSet<UassetFile>());
             }
 
-            prov.AllUassetFiles.Add(uassetFile);
-            prov.ModFiles[uassetFile.Mod].Add(uassetFile);
+            prov.AllUassetFiles.Add(uf);
+            prov.FilesByMod[uf.Mod].Add(uf);
         }
 
         Console.WriteLine($"Uasset files {prov.AllUassetFiles.Count}");
         Console.WriteLine($"CSV files {prov.CsvFiles.Count}");
         Console.WriteLine($"Mod file counts");
-        foreach ((string modName, HashSet<UassetFile> modFiles) in prov.ModFiles) {
+        foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             Console.WriteLine($"\t{modName}={modFiles.Count}");
         }
     }
 
+    public void SetupRecipe(UassetFile uf) {
+        string? displayName = uf.GetString(0, "Name");
+        if (displayName == null) {
+            throw new Exception($"Could not get name for {uf.File}");
+        }
+        UassetRecipe ur = new UassetRecipe { UFile = uf, DisplayName = displayName };
+
+        string? defObjPath = uf.GetString(0, "ClassDefaultObject.ObjectPath");
+        if (defObjPath == null) {
+            throw new Exception($"Couldn't get default object path for {uf.File}");
+        }
+        int defObjInd = SFModUtility.GetAssetPathIndex(defObjPath);
+        string? duration = uf.GetString(defObjInd, "mManufactoringDuration");
+        if (duration != null) {
+            ur.ManufacturingDuration = float.Parse(duration);
+        }
+    }
+
     public void doTheThing() {
-        
+        foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
+            foreach (UassetFile uf in modFiles) {
+                if (uf.type == UassetType.RecipeDesc) {
+                    SetupRecipe(uf);
+                }
+            }
+        }
     }
 }
