@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using CUE4Parse.FileProvider;
 using CUE4Parse.UE4.Assets.Exports;
 using Newtonsoft.Json.Linq;
+using SkiaSharp;
 using ZstdSharp.Unsafe;
 
 namespace SFModDataExtractor;
@@ -13,6 +14,7 @@ enum UassetType {
     MachineBuild,
     ItemDesc,
     Schematic,
+    Texture,
     Other
 }
 
@@ -50,18 +52,41 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     public UassetType type {
         get {
             if (_type == null) {
+                string? objClass = GetString(0, "Class");
+                if (objClass != null) {
+                    switch (objClass) {
+                        case "UScriptClass'Texture2D'":
+                            _type = UassetType.Texture;
+                            return (UassetType)_type;
+                    }
+                }
                 string? superStruct = GetString(0, "SuperStruct.ObjectName");
                 _type = superStruct switch {
                     "Class'FGRecipe'" => UassetType.RecipeDesc,
                     "Class'FGBuildableManufacturer'" => UassetType.MachineBuild,
+                    "Class'FGBuildableManufacturerVariablePower'" => UassetType.MachineBuild,
                     "Class'FGBuildingDescriptor'" => UassetType.MachineDesc,
                     "Class'FGItemDescriptor'" => UassetType.ItemDesc,
+                    "Class'FGResourceDescriptor'" => UassetType.ItemDesc,
+                    "Class'FGPowerShardDescriptor'" => UassetType.ItemDesc,
+                    "Class'FGItemDescriptorBiomass'" => UassetType.ItemDesc,
+                    "Class'FGEquipmentDescriptor'" => UassetType.ItemDesc,
+                    "Class'FGConsumableDescriptor'" => UassetType.ItemDesc,
+                    "Class'FGAmmoTypeInstantHit'" => UassetType.ItemDesc,
+                    "Class'FGAmmoTypeProjectile'" => UassetType.ItemDesc,
+                    "Class'FGAmmoTypeSpreadshot'" => UassetType.ItemDesc,
+                    "Class'FGItemDescriptorPowerBoosterFuel'" => UassetType.ItemDesc,
+                    "Class'FGItemDescriptorNuclearFuel'" => UassetType.ItemDesc,
                     "Class'FGSchematic'" => UassetType.Schematic,
                     _ => UassetType.Other,
                 };
             }
             return (UassetType)_type;
         }
+    }
+
+    public UObject GetUObject(int objIndex) {
+        return _provider.FileProvider.LoadPackage(File).GetExports().ToArray()[objIndex];
     }
 
     public JToken? GetToken(int exportIndex, string tokenPath, bool searchSuper = true) {
@@ -86,6 +111,30 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
         return null;
     }
 
+    public int? GetInt(int exportIndex, string tokenPath, bool searchSuper = true) {
+        string? result = GetString(exportIndex, tokenPath, searchSuper);
+        if (result != null) {
+            return int.Parse(result);
+        }
+        return null;
+    }
+
+    public double? GetDouble(int exportIndex, string tokenPath, bool searchSuper = true) {
+        string? result = GetString(exportIndex, tokenPath, searchSuper);
+        if (result != null) {
+            return double.Parse(result);
+        }
+        return null;
+    }
+
+    public int GetDefaultObjectIndex() {
+        string? defObjPath = GetString(0, "ClassDefaultObject.ObjectPath");
+        if (defObjPath == null) {
+            throw new Exception($"Couldn't get default object path for {File}");
+        }
+        return SFModUtility.GetAssetPathIndex(defObjPath);
+    }
+
     public int CompareTo(UassetFile? other) {
         if (other == null) {
             return 1;
@@ -101,7 +150,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     public UassetFile(SFModDataProvider Provider, string filename) {
         _provider = Provider;
         File = filename;
-        Mod = Provider.GetModName(filename);
+        Mod = SFModUtility.GetModName(filename);
     }
 }
 
@@ -122,10 +171,12 @@ class UassetRecipe : IComparableUasset {
     public required UassetFile UFile { get; set; }
     public required string DisplayName { get; set; }
     public string? Tier { get; set; }
-    public float? ManufacturingDuration { get; set; }
-    public IEnumerable<UAssetMachine>? ProducedIn { get; set; }
-    public IEnumerable<UassetPart>? Ingredients { get; set; }
-    public IEnumerable<UassetPart>? Products { get; set; }
+    public double? ManufacturingDuration { get; set; }
+    public HashSet<UAssetMachine>? ProducedIn { get; set; }
+    public HashSet<(int, UassetPart)> Ingredients = new HashSet<(int, UassetPart)>();
+    public HashSet<(int, UassetPart)> Products = new HashSet<(int, UassetPart)>();
+    public int? VariablePowerConstant;
+    public int? VariablePowerFactor;
     // power consumption fields
 }
 
@@ -137,8 +188,16 @@ class UAssetMachine : IComparableUasset {
     public double? PowerConsumptionExponent { get; set; }
     public int? ProductionShardSlotSize { get; set; }
     public double? ProductionShardBoostMultiplier { get; set; }
-    public IEnumerable<UassetPart>? Ingredients { get; set; }
-    // Couldn't find where to get or calculate this, only used for generator anyways
+    public int? ProductionShardPowerExponent {
+        get {
+            if (ProductionShardBoostMultiplier != null) {
+                return 2;
+            }
+            return null;
+        }
+    }
+    public HashSet<(int, UassetPart)> Ingredients = new HashSet<(int, UassetPart)>();
+    // Couldn't find where to get or calculate this, only used for geothermal generator anyways
     public int? MinPower {
         get {
             if (DisplayName == "Geothermal Generator") {
@@ -146,9 +205,11 @@ class UAssetMachine : IComparableUasset {
             }
             return null;
         }
-        set {
-        }
     }
+    public int? BasePowerProduction { get; set; }
+    public double? BaseBoostPercentage { get; set; }
+    public double? BoostPercentage { get; set; }
+    public SKBitmap[]? Icon { get; set; }
 }
 
 class UassetPart : IComparableUasset {
@@ -156,4 +217,5 @@ class UassetPart : IComparableUasset {
     public required string DisplayName { get; set; }
     public string? Tier { get; set; }
     public int? SinkPoints { get; set; }
+    public SKBitmap[]? Icon { get; set; }
 }
