@@ -2,6 +2,7 @@
 // random static functions
 using System.Text.RegularExpressions;
 using Fractions;
+using SFModDataExtractor;
 
 class SFModUtility {
     public static int CountCommonPrefix<T>(IEnumerable<T> a, IEnumerable<T> b) {
@@ -18,7 +19,7 @@ class SFModUtility {
     public static int GetAssetPathIndex(string assetPath) {
         string? ext = Path.GetExtension(assetPath)?.Substring(1);
         if (ext == null) {
-            throw new Exception($"Failed to get index from asset path {assetPath}");
+            throw new SFModDataRuntimeException($"Failed to get index from asset path {assetPath}");
         }
         return int.Parse(ext);
     }
@@ -28,7 +29,7 @@ class SFModUtility {
             Match modNameMatch = Regex.Match(filename, @"/Mods/([^/]+)/", RegexOptions.IgnoreCase);
             string? modName = modNameMatch.Groups[1].Value;
             if (modName == null || modName == "") {
-                throw new Exception($"Could not get mod from filename {filename}");
+                throw new SFModDataRuntimeException($"Could not get mod from filename {filename}");
             }
             return modName;
         }

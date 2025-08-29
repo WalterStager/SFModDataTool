@@ -139,10 +139,10 @@ public class GameDataRecipe : IEquatable<GameDataRecipe> {
 }
 
 public class GameData {
-    public required IEnumerable<GameDataMachine> Machines;
-    public required IEnumerable<GameDataMultiMachine> MultiMachines;
-    public required IEnumerable<GameDataItem> Parts;
-    public required IEnumerable<GameDataRecipe> Recipes;
+    public required HashSet<GameDataMachine> Machines;
+    public required HashSet<GameDataMultiMachine> MultiMachines;
+    public required HashSet<GameDataItem> Parts;
+    public required HashSet<GameDataRecipe> Recipes;
 
     public static GameData ReadGameData(string filename) {
         try {
@@ -165,10 +165,10 @@ public class GameData {
 
     public GameData Union(GameData data) {
         return new GameData {
-            Machines = Machines.Union(data.Machines),
-            MultiMachines = MultiMachines.Union(data.MultiMachines),
-            Parts = Parts.Union(data.Parts),
-            Recipes = Recipes.Union(data.Recipes),
+            Machines = Machines.Union(data.Machines).ToHashSet(),
+            MultiMachines = MultiMachines.Union(data.MultiMachines).ToHashSet(),
+            Parts = Parts.Union(data.Parts).ToHashSet(),
+            Recipes = Recipes.Union(data.Recipes).ToHashSet(),
         };
     }
 }

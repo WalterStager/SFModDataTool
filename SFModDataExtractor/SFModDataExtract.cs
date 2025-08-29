@@ -13,6 +13,9 @@ using SkiaSharp;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse_Conversion.Textures;
 using SFModDataMerger;
+using CUE4Parse.UE4.Readers;
+using CsvHelper;
+using System.Globalization;
 
 namespace SFModDataExtractor;
 
@@ -54,7 +57,8 @@ class SFModDataProvider {
     public HashSet<UassetFile> AllUassetFiles = new HashSet<UassetFile>();
     public HashSet<string> CsvFiles = new HashSet<string>();
     public Dictionary<string, UassetFile> AssetPathToFile = new Dictionary<string, UassetFile>();
-    public HashSet<UassetFile> MachinesToSetupLater = new HashSet<UassetFile>();
+    public Dictionary<string, Dictionary<string, DataEntry>> dataTables = new Dictionary<string, Dictionary<string, DataEntry>>();
+    // public HashSet<UAssetMachine> MachinesToSetupLater = new HashSet<UAssetMachine>();
 
     public UassetFile NormalizeAndMatchPath(string assetPath) {
         UassetFile? result;
@@ -65,7 +69,7 @@ class SFModDataProvider {
         string path = Path.ChangeExtension(assetPath, ".uasset").Replace('\\', '/');
         IEnumerable<string> parts = path.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar).Where(p => p != "").Reverse();
         if (parts.Count() <= 0) {
-            throw new Exception($"Could not get mod name from asset path {assetPath}");
+            throw new SFModDataRuntimeException($"Could not get mod name from asset path {assetPath}");
         }
         string mod = parts.Last();
         mod = mod == "Game" ? "FactoryGame" : mod;
@@ -74,7 +78,7 @@ class SFModDataProvider {
             modFiles = FilesByMod[mod];
         }
         catch (Exception e) {
-            throw new Exception($"Got invalid mod name from path {assetPath}, {e.Message}");
+            throw new SFModDataRuntimeException($"Got invalid mod name from path {assetPath}, {e.Message}");
         }
 
         int? maxCount = null;
@@ -89,12 +93,24 @@ class SFModDataProvider {
         }
 
         if (result == null) {
-            throw new Exception($"Could not match asset path {assetPath}");
+            throw new SFModDataRuntimeException($"Could not match asset path {assetPath}");
         }
 
         AssetPathToFile.Add(Path.ChangeExtension(assetPath, null), result);
 
         return result;
+    }
+
+    public void ReadCsv(string path, string tableName) {
+        dataTables.Add(tableName, new Dictionary<string, DataEntry>());
+        FArchive? archive = FileProvider.CreateReader(path);
+        StreamReader reader = new StreamReader((Stream)archive);
+        CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+        IEnumerable<DataEntry> records = csv.GetRecords<DataEntry>();
+        foreach (DataEntry entry in records) {
+            dataTables[tableName].Add(entry.Key, entry);
+        }
+        csv.Dispose();
     }
 }
 
@@ -138,13 +154,10 @@ class SFModDataExtract {
 
     public void SetupRecipe(UassetFile uf) {
         if (uf.type != UassetType.RecipeDesc) {
-            throw new Exception($"Not a recipe file {uf.File}");
+            throw new SFModDataRuntimeException($"Not a recipe file {uf.File}:{uf.type}");
         }
 
-        string? displayName = uf.GetString(0, "Name");
-        if (displayName == null) {
-            throw new Exception($"Could not get name for {uf.File}");
-        }
+        string displayName = uf.GetDisplayName(false);
         UassetRecipe recipe = new UassetRecipe { UFile = uf, DisplayName = displayName };
 
         int defObjInd = uf.GetDefaultObjectIndex();
@@ -153,30 +166,43 @@ class SFModDataExtract {
         recipe.VariablePowerConstant = uf.GetInt(defObjInd, "Properties.mVariablePowerConsumptionConstant");
         recipe.VariablePowerFactor = uf.GetInt(defObjInd, "Properties.mVariablePowerConsumptionFactor");
 
-        JToken? producedInToken = uf.GetToken(defObjInd, "Properties.mProducedIn");
         bool hasActualMachine = false;
         bool isMachineRecipe = false;
-        if (producedInToken != null) {
-            foreach (JToken mchToken in producedInToken.Children()) {
-                string? assetPathName = mchToken.SelectToken("AssetPathName")?.ToString();
-                if (assetPathName != null && assetPathName != "") {
-                    if (assetPathName == "/Game/FactoryGame/Equipment/BuildGun/BP_BuildGun.BP_BuildGun_C" ||
-                        assetPathName == "/Script/FactoryGame.FGBuildGun") {
-                        isMachineRecipe = true;
-                        break;
-                    }
-                    else if (assetPathName != "/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkshopComponent.BP_WorkshopComponent_C" &&
-                        assetPathName != "/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C" &&
-                        assetPathName != "/Script/FactoryGame.FGBuildableAutomatedWorkBench" &&
-                        assetPathName != "/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C") {
-                        hasActualMachine = true;
-                        UassetFile mchF = prov.NormalizeAndMatchPath(assetPathName);
-                        prov.MachinesToSetupLater.Add(mchF);
-                    }
-                    else {
-                        continue;
-                    }
+
+        foreach (string assetPathName in uf.GetProducedIn()) {
+            if (assetPathName == "/Game/FactoryGame/Equipment/BuildGun/BP_BuildGun.BP_BuildGun_C" ||
+                assetPathName == "/Script/FactoryGame.FGBuildGun") {
+                isMachineRecipe = true;
+                break;
+            }
+            else if (assetPathName != "/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkshopComponent.BP_WorkshopComponent_C" &&
+                assetPathName != "/Game/FactoryGame/Buildable/-Shared/WorkBench/BP_WorkBenchComponent.BP_WorkBenchComponent_C" &&
+                assetPathName != "/Script/FactoryGame.FGBuildableAutomatedWorkBench" &&
+                assetPathName != "/Game/FactoryGame/Buildable/Factory/AutomatedWorkBench/Build_AutomatedWorkBench.Build_AutomatedWorkBench_C") {
+                hasActualMachine = true;
+                if (recipe.ProducedIn == null) {
+                    recipe.ProducedIn = new HashSet<UAssetMachine>();
                 }
+
+                // build file
+                UassetFile mchF = prov.NormalizeAndMatchPath(assetPathName);
+                if (mchF.type != UassetType.MachineBuild) {
+                    throw new SFModDataRuntimeException($"Not a machine build file {mchF.File}:{mchF.type}");
+                }
+                UAssetMachine uMch;
+                if (prov.FileToMachine.ContainsKey(mchF.File)) {
+                    uMch = prov.FileToMachine[mchF.File];
+                }
+                else {
+                    string machineName = mchF.GetDisplayName();
+                    uMch = new UAssetMachine { UFile = mchF, DisplayName = machineName };
+                    prov.FileToMachine.Add(mchF.File, uMch);
+                }
+                
+                recipe.ProducedIn.Add(uMch);
+            }
+            else {
+                continue;
             }
         }
 
@@ -203,41 +229,51 @@ class SFModDataExtract {
             }
         }
 
+        JToken? ingredientsToken = uf.GetToken(defObjInd, "Properties.mIngredients");
+        if (ingredientsToken != null) {
+            foreach (JToken ingToken in ingredientsToken.Children()) {
+                string? objPath = ingToken.SelectToken("ItemClass.ObjectPath")?.ToString();
+                string? amount = ingToken.SelectToken("Amount")?.ToString();
+                if (objPath != null && amount != null) {
+                    UassetFile ingF = prov.NormalizeAndMatchPath(objPath);
+                    SetupPart(ingF);
+
+                    recipe.Ingredients.Add((int.Parse(amount), prov.FileToPart[ingF.File]));
+                }
+            }
+        }
+
+        // if the recipe is not named use a product name
+        if (recipe.DisplayName == uf.GetString(0, "Name") && recipe.Products.Count() > 0) {
+            recipe.DisplayName = recipe.Products.First().Item2.DisplayName;
+        }
+
         prov.FileToRecipe.Add(uf.File, recipe);
     }
 
-    private void SetupMachine(UassetFile uf) {
-        if (prov.FileToMachine.ContainsKey(uf.File)) {
-            return;
-        }
+    private void SetupMachine(UAssetMachine machine) {
 
-        if (uf.type != UassetType.MachineBuild) {
-            throw new Exception($"Not a machine build file {uf.File}");
-        }
-
-        string? displayName = uf.GetString(0, "Name");
-        if (displayName == null) {
-            throw new Exception($"Could not get name for {uf.File}");
-        }
-
-        UAssetMachine machine = new UAssetMachine { UFile = uf, DisplayName = displayName };
-        int defObjInd = uf.GetDefaultObjectIndex();
-        machine.PowerConsumption = uf.GetInt(defObjInd, "Properties.mPowerConsumption");
-        machine.PowerConsumptionExponent = uf.GetDouble(defObjInd, "Properties.mPowerConsumptionExponent");
-        machine.ProductionShardSlotSize = uf.GetInt(defObjInd, "Properties.mProductionShardSlotSize");
-        machine.ProductionShardBoostMultiplier = uf.GetDouble(defObjInd, "Properties.mProductionShardBoostMultiplier");
-        machine.BasePowerProduction = uf.GetInt(defObjInd, "Properties.mBasePowerProduction");
-        machine.BaseBoostPercentage = uf.GetDouble(defObjInd, "Properties.mBaseBoostPercentage");
+        // build file stuff
+        int defObjInd = machine.UFile.GetDefaultObjectIndex();
+        // the previous name was from Desc file but the build file generally has a more accurate name
+        // mods tend to reference base game stuff that messes up naming so only search superclass if in a mod
+        machine.DisplayName = machine.UFile.GetDisplayName(machine.UFile.Mod == "FactoryGame");
+        machine.PowerConsumption = machine.UFile.GetInt(defObjInd, "Properties.mPowerConsumption");
+        machine.PowerConsumptionExponent = machine.UFile.GetDouble(defObjInd, "Properties.mPowerConsumptionExponent");
+        machine.ProductionShardSlotSize = machine.UFile.GetInt(defObjInd, "Properties.mProductionShardSlotSize");
+        machine.ProductionShardBoostMultiplier = machine.UFile.GetDouble(defObjInd, "Properties.mProductionShardBoostMultiplier");
+        machine.BasePowerProduction = machine.UFile.GetInt(defObjInd, "Properties.mBasePowerProduction");
+        machine.BaseBoostPercentage = machine.UFile.GetDouble(defObjInd, "Properties.mBaseBoostPercentage");
         
-        string? fuelClass = uf.GetString(defObjInd, "Properties.AssetPathname");
+        string? fuelClass = machine.UFile.GetString(defObjInd, "Properties.mDefaultFuelClasses.AssetPathname");
         if (fuelClass != null) {
             UassetFile fuelClassFile = prov.NormalizeAndMatchPath(fuelClass);
             int fuelClassDefObjInd = fuelClassFile.GetDefaultObjectIndex();
             machine.BoostPercentage  = fuelClassFile.GetDouble(fuelClassDefObjInd, "Properties.mBoostPercentage");
         }
 
-        if (prov.FileToBuildingRecipe.ContainsKey(uf.File)) {
-            UassetFile machineRecipeFile = prov.FileToBuildingRecipe[uf.File];
+        if (prov.FileToBuildingRecipe.ContainsKey(machine.UFile.File)) {
+            UassetFile machineRecipeFile = prov.FileToBuildingRecipe[machine.UFile.File];
             int mrDefObjInd = machineRecipeFile.GetDefaultObjectIndex();
 
             JToken? ingredientsToken = machineRecipeFile.GetToken(mrDefObjInd, "Properties.mIngredients");
@@ -267,7 +303,7 @@ class SFModDataExtract {
                             iconObjPath = machineDescFile.GetString(bdfDefObjInd, "Properties.mPersistentBigIcon.ObjectPath");
                         }
                         if (iconObjPath == null) {
-                            throw new Exception($"Couldn't get icon path for {machineDescFile.File}");
+                            throw new SFModDataRuntimeException($"Couldn't get icon path for {machineDescFile.File}");
                         }
                         UassetFile iconUFile = prov.NormalizeAndMatchPath(iconObjPath);
                         machine.Icon = GetTexture(iconUFile, SFModUtility.GetAssetPathIndex(iconObjPath));
@@ -275,8 +311,6 @@ class SFModDataExtract {
                 }
             }
         }
-
-        prov.FileToMachine.Add(uf.File, machine);
     }
 
 
@@ -286,13 +320,10 @@ class SFModDataExtract {
         }
 
         if (uf.type != UassetType.ItemDesc) {
-            throw new Exception($"Not a part file {uf.File}");
+            throw new SFModDataRuntimeException($"Not a part file {uf.File}:{uf.type}");
         }
 
-        string? displayName = uf.GetString(0, "Name");
-        if (displayName == null) {
-            throw new Exception($"Could not get name for {uf.File}");
-        }
+        string displayName = uf.GetDisplayName();
         UassetPart part = new UassetPart { UFile = uf, DisplayName = displayName };
 
         int defObjInd = uf.GetDefaultObjectIndex();
@@ -302,7 +333,7 @@ class SFModDataExtract {
             iconObjPath = uf.GetString(defObjInd, "Properties.mPersistentBigIcon.ObjectPath");
         }
         if (iconObjPath == null) {
-            throw new Exception($"Couldn't get icon path for {uf.File}");
+            throw new SFModDataRuntimeException($"Couldn't get icon path for {uf.File}");
         }
         UassetFile iconUFile = prov.NormalizeAndMatchPath(iconObjPath);
         part.Icon = GetTexture(iconUFile, SFModUtility.GetAssetPathIndex(iconObjPath));
@@ -316,12 +347,12 @@ class SFModDataExtract {
         // }
 
         if (textureFile.type != UassetType.Texture) {
-            throw new Exception($"Not a texture file {textureFile.File}");
+            throw new SFModDataRuntimeException($"Not a texture file {textureFile.File}:{textureFile.type}");
         }
 
         UObject uObj = textureFile.GetUObject(objIndex);
         if (uObj is not UTexture) {
-            throw new Exception($"Not a texture object {textureFile.File}");
+            throw new SFModDataRuntimeException($"Not a texture object {textureFile.File}");
         }
         UTexture tex = (UTexture)uObj;
         SKBitmap?[]? bitmaps = new[] { tex.Decode(ETexturePlatform.DesktopMobile) };
@@ -334,7 +365,7 @@ class SFModDataExtract {
                 break;
         }
         if (bitmaps == null) {
-            throw new Exception($"Could not extract bitmaps {textureFile.File}");
+            throw new SFModDataRuntimeException($"Could not extract bitmaps {textureFile.File}");
         }
 
         return bitmaps.Where(b => b != null).Cast<SKBitmap>().ToArray();
@@ -374,6 +405,10 @@ class SFModDataExtract {
     }
 
     public void doTheThing() {
+        foreach (string csvFile in prov.CsvFiles) {
+            prov.ReadCsv(csvFile, Path.GetFileNameWithoutExtension(csvFile));
+        }
+
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             foreach (UassetFile uf in modFiles) {
                 if (uf.type == UassetType.RecipeDesc) {
@@ -383,7 +418,7 @@ class SFModDataExtract {
         }
 
         // machine setup is delayed so that machine recipes are already found
-        foreach (UassetFile machine in prov.MachinesToSetupLater) {
+        foreach (UAssetMachine machine in prov.FileToMachine.Values) {
             SetupMachine(machine);
         }
 
@@ -394,26 +429,39 @@ class SFModDataExtract {
 
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             GameData modGameData = new GameData {
-                Machines = new List<GameDataMachine>(),
-                MultiMachines = new List<GameDataMultiMachine>(),
-                Parts = new List<GameDataItem>(),
-                Recipes = new List<GameDataRecipe>()
+                Machines = new HashSet<GameDataMachine>(),
+                MultiMachines = new HashSet<GameDataMultiMachine>(),
+                Parts = new HashSet<GameDataItem>(),
+                Recipes = new HashSet<GameDataRecipe>()
             };
+            int recipesCount = 0, machinesCount = 0, partsCount = 0;
 
             foreach (UassetFile uf in modFiles) {
                 if (prov.FileToRecipe.ContainsKey(uf.File)) {
-                    modGameData.Recipes.ToList().Concat(prov.FileToRecipe[uf.File].ToGameDataRecipe());
+                    // add recipe for each machine it can be produced in
+                    foreach (GameDataRecipe rec in prov.FileToRecipe[uf.File].ToGameDataRecipe()) {
+                        recipesCount++;
+                        modGameData.Recipes.Add(rec);
+                    }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
-                    modGameData.Machines.ToList().Add(prov.FileToMachine[uf.File].ToGameDataMachine());
+                    machinesCount++;
+                    modGameData.Machines.Add(prov.FileToMachine[uf.File].ToGameDataMachine());
                 }
                 else if (prov.FileToPart.ContainsKey(uf.File)) {
-                    modGameData.Parts.ToList().Add(prov.FileToPart[uf.File].ToGameDataItem());
+                    partsCount++;
+                    modGameData.Parts.Add(prov.FileToPart[uf.File].ToGameDataItem());
                 }
             }
 
-            Directory.CreateDirectory(modName);
-            modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"));
+            if (modGameData.Machines.Count() + modGameData.MultiMachines.Count() + modGameData.Parts.Count() + modGameData.Recipes.Count() != 0) {
+                Console.WriteLine($"{modName} has:");
+                Console.WriteLine($"\tRecipes {recipesCount}");
+                Console.WriteLine($"\tMachines {machinesCount}");
+                Console.WriteLine($"\tParts {partsCount}");
+                Directory.CreateDirectory(modName);
+                modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"));
+            }
         }
     }
 }
