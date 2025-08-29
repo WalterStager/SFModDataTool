@@ -2,7 +2,9 @@ using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using CUE4Parse.FileProvider;
 using CUE4Parse.UE4.Assets.Exports;
+using Fractions;
 using Newtonsoft.Json.Linq;
+using SFModDataMerger;
 using SkiaSharp;
 using ZstdSharp.Unsafe;
 
@@ -177,7 +179,28 @@ class UassetRecipe : IComparableUasset {
     public HashSet<(int, UassetPart)> Products = new HashSet<(int, UassetPart)>();
     public int? VariablePowerConstant;
     public int? VariablePowerFactor;
-    // power consumption fields
+
+    public IEnumerable<GameDataRecipe> ToGameDataRecipe() {
+        List<GameDataRecipe> result = new List<GameDataRecipe>();
+        if (ProducedIn != null) {
+            foreach (UAssetMachine prodMachine in ProducedIn) {
+                GameDataRecipe mRecipe = new GameDataRecipe {
+                    Name = DisplayName,
+                    Tier = "0-0",
+                    Machine = prodMachine.DisplayName,
+                    BatchTime = SFModUtility.FractionStringFromDouble(ManufacturingDuration),
+                    Parts = Ingredients.Select(pair => pair.Item2.ToGameDataRecipePart(-1 * pair.Item1)).Concat(Products.Select(pair => pair.Item2.ToGameDataRecipePart(pair.Item1))),
+                    MinPower = VariablePowerFactor == null ? null : (-1 * (VariablePowerFactor + VariablePowerConstant ?? 0.0)).ToString(),
+                    AveragePower = VariablePowerFactor == null ? null : (-1 * (VariablePowerFactor/2 + VariablePowerConstant ?? 0.0)).ToString(),
+                    Alternate = DisplayName.Contains("Alternate"),
+                };
+
+                result.Add(mRecipe);
+            }
+        }
+
+        return result;
+    }
 }
 
 class UAssetMachine : IComparableUasset {
@@ -200,7 +223,7 @@ class UAssetMachine : IComparableUasset {
     // Couldn't find where to get or calculate this, only used for geothermal generator anyways
     public int? MinPower {
         get {
-            if (DisplayName == "Geothermal Generator") {
+            if (DisplayName == "Geothermal Generator" || DisplayName == "Build_GeneratorGeoThermal_C") {
                 return 100;
             }
             return null;
@@ -210,6 +233,25 @@ class UAssetMachine : IComparableUasset {
     public double? BaseBoostPercentage { get; set; }
     public double? BoostPercentage { get; set; }
     public SKBitmap[]? Icon { get; set; }
+
+    public GameDataMachine ToGameDataMachine() {
+        GameDataMachine result = new GameDataMachine {
+            Name = DisplayName,
+            Tier = "0-0",
+            AveragePower = PowerConsumption == null ? null : (PowerConsumption * -1).ToString(),
+            OverclockPowerExponent = SFModUtility.FractionStringFromDouble(PowerConsumptionExponent),
+            MaxProductionShards = ProductionShardSlotSize,
+            ProductionShardMultiplier = SFModUtility.FractionStringFromDouble(ProductionShardBoostMultiplier),
+            ProductionShardPowerExponent = ProductionShardPowerExponent?.ToString(),
+            Cost = Ingredients.Select(pair => pair.Item2.ToGameDataRecipePart(pair.Item1)),
+            MinPower = MinPower?.ToString(),
+            BasePower = BasePowerProduction?.ToString(),
+            BasePowerBoost = SFModUtility.FractionStringFromDouble(BaseBoostPercentage),
+            FueledBasePowerBoost = SFModUtility.FractionStringFromDouble(BoostPercentage + BaseBoostPercentage)
+        };
+
+        return result;
+    }
 }
 
 class UassetPart : IComparableUasset {
@@ -218,4 +260,23 @@ class UassetPart : IComparableUasset {
     public string? Tier { get; set; }
     public int? SinkPoints { get; set; }
     public SKBitmap[]? Icon { get; set; }
+
+    public GameDataItem ToGameDataItem() {
+        GameDataItem result = new GameDataItem {
+            Name = DisplayName,
+            Tier = "0-0",
+            SinkPoints = 0,
+        };
+
+        return result;
+    }
+
+    public GameDataRecipePart ToGameDataRecipePart(int amount) {
+        GameDataRecipePart result = new GameDataRecipePart {
+            Part = DisplayName,
+            Amount = amount.ToString(),
+        };
+
+        return result;
+    }
 }

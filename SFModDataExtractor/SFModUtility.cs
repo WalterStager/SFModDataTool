@@ -1,6 +1,7 @@
 
 // random static functions
 using System.Text.RegularExpressions;
+using Fractions;
 
 class SFModUtility {
     public static int CountCommonPrefix<T>(IEnumerable<T> a, IEnumerable<T> b) {
@@ -34,5 +35,12 @@ class SFModUtility {
         else {
             return "FactoryGame";
         }
+    }
+
+    public static string? FractionStringFromDouble(double? num) {
+        if (num == null) {
+            return null;
+        }
+        return Fraction.FromDouble((double)num).ToString();
     }
 }

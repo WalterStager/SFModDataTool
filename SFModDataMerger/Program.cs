@@ -131,6 +131,7 @@ public class GameDataRecipe : IEquatable<GameDataRecipe> {
     public string? BatchTime;
     public IEnumerable<GameDataRecipePart>? Parts;
     public string? MinPower;
+    public string? AveragePower;
     public bool? Alternate;
     public bool? Ficsmas;
 

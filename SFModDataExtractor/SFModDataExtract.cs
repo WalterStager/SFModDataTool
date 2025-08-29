@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using SkiaSharp;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse_Conversion.Textures;
+using SFModDataMerger;
 
 namespace SFModDataExtractor;
 
@@ -390,5 +391,29 @@ class SFModDataExtract {
         Console.WriteLine($"Parts {prov.FileToPart.Count}");
         Console.WriteLine($"Machines {prov.FileToMachine.Count}");
         Console.WriteLine($"MachineRecipes {prov.FileToBuildingRecipe.Count}");
+
+        foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
+            GameData modGameData = new GameData {
+                Machines = new List<GameDataMachine>(),
+                MultiMachines = new List<GameDataMultiMachine>(),
+                Parts = new List<GameDataItem>(),
+                Recipes = new List<GameDataRecipe>()
+            };
+
+            foreach (UassetFile uf in modFiles) {
+                if (prov.FileToRecipe.ContainsKey(uf.File)) {
+                    modGameData.Recipes.ToList().Concat(prov.FileToRecipe[uf.File].ToGameDataRecipe());
+                }
+                else if (prov.FileToMachine.ContainsKey(uf.File)) {
+                    modGameData.Machines.ToList().Add(prov.FileToMachine[uf.File].ToGameDataMachine());
+                }
+                else if (prov.FileToPart.ContainsKey(uf.File)) {
+                    modGameData.Parts.ToList().Add(prov.FileToPart[uf.File].ToGameDataItem());
+                }
+            }
+
+            Directory.CreateDirectory(modName);
+            modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"));
+        }
     }
 }
