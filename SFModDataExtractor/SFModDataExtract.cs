@@ -414,7 +414,7 @@ class SFModDataExtract {
 
         int? majorTier = uf.GetInt("Properties.mTechTier");
         int? menuPrio = (int?)uf.GetDouble("Properties.mMenuPriority");
-        string techTier = $"{majorTier ?? 0}-{menuPrio ?? 0}";
+        string techTier = $"{majorTier ?? 1}-{menuPrio ?? 0}";
 
         JToken? unlocks = uf.GetToken("Properties.mUnlocks");
         if (unlocks != null) {
@@ -515,7 +515,7 @@ class SFModDataExtract {
         Console.WriteLine($"Recipes {prov.FileToRecipe.Count}");
         Console.WriteLine($"Parts {prov.FileToPart.Count}");
         Console.WriteLine($"Machines {prov.FileToMachine.Count}");
-        Console.WriteLine($"MachineRecipes {prov.FileToBuildingRecipe.Count}");
+        Console.WriteLine($"BuildableRecipes {prov.FileToBuildingRecipe.Count}");
 
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             List<(string, SKBitmap[])> iconsToSave = new List<(string, SKBitmap[])>();
