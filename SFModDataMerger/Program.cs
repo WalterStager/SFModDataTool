@@ -69,6 +69,7 @@ public class GameDataRecipePart : IEquatable<GameDataRecipePart> {
     public required string Amount;
 
     public bool Equals(GameDataRecipePart? other) => Part.Equals(other?.Part);
+    public override int GetHashCode() => HashCode.Combine(Part);
 }
 
 public class GameDataMMMachine : IEquatable<GameDataRecipe> {
@@ -77,6 +78,7 @@ public class GameDataMMMachine : IEquatable<GameDataRecipe> {
     public bool? Default;
 
     public bool Equals(GameDataRecipe? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataMMCapacity : IEquatable<GameDataMMCapacity> {
@@ -86,6 +88,7 @@ public class GameDataMMCapacity : IEquatable<GameDataMMCapacity> {
     public int? Color;
 
     public bool Equals(GameDataMMCapacity? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataMachine : IEquatable<GameDataMachine> {
@@ -103,6 +106,7 @@ public class GameDataMachine : IEquatable<GameDataMachine> {
     public string? FueledBasePowerBoost;
 
     public bool Equals(GameDataMachine? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataMultiMachine : IEquatable<GameDataMultiMachine> {
@@ -114,6 +118,7 @@ public class GameDataMultiMachine : IEquatable<GameDataMultiMachine> {
     public IEnumerable<GameDataMMCapacity>? Capacities;
 
     public bool Equals(GameDataMultiMachine? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataItem : IEquatable<GameDataItem> {
@@ -122,6 +127,7 @@ public class GameDataItem : IEquatable<GameDataItem> {
     public required int? SinkPoints;
 
     public bool Equals(GameDataItem? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataRecipe : IEquatable<GameDataRecipe> {
@@ -136,6 +142,7 @@ public class GameDataRecipe : IEquatable<GameDataRecipe> {
     public bool? Ficsmas;
 
     public bool Equals(GameDataRecipe? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameData {
