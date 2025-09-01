@@ -58,8 +58,9 @@ class SFModDataProvider {
     public HashSet<UassetFile> AllUassetFiles = new HashSet<UassetFile>();
     public HashSet<string> CsvFiles = new HashSet<string>();
     public Dictionary<string, UassetFile> AssetPathToFile = new Dictionary<string, UassetFile>();
-    public Dictionary<string, Dictionary<string, StringDataEntry>> stringDataTables = new Dictionary<string, Dictionary<string, StringDataEntry>>();
+    public Dictionary<string, Dictionary<string, CsvDataEntry>> csvDataTables = new Dictionary<string, Dictionary<string, CsvDataEntry>>();
     public Dictionary<UassetFile, SinkDataEntry> sinkDataTable = new Dictionary<UassetFile, SinkDataEntry>();
+    public Dictionary<UassetFile, Dictionary<string, string>> stringDataTables = new Dictionary<UassetFile, Dictionary<string, string>>();
 
     public UassetFile NormalizeAndMatchPath(string assetPath) {
         UassetFile? result;
@@ -98,18 +99,24 @@ class SFModDataProvider {
         }
 
         AssetPathToFile.Add(Path.ChangeExtension(assetPath, null), result);
+        try {
+            result.defaultObjectIndexSearchOverride = SFModUtility.GetAssetPathIndex(assetPath);
+        }
+        catch (FormatException) {
+
+        }
 
         return result;
     }
 
     public void ReadCsv(string path, string tableName) {
-        stringDataTables.Add(tableName, new Dictionary<string, StringDataEntry>());
+        csvDataTables.Add(tableName, new Dictionary<string, CsvDataEntry>());
         FArchive? archive = FileProvider.CreateReader(path);
         StreamReader reader = new StreamReader((Stream)archive);
         CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-        IEnumerable<StringDataEntry> records = csv.GetRecords<StringDataEntry>();
-        foreach (StringDataEntry entry in records) {
-            stringDataTables[tableName].Add(entry.Key, entry);
+        IEnumerable<CsvDataEntry> records = csv.GetRecords<CsvDataEntry>();
+        foreach (CsvDataEntry entry in records) {
+            csvDataTables[tableName].Add(entry.Key, entry);
         }
         csv.Dispose();
     }
@@ -157,10 +164,7 @@ class SFModDataExtract {
         if (prov.FileToRecipe.ContainsKey(uf.File)) {
             return;
         }
-
-        // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
-        // including 'other' is a stopgap solution
-        if (uf.type != UassetType.RecipeDesc && uf.type != UassetType.Other) {
+        if (uf.type != UassetType.RecipeDesc) {
             throw new SFModDataRuntimeException($"Not a recipe file {uf.File}:{uf.type}");
         }
 
@@ -193,7 +197,7 @@ class SFModDataExtract {
                 UassetFile mchF = prov.NormalizeAndMatchPath(assetPathName);
                 // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
                 // including 'other' is a stopgap solution
-                if (mchF.type != UassetType.MachineBuild && mchF.type != UassetType.Other) {
+                if (mchF.type != UassetType.MachineBuild) {
                     throw new SFModDataRuntimeException($"Not a machine build file {mchF.File}:{mchF.type}");
                 }
                 UAssetMachine uMch;
@@ -230,7 +234,6 @@ class SFModDataExtract {
                 if (objPath != null && amount != null) {
                     UassetFile prodF = prov.NormalizeAndMatchPath(objPath);
                     SetupPart(prodF, techTier);
-
                     recipe.Products.Add((int.Parse(amount), prov.FileToPart[prodF.File]));
                 }
             }
@@ -244,7 +247,6 @@ class SFModDataExtract {
                 if (objPath != null && amount != null) {
                     UassetFile ingF = prov.NormalizeAndMatchPath(objPath);
                     SetupPart(ingF, techTier);
-
                     recipe.Ingredients.Add((int.Parse(amount), prov.FileToPart[ingF.File]));
                 }
             }
@@ -324,12 +326,23 @@ class SFModDataExtract {
 
         // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
         // including 'other' is a stopgap solution
-        if (uf.type != UassetType.ItemDesc && uf.type != UassetType.Other) {
+        if (uf.type != UassetType.ItemDesc) {
             throw new SFModDataRuntimeException($"Not a part file {uf.File}:{uf.type}");
         }
 
         string displayName = uf.GetDisplayName();
         UassetPart part = new UassetPart { UFile = uf, DisplayName = displayName, Tier = techTier };
+
+        if (prov.sinkDataTable.ContainsKey(uf)) {
+            part.SinkPoints = prov.sinkDataTable[uf].Points;
+        }
+
+        string? formString = uf.GetString("Properties.mForm");
+        part.Form = formString switch {
+            "EResourceForm::RF_LIQUID" => ItemForm.Liquid,
+            "EResourceForm::RF_GAS" => ItemForm.Gas,
+            _ => ItemForm.Solid,
+        };
 
         string? iconObjPath = uf.GetString("Properties.mSmallIcon.ObjectPath");
         if (iconObjPath == null) {
@@ -386,7 +399,7 @@ class SFModDataExtract {
                     string? buildFilePath = machineDescFile.GetString("Properties.mBuildableClass.ObjectPath");
                     if (buildFilePath != null) {
                         UassetFile machineBuildFile = prov.NormalizeAndMatchPath(buildFilePath);
-                        prov.FileToBuildingRecipe.Add(machineBuildFile.File, machineRecipeFile);
+                        prov.FileToBuildingRecipe.TryAdd(machineBuildFile.File, machineRecipeFile);
                         return;
                     }
                 }
@@ -400,7 +413,7 @@ class SFModDataExtract {
         }
 
         int? majorTier = uf.GetInt("Properties.mTechTier");
-        int? menuPrio = uf.GetInt("Properties.mMenuPriority");
+        int? menuPrio = (int?)uf.GetDouble("Properties.mMenuPriority");
         string techTier = $"{majorTier ?? 0}-{menuPrio ?? 0}";
 
         JToken? unlocks = uf.GetToken("Properties.mUnlocks");
@@ -434,12 +447,11 @@ class SFModDataExtract {
             throw new SFModDataRuntimeException($"Not a data table {uf.File}");
         }
         JToken? rows = uf.GetToken("Rows", exportIndex: 0);
-        //SinkDataEntry
         if (rows == null) {
             return;
         }
 
-        foreach (JToken entryToken in rows.Children()) {
+        foreach (JToken entryToken in rows.Children().Values()) {
             string? objectName = entryToken.SelectToken("ItemClass.ObjectName")?.Value<string>();
             string? objectPath = entryToken.SelectToken("ItemClass.ObjectPath")?.Value<string>();
             int? points = entryToken.SelectToken("Points")?.Value<int>();
@@ -458,6 +470,12 @@ class SFModDataExtract {
     }
 
     public void ParseGameWorld(UassetFile uf) {
+        string? sinkPointsPath = uf.GetString("Properties.mResourceSinkItemPointsTable.AssetPathName");
+        if (sinkPointsPath != null) {
+            UassetFile sinkPointsFile = prov.NormalizeAndMatchPath(sinkPointsPath);
+            ReadSinkPoints(sinkPointsFile);
+        }
+
         JToken? schematicsToken = uf.GetToken("Properties.mSchematics");
         if (schematicsToken != null) {
             foreach (JToken schemToken in schematicsToken.Children()) {
@@ -468,17 +486,17 @@ class SFModDataExtract {
                 }
             }
         }
-
-        string? sinkPointsPath = uf.GetString("Properties.mResourceSinkItemPointsTable.AssetPathName");
-        if (sinkPointsPath != null) {
-            UassetFile sinkPointsFile = prov.NormalizeAndMatchPath(sinkPointsPath);
-            ReadSinkPoints(sinkPointsFile);
-        }
     }
 
     public void doTheThing() {
         foreach (string csvFile in prov.CsvFiles) {
             prov.ReadCsv(csvFile, Path.GetFileNameWithoutExtension(csvFile));
+        }
+
+        // base game stuff since I couldn't find any gameworld file for the base game
+        ReadSinkPoints(prov.NormalizeAndMatchPath("FactoryGame/Content/FactoryGame/Buildable/Factory/ResourceSink/DT_ResourceSinkPoints.uasset"));
+        foreach (UassetFile baseSchemFile in prov.FilesByMod["FactoryGame"].Where(uf => uf.type == UassetType.Schematic)) {
+            ParseSchematic(baseSchemFile);
         }
 
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
@@ -507,19 +525,16 @@ class SFModDataExtract {
                 Parts = new HashSet<GameDataItem>(),
                 Recipes = new HashSet<GameDataRecipe>()
             };
-            int recipesCount = 0, machinesCount = 0, partsCount = 0;
 
             foreach (UassetFile uf in modFiles) {
                 if (prov.FileToRecipe.ContainsKey(uf.File)) {
                     // add recipe for each machine it can be produced in
                     foreach (GameDataRecipe rec in prov.FileToRecipe[uf.File].ToGameDataRecipe()) {
-                        recipesCount++;
                         modGameData.Recipes.Add(rec);
                     }
                     // include one level of dependency for base game items that are not normall included
                     // like a recipe to produce hard drives
                     foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Products) {
-                        partsCount++;
                         modGameData.Parts.Add(part.ToGameDataItem());
                         SKBitmap[]? partIcon = part.Icon;
                         if (partIcon != null) {
@@ -528,7 +543,6 @@ class SFModDataExtract {
                     }
 
                     foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Ingredients) {
-                        partsCount++;
                         modGameData.Parts.Add(part.ToGameDataItem());
                         SKBitmap[]? partIcon = part.Icon;
                         if (partIcon != null) {
@@ -537,7 +551,6 @@ class SFModDataExtract {
                     }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
-                    machinesCount++;
                     modGameData.Machines.Add(prov.FileToMachine[uf.File].ToGameDataMachine());
                     SKBitmap[]? mchIcon = prov.FileToMachine[uf.File].Icon;
                     if (mchIcon != null) {
@@ -545,7 +558,6 @@ class SFModDataExtract {
                     }
                 }
                 else if (prov.FileToPart.ContainsKey(uf.File)) {
-                    partsCount++;
                     modGameData.Parts.Add(prov.FileToPart[uf.File].ToGameDataItem());
                     SKBitmap[]? partIcon = prov.FileToPart[uf.File].Icon;
                     if (partIcon != null) {
@@ -556,9 +568,9 @@ class SFModDataExtract {
 
             if (modGameData.Machines.Count() + modGameData.MultiMachines.Count() + modGameData.Parts.Count() + modGameData.Recipes.Count() != 0) {
                 Console.WriteLine($"{modName} has:");
-                Console.WriteLine($"\tRecipes {recipesCount}");
-                Console.WriteLine($"\tMachines {machinesCount}");
-                Console.WriteLine($"\tParts {partsCount}");
+                Console.WriteLine($"\tRecipes {modGameData.Recipes.Count()}");
+                Console.WriteLine($"\tMachines {modGameData.Machines.Count()}");
+                Console.WriteLine($"\tParts {modGameData.Parts.Count()}");
                 Directory.CreateDirectory(modName);
                 modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"));
 

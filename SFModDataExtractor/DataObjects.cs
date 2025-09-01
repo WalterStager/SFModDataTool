@@ -11,7 +11,7 @@ using ZstdSharp.Unsafe;
 
 namespace SFModDataExtractor;
 
-class StringDataEntry {
+class CsvDataEntry {
     public required string Key { get; set; }
     public string? SourceString { get; set; }
     public string? Context { get; set; }
@@ -20,7 +20,7 @@ class StringDataEntry {
     public string? Tag { get; set; }
 
     public override string ToString() {
-        return $"StringDataEntry({SourceString},{SourceString},{Context},{VariableDescription},{Type},{Tag})";
+        return $"CsvDataEntry({SourceString},{SourceString},{Context},{VariableDescription},{Type},{Tag})";
     }
 }
 
@@ -35,6 +35,7 @@ class SinkDataEntry {
 }
 
 enum UassetType {
+    Other, // default
     RecipeDesc,
     MachineDesc,
     MachineBuild,
@@ -45,7 +46,12 @@ enum UassetType {
     ResoureceNode,
     DataTable,
     GameWorldModule,
-    Other
+}
+
+enum ItemForm {
+    Solid, // default
+    Liquid,
+    Gas,
 }
 
 [Serializable]
@@ -107,6 +113,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                 string? superStruct = GetString("SuperStruct.ObjectName", exportIndex: defaultObjectIndexSearchOverride);
                 _type = superStruct switch {
                     "Class'FGRecipe'" => UassetType.RecipeDesc,
+                    "Class'FGCustomizationRecipe'" => UassetType.RecipeDesc,
                     "Class'FGBuildableManufacturer'" => UassetType.MachineBuild,
                     "Class'FGBuildableManufacturerVariablePower'" => UassetType.MachineBuild,
                     "Class'FGBuildingDescriptor'" => UassetType.MachineDesc,
@@ -136,6 +143,24 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                         }
                     }
                     catch (SFModDataRuntimeException) {
+                    }
+                }
+                // thanks for not using FG classes like all the other mods ... FICSIT FARMING >:(
+                if (_type == UassetType.Other) {
+                    string filename = Path.GetFileNameWithoutExtension(File);
+                    if (filename.Contains("Recipe")) {
+                        _type = UassetType.RecipeDesc;
+                    }
+                    else if (filename.Contains("Build")) {
+                        _type = UassetType.MachineBuild;
+                    }
+                    else if (filename.Contains("Desc")) {
+                        if (File.Contains("Buildings")) {
+                            _type = UassetType.MachineDesc;
+                        }
+                        else {
+                            _type = UassetType.ItemDesc;
+                        }
                     }
                 }
             }
@@ -215,34 +240,76 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     }
 
     public string GetDisplayName(bool searchSuper = true) {
-        // localized string can just be some very weird stuff in base game 
-        // like the recipe for "Blue FICSMAS Ornament" being named "Iron Plate"
-        // and cooling system bing named "Truck Chassis"
-        string? displayName = (Mod == "FactoryGame") ? GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper) : GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
-        string? nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: false);
-        string? nameKey = GetString("Properties.mDisplayName.Key", searchSuper: false);
-        if ((nameTable == null || nameKey == null) && (searchSuper)) {
-            nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
-            nameKey = GetString("Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
-        }
-
-        if (nameTable != null && nameKey != null && _provider.stringDataTables.ContainsKey(nameTable)) {
-            if (!_provider.stringDataTables[nameTable].ContainsKey(nameKey)) {
-                throw new SFModDataRuntimeException($"Table entry missing {nameTable}:{nameKey} in {File}");
+        if (Mod == "FactoryGame") {
+            string? displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper);
+            string? nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: false);
+            string? nameKey = GetString("Properties.mDisplayName.Key", searchSuper: false);
+            if ((nameTable == null || nameKey == null) && searchSuper) {
+                nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
+                nameKey = GetString("Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
             }
-            else {
-                displayName = _provider.stringDataTables[nameTable][nameKey].SourceString;
+
+            if (nameTable != null && nameKey != null && _provider.csvDataTables.ContainsKey(nameTable)) {
+                if (!_provider.csvDataTables[nameTable].ContainsKey(nameKey)) {
+                    throw new SFModDataRuntimeException($"Table entry missing {nameTable}:{nameKey} in {File}");
+                }
+                else {
+                    displayName = _provider.csvDataTables[nameTable][nameKey].SourceString;
+                }
+            }
+
+            if (displayName == null) {
+                throw new SFModDataRuntimeException($"Could not get name for {File}");
+            }
+            return displayName;
+        }
+        else {
+            string? displayName = GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
+            if (displayName == null) {
+                displayName = GetString("Properties.mDisplayName.CultureInvariantString", searchSuper: searchSuper);
+            }
+            string? nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: false);
+            string? nameKey = GetString("Properties.mDisplayName.Key", searchSuper: false);
+            if ((nameTable == null || nameKey == null) && searchSuper) {
+                nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
+                nameKey = GetString("Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
+            }
+
+            if (nameTable != null && nameKey != null) {
+                UassetFile stringDataTableFile = _provider.NormalizeAndMatchPath(nameTable);
+                ParseStringTable(stringDataTableFile);
+
+                if (_provider.stringDataTables[stringDataTableFile].ContainsKey(nameKey)) {
+                    displayName = _provider.stringDataTables[stringDataTableFile][nameKey];
+                }
+                else {
+                    // throw new SFModDataRuntimeException($"Table entry missing {nameTable}:{nameKey} in {File}");
+                }
+            }
+
+            if (displayName == null) {
+                displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper: searchSuper);
+            }
+
+            if (displayName == null) {
+                throw new SFModDataRuntimeException($"Could not get name for {File}");
+            }
+            return displayName;
+        }
+    }
+
+    public void ParseStringTable(UassetFile stringDataTableFile) {
+        if (_provider.stringDataTables.ContainsKey(stringDataTableFile)) {
+            return;
+        }
+
+        JToken? tableToken = stringDataTableFile.GetToken("StringTable.KeysToEntries", exportIndex: 0);
+        if (tableToken != null) {
+            _provider.stringDataTables.Add(stringDataTableFile, new Dictionary<string, string>());
+            foreach (JProperty entry in tableToken.Children()) {
+                _provider.stringDataTables[stringDataTableFile].Add(entry.Name, entry.Value.ToString());
             }
         }
-
-        if (displayName == null) {
-            displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper: searchSuper);
-        }
-
-        if (displayName == null) {
-            throw new SFModDataRuntimeException($"Could not get name for {File}");
-        }
-        return displayName;
     }
 
     public IEnumerable<string> GetProducedIn(bool searchSuper = true) {
@@ -290,6 +357,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
         return File.CompareTo(other.File);
     }
     public bool Equals(UassetFile? other) => CompareTo(other) == 0;
+    public override int GetHashCode() => HashCode.Combine(Mod, File);
 
     public UassetFile(SFModDataProvider Provider, string filename) {
         _provider = Provider;
@@ -309,6 +377,7 @@ interface IComparableUasset {
         }
         return UFile.CompareTo(other.UFile);
     }
+    public int GetHashCode() => HashCode.Combine(UFile);
 }
 
 class UassetRecipe : IComparableUasset {
@@ -407,6 +476,7 @@ class UassetPart : IComparableUasset {
     public required string DisplayName { get; set; }
     public string? Tier { get; set; }
     public int? SinkPoints { get; set; }
+    public ItemForm Form { get; set; }
     public SKBitmap[]? Icon { get; set; }
 
     public GameDataItem ToGameDataItem() {
@@ -422,7 +492,7 @@ class UassetPart : IComparableUasset {
     public GameDataRecipePart ToGameDataRecipePart(int amount) {
         GameDataRecipePart result = new GameDataRecipePart {
             Part = DisplayName,
-            Amount = amount.ToString(),
+            Amount = (amount / (Form != ItemForm.Solid ? 1000 : 1)).ToString(),
         };
 
         return result;
