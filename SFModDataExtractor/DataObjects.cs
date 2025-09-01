@@ -11,7 +11,7 @@ using ZstdSharp.Unsafe;
 
 namespace SFModDataExtractor;
 
-class DataEntry {
+class StringDataEntry {
     public required string Key { get; set; }
     public string? SourceString { get; set; }
     public string? Context { get; set; }
@@ -20,8 +20,18 @@ class DataEntry {
     public string? Tag { get; set; }
 
     public override string ToString() {
-        return $"DataEntry({SourceString},{SourceString},{Context},{VariableDescription},{Type},{Tag})";
+        return $"StringDataEntry({SourceString},{SourceString},{Context},{VariableDescription},{Type},{Tag})";
     }
+}
+
+class SinkDataEntry {
+    // this is the ObjectPath since RowName is often just trash
+    public required string Key { get; set; }
+    public string? RowName { get; set; }
+    public string? ObjectName { get; set; }
+    public string? ObjectPath { get; set; }
+    public int? Points { get; set; }
+    public int? OverriddenResourceSinkPoints { get; set; }
 }
 
 enum UassetType {
@@ -30,7 +40,11 @@ enum UassetType {
     MachineBuild,
     ItemDesc,
     Schematic,
+    ResearchTree,
     Texture,
+    ResoureceNode,
+    DataTable,
+    GameWorldModule,
     Other
 }
 
@@ -62,7 +76,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     public UassetFile? super {
         get {
             if (_super == null) {
-                JToken? superPathToken = exports[0].SelectToken("Super.ObjectPath");
+                JToken? superPathToken = exports[defaultObjectIndexSearchOverride].SelectToken("Super.ObjectPath");
                 if (superPathToken == null || superPathToken.Type != JTokenType.String || superPathToken.ToString() == "") {
                     return null;
                 }
@@ -75,11 +89,14 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     public UassetType type {
         get {
             if (_type == null) {
-                string? objClass = GetString(0, "Class");
+                string? objClass = GetString("Class", exportIndex: defaultObjectIndexSearchOverride);
                 if (objClass != null) {
                     switch (objClass) {
                         case "UScriptClass'Texture2D'":
                             _type = UassetType.Texture;
+                            return (UassetType)_type;
+                        case "UScriptClass'DataTable'":
+                            _type = UassetType.DataTable;
                             return (UassetType)_type;
                     }
                 }
@@ -87,7 +104,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                     _type = super.type;
                     return (UassetType)_type;
                 }
-                string? superStruct = GetString(0, "SuperStruct.ObjectName");
+                string? superStruct = GetString("SuperStruct.ObjectName", exportIndex: defaultObjectIndexSearchOverride);
                 _type = superStruct switch {
                     "Class'FGRecipe'" => UassetType.RecipeDesc,
                     "Class'FGBuildableManufacturer'" => UassetType.MachineBuild,
@@ -105,10 +122,34 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                     "Class'FGItemDescriptorPowerBoosterFuel'" => UassetType.ItemDesc,
                     "Class'FGItemDescriptorNuclearFuel'" => UassetType.ItemDesc,
                     "Class'FGSchematic'" => UassetType.Schematic,
+                    "Class'FGResearchTree'" => UassetType.ResearchTree,
+                    "Class'FGResourceNode'" => UassetType.ResoureceNode,
                     _ => UassetType.Other,
                 };
+
+                if (_type == UassetType.Other) {
+                    try {
+                        bool? rootModule = GetBool("Properties.bRootModule");
+                        JToken? schematics = GetToken("Properties.mSchematics");
+                        if (rootModule == true && schematics != null) {
+                            _type = UassetType.GameWorldModule;
+                        }
+                    }
+                    catch (SFModDataRuntimeException) {
+                    }
+                }
             }
             return (UassetType)_type;
+        }
+    }
+    public int defaultObjectIndexSearchOverride = 0;
+    private int? _defaultObjectIndex;
+    public int defaultObjectIndex {
+        get {
+            if (_defaultObjectIndex == null) {
+                _defaultObjectIndex = GetDefaultObjectIndex();
+            }
+            return (int)_defaultObjectIndex;
         }
     }
 
@@ -116,21 +157,23 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
         return _provider.FileProvider.LoadPackage(File).GetExports().ToArray()[objIndex];
     }
 
-    public JToken? GetToken(int exportIndex, string tokenPath, bool searchSuper = true, bool forceSuper = false) {
+    public JToken? GetToken(string tokenPath, int? exportIndex = null, bool searchSuper = true, bool forceSuper = false) {
+        if (exportIndex == null) {
+            exportIndex = defaultObjectIndex;
+        }
         if (exportIndex >= exports.Count()) {
             throw new SFModDataRuntimeException($"Exports index ({exportIndex}) out of range ({exports.Count()} for {File})");
         }
         JToken? result = null;
         if (!forceSuper) {
-            result = exports[exportIndex].SelectToken(tokenPath);
+            result = exports[(int)exportIndex].SelectToken(tokenPath);
         }
         if (result != null && result.ToString() != "") {
             return result;
         }
         if (searchSuper && super != null) {
             try {
-                int superObjInd = super.GetDefaultObjectIndex();
-                result = super.GetToken(superObjInd, tokenPath, searchSuper);
+                result = super.GetToken(tokenPath, searchSuper: true);
             }
             catch (SFModDataRuntimeException) {
                 // Console.WriteLine($"Failed to get from super {File}->{super.File}");
@@ -139,55 +182,61 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
         return result;
     }
 
-    public string? GetString(int exportIndex, string tokenPath, bool searchSuper = true, bool forceSuper = false) {
-        JToken? result = GetToken(exportIndex, tokenPath, searchSuper, forceSuper);
+    public string? GetString(string tokenPath, int? exportIndex = null, bool searchSuper = true, bool forceSuper = false) {
+        JToken? result = GetToken(tokenPath, exportIndex, searchSuper, forceSuper);
         if (result?.Type is JTokenType.String) {
             return result.ToString();
         }
         return null;
     }
 
-    public int? GetInt(int exportIndex, string tokenPath, bool searchSuper = true, bool forceSuper = false) {
-        JToken? result = GetToken(exportIndex, tokenPath, searchSuper, forceSuper);
+    public int? GetInt(string tokenPath, int? exportIndex = null, bool searchSuper = true, bool forceSuper = false) {
+        JToken? result = GetToken(tokenPath, exportIndex, searchSuper, forceSuper);
         if (result?.Type is JTokenType.String || result?.Type is JTokenType.Float || result?.Type is JTokenType.Integer) {
             return int.Parse(result.ToString());
         }
         return null;
     }
 
-    public double? GetDouble(int exportIndex, string tokenPath, bool searchSuper = true, bool forceSuper = false) {
-        JToken? result = GetToken(exportIndex, tokenPath, searchSuper, forceSuper);
+    public double? GetDouble(string tokenPath, int? exportIndex = null, bool searchSuper = true, bool forceSuper = false) {
+        JToken? result = GetToken(tokenPath, exportIndex, searchSuper, forceSuper);
         if (result?.Type is JTokenType.String || result?.Type is JTokenType.Float || result?.Type is JTokenType.Integer) {
             return double.Parse(result.ToString());
         }
         return null;
     }
 
-    public string GetDisplayName(bool searchSuper = true) {
-        int defObjInd = GetDefaultObjectIndex();
+    public bool? GetBool(string tokenPath, int? exportIndex = null, bool searchSuper = true, bool forceSuper = false) {
+        JToken? result = GetToken(tokenPath, exportIndex, searchSuper, forceSuper);
+        if (result?.Type is JTokenType.Boolean) {
+            return result?.Value<bool>();
+        }
+        return null;
+    }
 
+    public string GetDisplayName(bool searchSuper = true) {
         // localized string can just be some very weird stuff in base game 
         // like the recipe for "Blue FICSMAS Ornament" being named "Iron Plate"
         // and cooling system bing named "Truck Chassis"
-        string? displayName = (Mod == "FactoryGame") ? GetString(0, "Name", searchSuper) : GetString(defObjInd, "Properties.mDisplayName.LocalizedString", searchSuper);
-        string? nameTable = GetString(defObjInd, "Properties.mDisplayName.TableId", searchSuper: false);
-        string? nameKey = GetString(defObjInd, "Properties.mDisplayName.Key", searchSuper: false);
+        string? displayName = (Mod == "FactoryGame") ? GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper) : GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
+        string? nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: false);
+        string? nameKey = GetString("Properties.mDisplayName.Key", searchSuper: false);
         if ((nameTable == null || nameKey == null) && (searchSuper)) {
-            nameTable = GetString(defObjInd, "Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
-            nameKey = GetString(defObjInd, "Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
+            nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
+            nameKey = GetString("Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
         }
 
-        if (nameTable != null && nameKey != null && _provider.dataTables.ContainsKey(nameTable)) {
-            if (!_provider.dataTables[nameTable].ContainsKey(nameKey)) {
+        if (nameTable != null && nameKey != null && _provider.stringDataTables.ContainsKey(nameTable)) {
+            if (!_provider.stringDataTables[nameTable].ContainsKey(nameKey)) {
                 throw new SFModDataRuntimeException($"Table entry missing {nameTable}:{nameKey} in {File}");
             }
             else {
-                displayName = _provider.dataTables[nameTable][nameKey].SourceString;
+                displayName = _provider.stringDataTables[nameTable][nameKey].SourceString;
             }
         }
 
         if (displayName == null) {
-            displayName = GetString(0, "Name", searchSuper);
+            displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper: searchSuper);
         }
 
         if (displayName == null) {
@@ -197,8 +246,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
     }
 
     public IEnumerable<string> GetProducedIn(bool searchSuper = true) {
-        int defObjInd = GetDefaultObjectIndex();
-        JToken? producedInToken = GetToken(defObjInd, "Properties.mProducedIn");
+        JToken? producedInToken = GetToken("Properties.mProducedIn");
         if (producedInToken != null) {
             foreach (JToken mchToken in producedInToken.Children()) {
                 string? assetPathName = mchToken.SelectToken("AssetPathName")?.ToString();
@@ -207,7 +255,7 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                 }
             }
         }
-        producedInToken = GetToken(defObjInd, "Properties.mProducedIn", searchSuper, true);
+        producedInToken = GetToken("Properties.mProducedIn", searchSuper: searchSuper, forceSuper: true);
         if (producedInToken != null) {
             foreach (JToken mchToken in producedInToken.Children()) {
                 string? assetPathName = mchToken.SelectToken("AssetPathName")?.ToString();
@@ -219,8 +267,8 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
         yield break;
     }
 
-    public int GetDefaultObjectIndex() {
-        string? defObjPath = GetString(0, "ClassDefaultObject.ObjectPath");
+    private int GetDefaultObjectIndex() {
+        string? defObjPath = GetString("ClassDefaultObject.ObjectPath", exportIndex: defaultObjectIndexSearchOverride);
         if (defObjPath == null) {
             throw new SFModDataRuntimeException($"Couldn't get default object path for {File}");
         }
@@ -280,7 +328,7 @@ class UassetRecipe : IComparableUasset {
             foreach (UAssetMachine prodMachine in ProducedIn) {
                 GameDataRecipe mRecipe = new GameDataRecipe {
                     Name = DisplayName,
-                    Tier = "0-0",
+                    Tier = Tier ?? "0-0",
                     Machine = prodMachine.DisplayName,
                     BatchTime = SFModUtility.FractionStringFromDouble(ManufacturingDuration),
                     Parts = new List<GameDataRecipePart>(),
@@ -337,7 +385,7 @@ class UAssetMachine : IComparableUasset {
     public GameDataMachine ToGameDataMachine() {
         GameDataMachine result = new GameDataMachine {
             Name = DisplayName,
-            Tier = "0-0",
+            Tier = Tier ?? "0-0",
             AveragePower = PowerConsumption == null ? null : (PowerConsumption * -1).ToString(),
             OverclockPowerExponent = SFModUtility.FractionStringFromDouble(PowerConsumptionExponent),
             MaxProductionShards = ProductionShardSlotSize,
@@ -364,8 +412,8 @@ class UassetPart : IComparableUasset {
     public GameDataItem ToGameDataItem() {
         GameDataItem result = new GameDataItem {
             Name = DisplayName,
-            Tier = "0-0",
-            SinkPoints = 0,
+            Tier = Tier ?? "0-0",
+            SinkPoints = SinkPoints ?? 0,
         };
 
         return result;

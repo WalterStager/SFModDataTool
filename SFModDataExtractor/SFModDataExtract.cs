@@ -53,12 +53,13 @@ class SFModDataProvider {
     public Dictionary<string, UassetFile> FileToBuildingRecipe = new Dictionary<string, UassetFile>();
     public Dictionary<string, UassetPart> FileToPart = new Dictionary<string, UassetPart>();
     public Dictionary<string, UAssetMachine> FileToMachine = new Dictionary<string, UAssetMachine>();
+    public HashSet<UassetFile> ParsedSchematics = new HashSet<UassetFile>();
     public Dictionary<string, HashSet<UassetFile>> FilesByMod = new Dictionary<string, HashSet<UassetFile>>();
     public HashSet<UassetFile> AllUassetFiles = new HashSet<UassetFile>();
     public HashSet<string> CsvFiles = new HashSet<string>();
     public Dictionary<string, UassetFile> AssetPathToFile = new Dictionary<string, UassetFile>();
-    public Dictionary<string, Dictionary<string, DataEntry>> dataTables = new Dictionary<string, Dictionary<string, DataEntry>>();
-    // public HashSet<UAssetMachine> MachinesToSetupLater = new HashSet<UAssetMachine>();
+    public Dictionary<string, Dictionary<string, StringDataEntry>> stringDataTables = new Dictionary<string, Dictionary<string, StringDataEntry>>();
+    public Dictionary<UassetFile, SinkDataEntry> sinkDataTable = new Dictionary<UassetFile, SinkDataEntry>();
 
     public UassetFile NormalizeAndMatchPath(string assetPath) {
         UassetFile? result;
@@ -102,13 +103,13 @@ class SFModDataProvider {
     }
 
     public void ReadCsv(string path, string tableName) {
-        dataTables.Add(tableName, new Dictionary<string, DataEntry>());
+        stringDataTables.Add(tableName, new Dictionary<string, StringDataEntry>());
         FArchive? archive = FileProvider.CreateReader(path);
         StreamReader reader = new StreamReader((Stream)archive);
         CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-        IEnumerable<DataEntry> records = csv.GetRecords<DataEntry>();
-        foreach (DataEntry entry in records) {
-            dataTables[tableName].Add(entry.Key, entry);
+        IEnumerable<StringDataEntry> records = csv.GetRecords<StringDataEntry>();
+        foreach (StringDataEntry entry in records) {
+            stringDataTables[tableName].Add(entry.Key, entry);
         }
         csv.Dispose();
     }
@@ -152,19 +153,23 @@ class SFModDataExtract {
         }
     }
 
-    public void SetupRecipe(UassetFile uf) {
-        if (uf.type != UassetType.RecipeDesc) {
+    public void SetupRecipe(UassetFile uf, string techTier) {
+        if (prov.FileToRecipe.ContainsKey(uf.File)) {
+            return;
+        }
+
+        // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
+        // including 'other' is a stopgap solution
+        if (uf.type != UassetType.RecipeDesc && uf.type != UassetType.Other) {
             throw new SFModDataRuntimeException($"Not a recipe file {uf.File}:{uf.type}");
         }
 
         string displayName = uf.GetDisplayName(false);
-        UassetRecipe recipe = new UassetRecipe { UFile = uf, DisplayName = displayName };
+        UassetRecipe recipe = new UassetRecipe { UFile = uf, DisplayName = displayName, Tier = techTier };
 
-        int defObjInd = uf.GetDefaultObjectIndex();
-
-        recipe.ManufacturingDuration = uf.GetDouble(defObjInd, "Properties.mManufactoringDuration");
-        recipe.VariablePowerConstant = uf.GetInt(defObjInd, "Properties.mVariablePowerConsumptionConstant");
-        recipe.VariablePowerFactor = uf.GetInt(defObjInd, "Properties.mVariablePowerConsumptionFactor");
+        recipe.ManufacturingDuration = uf.GetDouble("Properties.mManufactoringDuration");
+        recipe.VariablePowerConstant = uf.GetInt("Properties.mVariablePowerConsumptionConstant");
+        recipe.VariablePowerFactor = uf.GetInt("Properties.mVariablePowerConsumptionFactor");
 
         bool hasActualMachine = false;
         bool isMachineRecipe = false;
@@ -186,7 +191,9 @@ class SFModDataExtract {
 
                 // build file
                 UassetFile mchF = prov.NormalizeAndMatchPath(assetPathName);
-                if (mchF.type != UassetType.MachineBuild) {
+                // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
+                // including 'other' is a stopgap solution
+                if (mchF.type != UassetType.MachineBuild && mchF.type != UassetType.Other) {
                     throw new SFModDataRuntimeException($"Not a machine build file {mchF.File}:{mchF.type}");
                 }
                 UAssetMachine uMch;
@@ -195,7 +202,7 @@ class SFModDataExtract {
                 }
                 else {
                     string machineName = mchF.GetDisplayName();
-                    uMch = new UAssetMachine { UFile = mchF, DisplayName = machineName };
+                    uMch = new UAssetMachine { UFile = mchF, DisplayName = machineName, Tier = techTier };
                     prov.FileToMachine.Add(mchF.File, uMch);
                 }
                 
@@ -215,28 +222,28 @@ class SFModDataExtract {
             return;
         }
 
-        JToken? productsToken = uf.GetToken(defObjInd, "Properties.mProduct");
+        JToken? productsToken = uf.GetToken("Properties.mProduct");
         if (productsToken != null) {
             foreach (JToken prodToken in productsToken.Children()) {
                 string? objPath = prodToken.SelectToken("ItemClass.ObjectPath")?.ToString();
                 string? amount = prodToken.SelectToken("Amount")?.ToString();
                 if (objPath != null && amount != null) {
                     UassetFile prodF = prov.NormalizeAndMatchPath(objPath);
-                    SetupPart(prodF);
+                    SetupPart(prodF, techTier);
 
                     recipe.Products.Add((int.Parse(amount), prov.FileToPart[prodF.File]));
                 }
             }
         }
 
-        JToken? ingredientsToken = uf.GetToken(defObjInd, "Properties.mIngredients");
+        JToken? ingredientsToken = uf.GetToken("Properties.mIngredients");
         if (ingredientsToken != null) {
             foreach (JToken ingToken in ingredientsToken.Children()) {
                 string? objPath = ingToken.SelectToken("ItemClass.ObjectPath")?.ToString();
                 string? amount = ingToken.SelectToken("Amount")?.ToString();
                 if (objPath != null && amount != null) {
                     UassetFile ingF = prov.NormalizeAndMatchPath(objPath);
-                    SetupPart(ingF);
+                    SetupPart(ingF, techTier);
 
                     recipe.Ingredients.Add((int.Parse(amount), prov.FileToPart[ingF.File]));
                 }
@@ -244,7 +251,7 @@ class SFModDataExtract {
         }
 
         // if the recipe is not named use a product name
-        if (recipe.DisplayName == uf.GetString(0, "Name") && recipe.Products.Count() > 0) {
+        if (recipe.DisplayName == uf.GetString("Name", exportIndex: 0) && recipe.Products.Count() > 0) {
             recipe.DisplayName = recipe.Products.First().Item2.DisplayName;
         }
 
@@ -254,53 +261,49 @@ class SFModDataExtract {
     private void SetupMachine(UAssetMachine machine) {
 
         // build file stuff
-        int defObjInd = machine.UFile.GetDefaultObjectIndex();
         // the previous name was from Desc file but the build file generally has a more accurate name
         // mods tend to reference base game stuff that messes up naming so only search superclass if in a mod
         machine.DisplayName = machine.UFile.GetDisplayName(machine.UFile.Mod == "FactoryGame");
-        machine.PowerConsumption = machine.UFile.GetInt(defObjInd, "Properties.mPowerConsumption");
-        machine.PowerConsumptionExponent = machine.UFile.GetDouble(defObjInd, "Properties.mPowerConsumptionExponent");
-        machine.ProductionShardSlotSize = machine.UFile.GetInt(defObjInd, "Properties.mProductionShardSlotSize");
-        machine.ProductionShardBoostMultiplier = machine.UFile.GetDouble(defObjInd, "Properties.mProductionShardBoostMultiplier");
-        machine.BasePowerProduction = machine.UFile.GetInt(defObjInd, "Properties.mBasePowerProduction");
-        machine.BaseBoostPercentage = machine.UFile.GetDouble(defObjInd, "Properties.mBaseBoostPercentage");
+        machine.PowerConsumption = machine.UFile.GetInt("Properties.mPowerConsumption");
+        machine.PowerConsumptionExponent = machine.UFile.GetDouble("Properties.mPowerConsumptionExponent");
+        machine.ProductionShardSlotSize = machine.UFile.GetInt("Properties.mProductionShardSlotSize");
+        machine.ProductionShardBoostMultiplier = machine.UFile.GetDouble("Properties.mProductionShardBoostMultiplier");
+        machine.BasePowerProduction = machine.UFile.GetInt("Properties.mBasePowerProduction");
+        machine.BaseBoostPercentage = machine.UFile.GetDouble("Properties.mBaseBoostPercentage");
         
-        string? fuelClass = machine.UFile.GetString(defObjInd, "Properties.mDefaultFuelClasses.AssetPathname");
+        string? fuelClass = machine.UFile.GetString("Properties.mDefaultFuelClasses.AssetPathname");
         if (fuelClass != null) {
             UassetFile fuelClassFile = prov.NormalizeAndMatchPath(fuelClass);
-            int fuelClassDefObjInd = fuelClassFile.GetDefaultObjectIndex();
-            machine.BoostPercentage  = fuelClassFile.GetDouble(fuelClassDefObjInd, "Properties.mBoostPercentage");
+            machine.BoostPercentage  = fuelClassFile.GetDouble("Properties.mBoostPercentage");
         }
 
         if (prov.FileToBuildingRecipe.ContainsKey(machine.UFile.File)) {
             UassetFile machineRecipeFile = prov.FileToBuildingRecipe[machine.UFile.File];
-            int mrDefObjInd = machineRecipeFile.GetDefaultObjectIndex();
 
-            JToken? ingredientsToken = machineRecipeFile.GetToken(mrDefObjInd, "Properties.mIngredients");
+            JToken? ingredientsToken = machineRecipeFile.GetToken("Properties.mIngredients");
             if (ingredientsToken != null) {
                 foreach (JToken ingToken in ingredientsToken.Children()) {
                     string? objPath = ingToken.SelectToken("ItemClass.ObjectPath")?.ToString();
                     string? amount = ingToken.SelectToken("Amount")?.ToString();
                     if (objPath != null && amount != null) {
                         UassetFile ingF = prov.NormalizeAndMatchPath(objPath);
-                        SetupPart(ingF);
+                        SetupPart(ingF, machine.Tier);
 
                         machine.Ingredients.Add((int.Parse(amount), prov.FileToPart[ingF.File]));
                     }
                 }
             }
 
-            JToken? productsToken = machineRecipeFile.GetToken(mrDefObjInd, "Properties.mProduct");
+            JToken? productsToken = machineRecipeFile.GetToken("Properties.mProduct");
             if (productsToken != null) {
                 // there should only be one product in a machine recipe
                 foreach (JToken prodToken in productsToken.Children()) {
                     string? objPath = prodToken.SelectToken("ItemClass.ObjectPath")?.ToString();
                     if (objPath != null) {
                         UassetFile machineDescFile = prov.NormalizeAndMatchPath(objPath);
-                        int bdfDefObjInd = machineDescFile.GetDefaultObjectIndex();
-                        string? iconObjPath = machineDescFile.GetString(bdfDefObjInd, "Properties.mSmallIcon.ObjectPath");
+                        string? iconObjPath = machineDescFile.GetString("Properties.mSmallIcon.ObjectPath");
                         if (iconObjPath == null) {
-                            iconObjPath = machineDescFile.GetString(bdfDefObjInd, "Properties.mPersistentBigIcon.ObjectPath");
+                            iconObjPath = machineDescFile.GetString("Properties.mPersistentBigIcon.ObjectPath");
                         }
                         if (iconObjPath == null) {
                             throw new SFModDataRuntimeException($"Couldn't get icon path for {machineDescFile.File}");
@@ -314,23 +317,23 @@ class SFModDataExtract {
     }
 
 
-    public void SetupPart(UassetFile uf) {
+    public void SetupPart(UassetFile uf, string? techTier) {
         if (prov.FileToPart.ContainsKey(uf.File)) {
             return;
         }
 
-        if (uf.type != UassetType.ItemDesc) {
+        // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
+        // including 'other' is a stopgap solution
+        if (uf.type != UassetType.ItemDesc && uf.type != UassetType.Other) {
             throw new SFModDataRuntimeException($"Not a part file {uf.File}:{uf.type}");
         }
 
         string displayName = uf.GetDisplayName();
-        UassetPart part = new UassetPart { UFile = uf, DisplayName = displayName };
+        UassetPart part = new UassetPart { UFile = uf, DisplayName = displayName, Tier = techTier };
 
-        int defObjInd = uf.GetDefaultObjectIndex();
-
-        string? iconObjPath = uf.GetString(defObjInd, "Properties.mSmallIcon.ObjectPath");
+        string? iconObjPath = uf.GetString("Properties.mSmallIcon.ObjectPath");
         if (iconObjPath == null) {
-            iconObjPath = uf.GetString(defObjInd, "Properties.mPersistentBigIcon.ObjectPath");
+            iconObjPath = uf.GetString("Properties.mPersistentBigIcon.ObjectPath");
         }
         if (iconObjPath == null) {
             throw new SFModDataRuntimeException($"Couldn't get icon path for {uf.File}");
@@ -369,31 +372,18 @@ class SFModDataExtract {
         }
 
         return bitmaps.Where(b => b != null).Cast<SKBitmap>().ToArray();
-
-        // foreach (SKBitmap? bitmap in bitmaps) {
-        //     if (bitmap is null) continue;
-        //     SKData bytes = bitmap.Encode(SKEncodedImageFormat.Png, 100);
-        //     if (!Path.Exists(savePath)) {
-        //         File.WriteAllBytes(savePath, bytes.ToArray());
-        //     }
-        // }
-        // return true;
-
     }
 
     // recipe file -> desc file -> build file (save the build file so that it can be used to look up recipe file later)
     public void SetupMachineRecipe(UassetFile machineRecipeFile) {
-        int defObjInd = machineRecipeFile.GetDefaultObjectIndex();
-
-        JToken? productsToken = machineRecipeFile.GetToken(defObjInd, "Properties.mProduct");
+        JToken? productsToken = machineRecipeFile.GetToken("Properties.mProduct");
         if (productsToken != null) {
             // there should only be one product in a machine recipe
             foreach (JToken prodToken in productsToken.Children()) {
                 string? objPath = prodToken.SelectToken("ItemClass.ObjectPath")?.ToString();
                 if (objPath != null) {
                     UassetFile machineDescFile = prov.NormalizeAndMatchPath(objPath);
-                    int bdfDefObjInd = machineDescFile.GetDefaultObjectIndex();
-                    string? buildFilePath = machineDescFile.GetString(bdfDefObjInd, "Properties.mBuildableClass.ObjectPath");
+                    string? buildFilePath = machineDescFile.GetString("Properties.mBuildableClass.ObjectPath");
                     if (buildFilePath != null) {
                         UassetFile machineBuildFile = prov.NormalizeAndMatchPath(buildFilePath);
                         prov.FileToBuildingRecipe.Add(machineBuildFile.File, machineRecipeFile);
@@ -404,6 +394,88 @@ class SFModDataExtract {
         }
     }
 
+    public void ParseSchematic(UassetFile uf) {
+        if (prov.ParsedSchematics.Contains(uf)) {
+            return;
+        }
+
+        int? majorTier = uf.GetInt("Properties.mTechTier");
+        int? menuPrio = uf.GetInt("Properties.mMenuPriority");
+        string techTier = $"{majorTier ?? 0}-{menuPrio ?? 0}";
+
+        JToken? unlocks = uf.GetToken("Properties.mUnlocks");
+        if (unlocks != null) {
+            foreach (JToken schemToken in unlocks.Children()) {
+                string? objPath = schemToken.SelectToken("ObjectPath")?.ToString();
+                if (objPath != null) {
+                    // should be in the same file but lets do this to be sure
+                    
+                    int unlockObjIndex = SFModUtility.GetAssetPathIndex(objPath);
+                    UassetFile unlockFile = prov.NormalizeAndMatchPath(objPath);
+                    JToken? recipesToken = unlockFile.GetToken("Properties.mRecipes", exportIndex: unlockObjIndex);
+                    if (recipesToken != null) {
+                        foreach (JToken recObjPathToken in recipesToken.Children()) {
+                            string? recObjPath = recObjPathToken.SelectToken("ObjectPath")?.ToString();
+                            if (recObjPath != null) {
+                                UassetFile recipeFile = prov.NormalizeAndMatchPath(recObjPath);
+                                SetupRecipe(recipeFile, techTier);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        prov.ParsedSchematics.Add(uf);
+    }
+
+    public void ReadSinkPoints(UassetFile uf) {
+        if (uf.type != UassetType.DataTable) {
+            throw new SFModDataRuntimeException($"Not a data table {uf.File}");
+        }
+        JToken? rows = uf.GetToken("Rows", exportIndex: 0);
+        //SinkDataEntry
+        if (rows == null) {
+            return;
+        }
+
+        foreach (JToken entryToken in rows.Children()) {
+            string? objectName = entryToken.SelectToken("ItemClass.ObjectName")?.Value<string>();
+            string? objectPath = entryToken.SelectToken("ItemClass.ObjectPath")?.Value<string>();
+            int? points = entryToken.SelectToken("Points")?.Value<int>();
+            int? overrideSinkPoints = entryToken.SelectToken("OverriddenResourceSinkPoints")?.Value<int>();
+            if (objectPath != null && objectPath != "" && points != null) {
+                UassetFile itemFile = prov.NormalizeAndMatchPath(objectPath);
+                prov.sinkDataTable.Add(itemFile, new SinkDataEntry {
+                    Key = objectPath,
+                    ObjectName = objectName,
+                    ObjectPath = objectPath,
+                    Points = points,
+                    OverriddenResourceSinkPoints = overrideSinkPoints,
+                });
+            }
+        }
+    }
+
+    public void ParseGameWorld(UassetFile uf) {
+        JToken? schematicsToken = uf.GetToken("Properties.mSchematics");
+        if (schematicsToken != null) {
+            foreach (JToken schemToken in schematicsToken.Children()) {
+                string? objPath = schemToken.SelectToken("ObjectPath")?.ToString();
+                if (objPath != null) {
+                    UassetFile schemFile = prov.NormalizeAndMatchPath(objPath);
+                    ParseSchematic(schemFile);
+                }
+            }
+        }
+
+        string? sinkPointsPath = uf.GetString("Properties.mResourceSinkItemPointsTable.AssetPathName");
+        if (sinkPointsPath != null) {
+            UassetFile sinkPointsFile = prov.NormalizeAndMatchPath(sinkPointsPath);
+            ReadSinkPoints(sinkPointsFile);
+        }
+    }
+
     public void doTheThing() {
         foreach (string csvFile in prov.CsvFiles) {
             prov.ReadCsv(csvFile, Path.GetFileNameWithoutExtension(csvFile));
@@ -411,8 +483,8 @@ class SFModDataExtract {
 
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             foreach (UassetFile uf in modFiles) {
-                if (uf.type == UassetType.RecipeDesc) {
-                    SetupRecipe(uf);
+                if (uf.type == UassetType.GameWorldModule) {
+                    ParseGameWorld(uf);
                 }
             }
         }

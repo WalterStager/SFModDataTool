@@ -8,7 +8,7 @@ class SFModUtility {
     public static int CountCommonPrefix<T>(IEnumerable<T> a, IEnumerable<T> b) {
         int count = 0;
         foreach ((T ae, T be) in a.Zip(b)) {
-            if (!ae.Equals(be)) {
+            if (ae == null || !ae.Equals(be)) {
                 break;
             }
             count++;
