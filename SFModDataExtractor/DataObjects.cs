@@ -241,13 +241,9 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
 
     public string GetDisplayName(bool searchSuper = true) {
         if (Mod == "FactoryGame") {
-            string? displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper);
+            string? displayName = null;
             string? nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: false);
             string? nameKey = GetString("Properties.mDisplayName.Key", searchSuper: false);
-            if ((nameTable == null || nameKey == null) && searchSuper) {
-                nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
-                nameKey = GetString("Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
-            }
 
             if (nameTable != null && nameKey != null && _provider.csvDataTables.ContainsKey(nameTable)) {
                 if (!_provider.csvDataTables[nameTable].ContainsKey(nameKey)) {
@@ -258,22 +254,22 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                 }
             }
 
+            if (displayName == null && searchSuper) {
+                displayName = super?.GetDisplayName();
+            }
+            if (displayName == null) {
+                displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper);
+            }
+
             if (displayName == null) {
                 throw new SFModDataRuntimeException($"Could not get name for {File}");
             }
             return displayName;
         }
         else {
-            string? displayName = GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
-            if (displayName == null) {
-                displayName = GetString("Properties.mDisplayName.CultureInvariantString", searchSuper: searchSuper);
-            }
+            string? displayName = null;
             string? nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: false);
             string? nameKey = GetString("Properties.mDisplayName.Key", searchSuper: false);
-            if ((nameTable == null || nameKey == null) && searchSuper) {
-                nameTable = GetString("Properties.mDisplayName.TableId", searchSuper: true, forceSuper: true);
-                nameKey = GetString("Properties.mDisplayName.Key", searchSuper: true, forceSuper: true);
-            }
 
             if (nameTable != null && nameKey != null) {
                 UassetFile stringDataTableFile = _provider.NormalizeAndMatchPath(nameTable);
@@ -287,6 +283,15 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
                 }
             }
 
+            if (displayName == null) {
+                GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
+            }
+            if (displayName == null) {
+                displayName = GetString("Properties.mDisplayName.CultureInvariantString", searchSuper: searchSuper);
+            }
+            if (displayName == null && searchSuper) {
+                displayName = super?.GetDisplayName();
+            }
             if (displayName == null) {
                 displayName = GetString("Name", exportIndex: defaultObjectIndexSearchOverride, searchSuper: searchSuper);
             }
