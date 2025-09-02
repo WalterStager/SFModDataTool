@@ -53,7 +53,7 @@ class SFModDataProvider {
     public Dictionary<string, UassetFile> FileToBuildingRecipe = new Dictionary<string, UassetFile>();
     public Dictionary<string, UassetPart> FileToPart = new Dictionary<string, UassetPart>();
     public Dictionary<string, UAssetMachine> FileToMachine = new Dictionary<string, UAssetMachine>();
-    public HashSet<UassetFile> ParsedSchematics = new HashSet<UassetFile>();
+    public HashSet<UassetFile> AlreadyParsedFiles = new HashSet<UassetFile>();
     public Dictionary<string, HashSet<UassetFile>> FilesByMod = new Dictionary<string, HashSet<UassetFile>>();
     public HashSet<UassetFile> AllUassetFiles = new HashSet<UassetFile>();
     public HashSet<string> CsvFiles = new HashSet<string>();
@@ -570,10 +570,10 @@ class SFModDataExtract {
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             List<(string, SKBitmap[])> iconsToSave = new List<(string, SKBitmap[])>();
             GameData modGameData = new GameData {
-                Machines = new HashSet<GameDataMachine>(),
-                MultiMachines = new HashSet<GameDataMultiMachine>(),
-                Parts = new HashSet<GameDataItem>(),
-                Recipes = new HashSet<GameDataRecipe>()
+                Machines = new List<GameDataMachine>(),
+                MultiMachines = new List<GameDataMultiMachine>(),
+                Parts = new List<GameDataItem>(),
+                Recipes = new List<GameDataRecipe>()
             };
 
             foreach (UassetFile uf in modFiles) {
@@ -584,21 +584,21 @@ class SFModDataExtract {
                     }
                     // include one level of dependency for base game items that are not normall included
                     // like a recipe to produce hard drives
-                    foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Products) {
-                        modGameData.Parts.Add(part.ToGameDataItem());
-                        SKBitmap[]? partIcon = part.Icon;
-                        if (partIcon != null) {
-                            iconsToSave.Add((part.DisplayName, partIcon));
-                        }
-                    }
+                    // foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Products) {
+                    //     modGameData.Parts.Add(part.ToGameDataItem());
+                    //     SKBitmap[]? partIcon = part.Icon;
+                    //     if (partIcon != null) {
+                    //         iconsToSave.Add((part.DisplayName, partIcon));
+                    //     }
+                    // }
 
-                    foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Ingredients) {
-                        modGameData.Parts.Add(part.ToGameDataItem());
-                        SKBitmap[]? partIcon = part.Icon;
-                        if (partIcon != null) {
-                            iconsToSave.Add((part.DisplayName, partIcon));
-                        }
-                    }
+                    // foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Ingredients) {
+                    //     modGameData.Parts.Add(part.ToGameDataItem());
+                    //     SKBitmap[]? partIcon = part.Icon;
+                    //     if (partIcon != null) {
+                    //         iconsToSave.Add((part.DisplayName, partIcon));
+                    //     }
+                    // }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
                     modGameData.Machines.Add(prov.FileToMachine[uf.File].ToGameDataMachine());
