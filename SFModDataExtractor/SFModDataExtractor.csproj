@@ -30,6 +30,21 @@
       <Pack>true</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Update="oo2core_9_win64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
+
+  <Target Name="CleanPublishFiles" AfterTargets="Publish">
+    <ItemGroup>
+      <!-- <PublishedDlls Include="$(PublishDir)*.dll" /> -->
+      <PublishedPdbs Include="$(PublishDir)*.pdb" />
+    </ItemGroup>
+    <!-- <MakeDir Directories="$(PublishDir)lib" />
+    <Move SourceFiles="@(PublishedDlls)" DestinationFolder="$(PublishDir)lib\" /> -->
+    <Delete Files="@(PublishedPdbs)" />
+  </Target>
 
 </Project>

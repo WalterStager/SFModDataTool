@@ -37,7 +37,6 @@ class SFModDataProvider {
                     throw new Exception($"Invalid satisfactory path {fileProviderPath} does not exist");
                 }
 
-                // OodleHelper.DownloadOodleDll();
                 OodleHelper.Initialize(Path.GetFullPath(Path.Combine("./", OodleHelper.OODLE_DLL_NAME)));
                 __provider = new DefaultFileProvider(
                     directory: fileProviderPath,
