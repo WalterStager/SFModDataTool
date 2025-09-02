@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using McMaster.Extensions.CommandLineUtils;
-using SFModDataExtractor;
-using SFModDataMerger;
+﻿using McMaster.Extensions.CommandLineUtils;
+
+namespace SFModDataExtractor;
 
 public class SFModDataExtractProgram {
     public static int Main(string[] args) {
         args = args.Length == 0 ? new string[] { "--help" } : args;
-        CommandLineApplication.Execute<Program>(args);
+        CommandLineApplication.Execute<SFModDataExtractProgram>(args);
         return 0;
     }
 
