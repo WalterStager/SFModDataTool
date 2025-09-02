@@ -16,6 +16,7 @@ using SFModDataMerger;
 using CUE4Parse.UE4.Readers;
 using CsvHelper;
 using System.Globalization;
+using ZstdSharp.Unsafe;
 
 namespace SFModDataExtractor;
 
@@ -567,6 +568,8 @@ class SFModDataExtract {
         Console.WriteLine($"Machines {prov.FileToMachine.Count}");
         Console.WriteLine($"BuildableRecipes {prov.FileToBuildingRecipe.Count}");
 
+        GameData baseGameData = GameData.ReadGameData("../../../game_data_base.json");
+
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             List<(string, SKBitmap[])> iconsToSave = new List<(string, SKBitmap[])>();
             GameData modGameData = new GameData {
@@ -581,24 +584,8 @@ class SFModDataExtract {
                     // add recipe for each machine it can be produced in
                     foreach (GameDataRecipe rec in prov.FileToRecipe[uf.File].ToGameDataRecipe()) {
                         modGameData.Recipes.Add(rec);
-                    }
-                    // include one level of dependency for base game items that are not normall included
-                    // like a recipe to produce hard drives
-                    // foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Products) {
-                    //     modGameData.Parts.Add(part.ToGameDataItem());
-                    //     SKBitmap[]? partIcon = part.Icon;
-                    //     if (partIcon != null) {
-                    //         iconsToSave.Add((part.DisplayName, partIcon));
-                    //     }
-                    // }
 
-                    // foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Ingredients) {
-                    //     modGameData.Parts.Add(part.ToGameDataItem());
-                    //     SKBitmap[]? partIcon = part.Icon;
-                    //     if (partIcon != null) {
-                    //         iconsToSave.Add((part.DisplayName, partIcon));
-                    //     }
-                    // }
+                    }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
                     modGameData.Machines.Add(prov.FileToMachine[uf.File].ToGameDataMachine());
@@ -617,6 +604,12 @@ class SFModDataExtract {
             }
 
             if (modGameData.Machines.Count() + modGameData.MultiMachines.Count() + modGameData.Parts.Count() + modGameData.Recipes.Count() != 0) {
+                if (modName == "FactoryGame") {
+                    modGameData.Recipes = modGameData.Recipes.Where(r => !baseGameData.Recipes.Contains(r)).ToList();
+                    modGameData.Machines = modGameData.Machines.Where(m => !baseGameData.Machines.Contains(m)).ToList();
+                    modGameData.Parts = modGameData.Parts.Where(p => !baseGameData.Parts.Contains(p)).ToList();
+                }
+
                 Console.WriteLine($"{modName} has:");
                 Console.WriteLine($"\tRecipes {modGameData.Recipes.Count()}");
                 Console.WriteLine($"\tMachines {modGameData.Machines.Count()}");
