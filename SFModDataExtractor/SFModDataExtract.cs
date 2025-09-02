@@ -408,7 +408,7 @@ class SFModDataExtract {
     }
 
     public void ParseSchematic(UassetFile uf) {
-        if (prov.ParsedSchematics.Contains(uf)) {
+        if (prov.AlreadyParsedFiles.Contains(uf)) {
             return;
         }
 
@@ -439,7 +439,7 @@ class SFModDataExtract {
             }
         }
 
-        prov.ParsedSchematics.Add(uf);
+        prov.AlreadyParsedFiles.Add(uf);
     }
 
     public void ReadSinkPoints(UassetFile uf) {
@@ -488,6 +488,53 @@ class SFModDataExtract {
         }
     }
 
+    public void SetupResourceNode(UassetFile uf) {
+        if (prov.AlreadyParsedFiles.Contains(uf)) {
+            return;
+        }
+        prov.AlreadyParsedFiles.Add(uf);
+
+        // int index = 0;
+        // Console.WriteLine($"File::{uf.File}");
+        // foreach (JToken item in uf.exports) {
+        //     Console.WriteLine($"{index}::{JsonConvert.SerializeObject(item, Formatting.Indented)}");
+        //     index++;
+        // }
+
+        string? resourceClassPath = uf.GetString("Properties.mResourceClass.ObjectPath");
+        if (resourceClassPath != null) {
+            UassetFile resourceClass = prov.NormalizeAndMatchPath(resourceClassPath);
+
+            SetupPart(resourceClass, "0-0");
+            UassetPart resourcePart = prov.FileToPart[resourceClass.File];
+
+            UassetRecipe resourceRecipe = new UassetRecipe { UFile = uf, DisplayName = resourcePart.DisplayName, ManufacturingDuration = 60, Tier = "0-0" };
+            resourceRecipe.ProducedIn =
+            [
+                new UAssetMachine { DisplayName = "Miner", UFile = prov.NormalizeAndMatchPath("FactoryGame/Content/FactoryGame/Buildable/Factory/MinerMK1/Build_MinerMk1.uasset") },
+            ];
+
+            int? extractMultiplier = uf.GetInt("Properties.mExtractMultiplier");
+            resourceRecipe.Products = [(extractMultiplier ?? 1, resourcePart)];
+
+            prov.FileToRecipe.Add(uf.File, resourceRecipe);
+        }
+
+        // FuncMap.___.ObjectPath
+        //     ->ChildProperties.[x].PropertyClass.ObjectPath
+        //         ->defObjIndex.mResourceClass.ObjectPath(how reliable is this ?)
+        //         defaults:
+        //             mAmount = RA_Infinite
+        //             mPurity = RP_Normal
+        //             mCanPlaceResourceExtractor = true
+        //             mExtractMultiplier = 1
+        //         (Mining Speed) in items / min = (Purity Modifier) *((Overclock percentage) / 100) *(Default Mining Speed) items / min
+        //         Purity Modifier: Impure = 0.5, Normal = 1, Pure = 2 and
+        //         Default Mining Speed: Mk.1 = 60, Mk.2 = 120, Mk.3 = 240
+
+
+    }
+
     public void doTheThing() {
         foreach (string csvFile in prov.CsvFiles) {
             prov.ReadCsv(csvFile, Path.GetFileNameWithoutExtension(csvFile));
@@ -503,6 +550,9 @@ class SFModDataExtract {
             foreach (UassetFile uf in modFiles) {
                 if (uf.type == UassetType.GameWorldModule) {
                     ParseGameWorld(uf);
+                }
+                else if (uf.type == UassetType.ResoureceNode) {
+                    SetupResourceNode(uf);
                 }
             }
         }
