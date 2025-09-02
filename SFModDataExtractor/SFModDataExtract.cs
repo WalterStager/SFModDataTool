@@ -210,7 +210,7 @@ class SFModDataExtract {
                     uMch = new UAssetMachine { UFile = mchF, DisplayName = machineName, Tier = techTier };
                     prov.FileToMachine.Add(mchF.File, uMch);
                 }
-                
+
                 recipe.ProducedIn.Add(uMch);
             }
             else {
@@ -264,8 +264,6 @@ class SFModDataExtract {
     private void SetupMachine(UAssetMachine machine) {
 
         // build file stuff
-        // the previous name was from Desc file but the build file generally has a more accurate name
-        // mods tend to reference base game stuff that messes up naming so only search superclass if in a mod
         machine.DisplayName = machine.UFile.GetDisplayName(machine.UFile.Mod == "FactoryGame");
         machine.PowerConsumption = machine.UFile.GetInt("Properties.mPowerConsumption");
         machine.PowerConsumptionExponent = machine.UFile.GetDouble("Properties.mPowerConsumptionExponent");
@@ -273,11 +271,11 @@ class SFModDataExtract {
         machine.ProductionShardBoostMultiplier = machine.UFile.GetDouble("Properties.mProductionShardBoostMultiplier");
         machine.BasePowerProduction = machine.UFile.GetInt("Properties.mBasePowerProduction");
         machine.BaseBoostPercentage = machine.UFile.GetDouble("Properties.mBaseBoostPercentage");
-        
+
         string? fuelClass = machine.UFile.GetString("Properties.mDefaultFuelClasses.AssetPathname");
         if (fuelClass != null) {
             UassetFile fuelClassFile = prov.NormalizeAndMatchPath(fuelClass);
-            machine.BoostPercentage  = fuelClassFile.GetDouble("Properties.mBoostPercentage");
+            machine.BoostPercentage = fuelClassFile.GetDouble("Properties.mBoostPercentage");
         }
 
         if (prov.FileToBuildingRecipe.ContainsKey(machine.UFile.File)) {
@@ -423,7 +421,7 @@ class SFModDataExtract {
                 string? objPath = schemToken.SelectToken("ObjectPath")?.ToString();
                 if (objPath != null) {
                     // should be in the same file but lets do this to be sure
-                    
+
                     int unlockObjIndex = SFModUtility.GetAssetPathIndex(objPath);
                     UassetFile unlockFile = prov.NormalizeAndMatchPath(objPath);
                     JToken? recipesToken = unlockFile.GetToken("Properties.mRecipes", exportIndex: unlockObjIndex);
