@@ -284,10 +284,13 @@ class UassetFile : IComparable<UassetFile>, IEquatable<UassetFile> {
             }
 
             if (displayName == null) {
-                GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
+                displayName = GetString("Properties.mDisplayName.LocalizedString", searchSuper: searchSuper);
             }
             if (displayName == null) {
                 displayName = GetString("Properties.mDisplayName.CultureInvariantString", searchSuper: searchSuper);
+            }
+            if (displayName == null) {
+                displayName = GetString("Properties.mDisplayName.SourceString", searchSuper: searchSuper);
             }
             if (displayName == null && searchSuper) {
                 displayName = super?.GetDisplayName();
