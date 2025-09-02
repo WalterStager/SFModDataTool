@@ -138,10 +138,10 @@ class SFModDataProvider {
 class SFModDataExtract {
     private SFModDataProvider prov;
 
-    public SFModDataExtract() {
+    public SFModDataExtract(string configFilePath) {
         SFModDataExtractorConfig? config;
         try {
-            string text = File.ReadAllText("config.json");
+            string text = File.ReadAllText(configFilePath);
             config = JsonConvert.DeserializeObject<SFModDataExtractorConfig>(text);
         }
         catch (Exception ex) {
