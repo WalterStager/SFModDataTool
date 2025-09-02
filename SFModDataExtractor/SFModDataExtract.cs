@@ -709,7 +709,7 @@ class SFModDataExtract {
                 Console.WriteLine($"\tMachines {modGameData.Machines.Count()}");
                 Console.WriteLine($"\tParts {modGameData.Parts.Count()}");
                 Directory.CreateDirectory(modName);
-                modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"));
+                modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"), false);
 
                 if (prov.config.save_icons) {
                     Directory.CreateDirectory(Path.Combine(modName, "icons"));
