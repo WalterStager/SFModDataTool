@@ -19,10 +19,13 @@
     <ProjectReference Include="..\SFModDataMerger\SFModDataMerger.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <None Update="debug_config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
