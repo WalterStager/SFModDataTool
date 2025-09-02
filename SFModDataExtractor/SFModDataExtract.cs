@@ -581,7 +581,7 @@ class SFModDataExtract {
                 if (prov.FileToRecipe.ContainsKey(uf.File)) {
                     // add recipe for each machine it can be produced in
                     foreach (GameDataRecipe rec in prov.FileToRecipe[uf.File].ToGameDataRecipe()) {
-                        if (baseGameData.Recipes.Contains(rec)) {
+                        if (baseGameData.Recipes.Contains(rec) && modName != "FactoryGame") {
                             rec.Name = SFModUtility.IncrementAltRecipeName(rec.Name);
                         }
                         while (!modGameData.Recipes.Add(rec)) {
@@ -591,7 +591,7 @@ class SFModDataExtract {
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
                     GameDataMachine mch = prov.FileToMachine[uf.File].ToGameDataMachine();
-                    if (baseGameData.Machines.Contains(mch)) {
+                    if (baseGameData.Machines.Contains(mch) && modName != "FactoryGame") {
                         mch.Name = SFModUtility.IncrementAltRecipeName(mch.Name);
                     }
                     while (!modGameData.Machines.Add(mch)) {
@@ -604,7 +604,7 @@ class SFModDataExtract {
                 }
                 else if (prov.FileToPart.ContainsKey(uf.File)) {
                     GameDataItem part = prov.FileToPart[uf.File].ToGameDataItem();
-                    if (baseGameData.Parts.Contains(part)) {
+                    if (baseGameData.Parts.Contains(part) && modName != "FactoryGame") {
                         part.Name = SFModUtility.IncrementAltRecipeName(part.Name);
                     }
                     while (!modGameData.Parts.Add(part)) {
