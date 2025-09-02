@@ -44,4 +44,18 @@ class SFModUtility {
         }
         return Fraction.FromDouble((double)num).ToString();
     }
+
+    public static string IncrementAltRecipeName(string inputName) {
+        string pattern = @"\(Alt (\d+)\)$";
+
+        if (Regex.IsMatch(inputName, pattern)) {
+            return Regex.Replace(inputName, pattern, m => {
+                int num = int.Parse(m.Groups[1].Value);
+                return $"(Alt {num + 1})";
+            });
+        }
+        else {
+            return inputName + " (Alt 1)";
+        }
+    }
 }

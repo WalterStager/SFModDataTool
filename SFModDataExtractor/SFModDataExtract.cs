@@ -571,29 +571,36 @@ class SFModDataExtract {
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             List<(string, SKBitmap[])> iconsToSave = new List<(string, SKBitmap[])>();
             GameData modGameData = new GameData {
-                Machines = new List<GameDataMachine>(),
-                MultiMachines = new List<GameDataMultiMachine>(),
-                Parts = new List<GameDataItem>(),
-                Recipes = new List<GameDataRecipe>()
+                Machines = new HashSet<GameDataMachine>(),
+                MultiMachines = new HashSet<GameDataMultiMachine>(),
+                Parts = new HashSet<GameDataItem>(),
+                Recipes = new HashSet<GameDataRecipe>()
             };
 
             foreach (UassetFile uf in modFiles) {
                 if (prov.FileToRecipe.ContainsKey(uf.File)) {
                     // add recipe for each machine it can be produced in
                     foreach (GameDataRecipe rec in prov.FileToRecipe[uf.File].ToGameDataRecipe()) {
-                        modGameData.Recipes.Add(rec);
-
+                        while (baseGameData.Recipes.Contains(rec) || !modGameData.Recipes.Add(rec)) {
+                            rec.Name = SFModUtility.IncrementAltRecipeName(rec.Name);
+                        }
                     }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
-                    modGameData.Machines.Add(prov.FileToMachine[uf.File].ToGameDataMachine());
+                    GameDataMachine mch = prov.FileToMachine[uf.File].ToGameDataMachine();
+                    while (baseGameData.Machines.Contains(mch) || !modGameData.Machines.Add(mch)) {
+                        mch.Name = SFModUtility.IncrementAltRecipeName(mch.Name);
+                    }
                     SKBitmap[]? mchIcon = prov.FileToMachine[uf.File].Icon;
                     if (mchIcon != null) {
-                        iconsToSave.Add((prov.FileToMachine[uf.File].DisplayName, mchIcon));
+                        iconsToSave.Add((mch.Name, mchIcon));
                     }
                 }
                 else if (prov.FileToPart.ContainsKey(uf.File)) {
-                    modGameData.Parts.Add(prov.FileToPart[uf.File].ToGameDataItem());
+                    GameDataItem part = prov.FileToPart[uf.File].ToGameDataItem();
+                    while (baseGameData.Parts.Contains(part) || !modGameData.Parts.Add(part)) {
+                        part.Name = SFModUtility.IncrementAltRecipeName(part.Name);
+                    }
                     SKBitmap[]? partIcon = prov.FileToPart[uf.File].Icon;
                     if (partIcon != null) {
                         iconsToSave.Add((prov.FileToPart[uf.File].DisplayName, partIcon));
@@ -603,9 +610,9 @@ class SFModDataExtract {
 
             if (modGameData.Machines.Count() + modGameData.MultiMachines.Count() + modGameData.Parts.Count() + modGameData.Recipes.Count() != 0) {
                 if (modName == "FactoryGame") {
-                    modGameData.Recipes = modGameData.Recipes.Where(r => !baseGameData.Recipes.Contains(r)).ToList();
-                    modGameData.Machines = modGameData.Machines.Where(m => !baseGameData.Machines.Contains(m)).ToList();
-                    modGameData.Parts = modGameData.Parts.Where(p => !baseGameData.Parts.Contains(p)).ToList();
+                    modGameData.Recipes = modGameData.Recipes.Where(r => !baseGameData.Recipes.Contains(r)).ToHashSet();
+                    modGameData.Machines = modGameData.Machines.Where(m => !baseGameData.Machines.Contains(m)).ToHashSet();
+                    modGameData.Parts = modGameData.Parts.Where(p => !baseGameData.Parts.Contains(p)).ToHashSet();
                 }
 
                 Console.WriteLine($"{modName} has:");
