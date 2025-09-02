@@ -635,6 +635,24 @@ class SFModDataExtract {
                         while (!modGameData.Recipes.Add(rec)) {
                             rec.Name = SFModUtility.IncrementAltRecipeName(rec.Name);
                         }
+
+                        foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Products) {
+                            if (part.UFile.Mod == "FactoryGame" && !baseGameData.Parts.Contains(part.ToGameDataItem())) {
+                                modGameData.Parts.Add(part.ToGameDataItem());
+                                if (part.Icon != null) {
+                                    iconsToSave.Add((part.DisplayName, part.Icon));
+                                }
+                            }
+                        }
+
+                        foreach ((_, UassetPart part) in prov.FileToRecipe[uf.File].Ingredients) {
+                            if (part.UFile.Mod == "FactoryGame" && !baseGameData.Parts.Contains(part.ToGameDataItem())) {
+                                modGameData.Parts.Add(part.ToGameDataItem());
+                                if (part.Icon != null) {
+                                    iconsToSave.Add((part.DisplayName, part.Icon));
+                                }
+                            }
+                        }
                     }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
@@ -648,6 +666,15 @@ class SFModDataExtract {
                     SKBitmap[]? mchIcon = prov.FileToMachine[uf.File].Icon;
                     if (mchIcon != null) {
                         iconsToSave.Add((mch.Name, mchIcon));
+                    }
+
+                    foreach ((_, UassetPart part) in prov.FileToMachine[uf.File].Ingredients) {
+                        if (part.UFile.Mod == "FactoryGame" && !baseGameData.Parts.Contains(part.ToGameDataItem())) {
+                            modGameData.Parts.Add(part.ToGameDataItem());
+                            if (part.Icon != null) {
+                                iconsToSave.Add((part.DisplayName, part.Icon));
+                            }
+                        }
                     }
                 }
                 else if (prov.FileToPart.ContainsKey(uf.File)) {
