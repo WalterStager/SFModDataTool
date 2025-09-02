@@ -5,10 +5,7 @@ using CUE4Parse.UE4.Assets.Exports.Texture;
 using CUE4Parse.MappingsProvider;
 using CUE4Parse.UE4.Objects.Core.Misc;
 using CUE4Parse.Encryption.Aes;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
-using CUE4Parse.UE4.Objects.UObject;
-using Newtonsoft.Json;
 using SkiaSharp;
 using CUE4Parse.UE4.Assets.Exports;
 using CUE4Parse_Conversion.Textures;
@@ -16,29 +13,40 @@ using SFModDataMerger;
 using CUE4Parse.UE4.Readers;
 using CsvHelper;
 using System.Globalization;
-using ZstdSharp.Unsafe;
+using Newtonsoft.Json;
 
 namespace SFModDataExtractor;
 
+class SFModDataExtractorConfig {
+    public string satisfactory_path = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Satisfactory\\";
+    public bool save_icons = true;
+    public bool write_to_modeler_after_extracting = false; // unimplemented
+    public string? modeler_path = null; // unimplemented
+}
+
 class SFModDataProvider {
     // based on satisfactory-dev/asset-http
-    private string SATISFACTORY_PATH = "D:\\EvenMoreSteamExtras\\steamapps\\common\\Satisfactory\\";
     private EGame Version = EGame.GAME_UE5_3;
 
     private DefaultFileProvider? __provider = null;
     public DefaultFileProvider FileProvider {
         get {
             if (__provider == null) {
+                string fileProviderPath = Path.Combine(config.satisfactory_path, "FactoryGame\\");
+                if (!Path.Exists(fileProviderPath)) {
+                    throw new Exception($"Invalid satisfactory path {fileProviderPath} does not exist");
+                }
+
                 // OodleHelper.DownloadOodleDll();
                 OodleHelper.Initialize(Path.GetFullPath(Path.Combine("./", OodleHelper.OODLE_DLL_NAME)));
                 __provider = new DefaultFileProvider(
-                    directory: Path.Combine(SATISFACTORY_PATH, "FactoryGame\\"),
+                    directory: fileProviderPath,
                     searchOption: SearchOption.AllDirectories,
                     versions: new VersionContainer(Version, ETexturePlatform.DesktopMobile),
                     StringComparer.InvariantCulture
                 );
                 var mc = new FileUsmapTypeMappingsProvider(
-                    Path.Combine(SATISFACTORY_PATH, "CommunityResources\\FactoryGame.usmap")
+                    Path.Combine(config.satisfactory_path, "CommunityResources\\FactoryGame.usmap")
                 );
                 __provider.MappingsContainer = mc;
                 __provider.Initialize();
@@ -49,6 +57,7 @@ class SFModDataProvider {
             return __provider;
         }
     }
+    public SFModDataExtractorConfig config;
 
     public Dictionary<string, UassetRecipe> FileToRecipe = new Dictionary<string, UassetRecipe>();
     public Dictionary<string, UassetFile> FileToBuildingRecipe = new Dictionary<string, UassetFile>();
@@ -62,6 +71,10 @@ class SFModDataProvider {
     public Dictionary<string, Dictionary<string, CsvDataEntry>> csvDataTables = new Dictionary<string, Dictionary<string, CsvDataEntry>>();
     public Dictionary<UassetFile, SinkDataEntry> sinkDataTable = new Dictionary<UassetFile, SinkDataEntry>();
     public Dictionary<UassetFile, Dictionary<string, string>> stringDataTables = new Dictionary<UassetFile, Dictionary<string, string>>();
+
+    public SFModDataProvider(SFModDataExtractorConfig config) {
+        this.config = config;
+    }
 
     public UassetFile NormalizeAndMatchPath(string assetPath) {
         UassetFile? result;
@@ -127,7 +140,20 @@ class SFModDataExtract {
     private SFModDataProvider prov;
 
     public SFModDataExtract() {
-        prov = new SFModDataProvider();
+        SFModDataExtractorConfig? config;
+        try {
+            string text = File.ReadAllText("config.json");
+            config = JsonConvert.DeserializeObject<SFModDataExtractorConfig>(text);
+        }
+        catch (Exception ex) {
+            throw new SFModDataRuntimeException($"Error parsing config: {ex.Message}", ex);
+        }
+
+        if (config == null) {
+            throw new Exception("Failed to parse config, got null result.");
+        }
+
+        prov = new SFModDataProvider(config);
 
         foreach (string filename in prov.FileProvider.Files.Keys) {
             if (!filename.StartsWith("FactoryGame")) {
@@ -196,8 +222,6 @@ class SFModDataExtract {
 
                 // build file
                 UassetFile mchF = prov.NormalizeAndMatchPath(assetPathName);
-                // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
-                // including 'other' is a stopgap solution
                 if (mchF.type != UassetType.MachineBuild) {
                     throw new SFModDataRuntimeException($"Not a machine build file {mchF.File}:{mchF.type}");
                 }
@@ -323,8 +347,6 @@ class SFModDataExtract {
             return;
         }
 
-        // 1 mod messing up this check by not using the same type as every other ... FICSIT FARMING >:(
-        // including 'other' is a stopgap solution
         if (uf.type != UassetType.ItemDesc) {
             throw new SFModDataRuntimeException($"Not a part file {uf.File}:{uf.type}");
         }
@@ -541,13 +563,6 @@ class SFModDataExtract {
         }
         prov.AlreadyParsedFiles.Add(uf);
 
-        // int index = 0;
-        // Console.WriteLine($"File::{uf.File}");
-        // foreach (JToken item in uf.exports) {
-        //     Console.WriteLine($"{index}::{JsonConvert.SerializeObject(item, Formatting.Indented)}");
-        //     index++;
-        // }
-
         string? resourceClassPath = uf.GetString("Properties.mResourceClass.ObjectPath");
         if (resourceClassPath != null) {
             UassetFile resourceClass = prov.NormalizeAndMatchPath(resourceClassPath);
@@ -566,20 +581,6 @@ class SFModDataExtract {
 
             prov.FileToRecipe.Add(uf.File, resourceRecipe);
         }
-
-        // FuncMap.___.ObjectPath
-        //     ->ChildProperties.[x].PropertyClass.ObjectPath
-        //         ->defObjIndex.mResourceClass.ObjectPath(how reliable is this ?)
-        //         defaults:
-        //             mAmount = RA_Infinite
-        //             mPurity = RP_Normal
-        //             mCanPlaceResourceExtractor = true
-        //             mExtractMultiplier = 1
-        //         (Mining Speed) in items / min = (Purity Modifier) *((Overclock percentage) / 100) *(Default Mining Speed) items / min
-        //         Purity Modifier: Impure = 0.5, Normal = 1, Pure = 2 and
-        //         Default Mining Speed: Mk.1 = 60, Mk.2 = 120, Mk.3 = 240
-
-
     }
 
     public void doTheThing() {
@@ -614,7 +615,7 @@ class SFModDataExtract {
         Console.WriteLine($"Machines {prov.FileToMachine.Count}");
         Console.WriteLine($"BuildableRecipes {prov.FileToBuildingRecipe.Count}");
 
-        GameData baseGameData = GameData.ReadGameData("../../../game_data_base.json");
+        GameData baseGameData = GameData.ReadGameData("game_data_base.json");
 
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             List<(string, SKBitmap[])> iconsToSave = new List<(string, SKBitmap[])>();
@@ -706,13 +707,15 @@ class SFModDataExtract {
                 Directory.CreateDirectory(modName);
                 modGameData.WriteGameData(Path.Combine(modName, $"game_data_{modName}.json"));
 
-                Directory.CreateDirectory(Path.Combine(modName, "icons"));
-                foreach ((string iconName, SKBitmap[] iconData) in iconsToSave) {
-                    string savePath = Path.Combine(modName, "icons", $"{iconName.Replace(" ", "_")}.png");
-                    foreach (SKBitmap bitmap in iconData) {
-                        SKData bytes = bitmap.Encode(SKEncodedImageFormat.Png, 100);
-                        if (!Path.Exists(savePath)) {
-                            File.WriteAllBytes(savePath, bytes.ToArray());
+                if (prov.config.save_icons) {
+                    Directory.CreateDirectory(Path.Combine(modName, "icons"));
+                    foreach ((string iconName, SKBitmap[] iconData) in iconsToSave) {
+                        string savePath = Path.Combine(modName, "icons", $"{iconName.Replace(" ", "_")}.png");
+                        foreach (SKBitmap bitmap in iconData) {
+                            SKData bytes = bitmap.Encode(SKEncodedImageFormat.Png, 100);
+                            if (!Path.Exists(savePath)) {
+                                File.WriteAllBytes(savePath, bytes.ToArray());
+                            }
                         }
                     }
                 }
