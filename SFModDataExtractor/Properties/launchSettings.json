@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SFModDataExtractorDebug": {
+      "commandName": "Project",
+      "commandLineArgs": "debug_config.json"
+    }
+  }
+}

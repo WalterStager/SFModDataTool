@@ -36,8 +36,12 @@ class SFModDataProvider {
                 if (!Path.Exists(fileProviderPath)) {
                     throw new Exception($"Invalid satisfactory path {fileProviderPath} does not exist");
                 }
-
-                OodleHelper.Initialize(Path.GetFullPath(Path.Combine("./", OodleHelper.OODLE_DLL_NAME)));
+                string oodlDllPath = Path.GetFullPath(Path.Combine("./", OodleHelper.OODLE_DLL_NAME));
+                if (!Path.Exists(oodlDllPath)) {
+                    Console.WriteLine("Oodl DLL not found, downloading.");
+                    OodleHelper.DownloadOodleDll();
+                }
+                OodleHelper.Initialize(oodlDllPath);
                 __provider = new DefaultFileProvider(
                     directory: fileProviderPath,
                     searchOption: SearchOption.AllDirectories,
@@ -138,10 +142,10 @@ class SFModDataProvider {
 class SFModDataExtract {
     private SFModDataProvider prov;
 
-    public SFModDataExtract() {
+    public SFModDataExtract(string configFilePath) {
         SFModDataExtractorConfig? config;
         try {
-            string text = File.ReadAllText("config.json");
+            string text = File.ReadAllText(configFilePath);
             config = JsonConvert.DeserializeObject<SFModDataExtractorConfig>(text);
         }
         catch (Exception ex) {
