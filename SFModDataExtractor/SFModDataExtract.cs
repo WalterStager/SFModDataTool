@@ -581,14 +581,20 @@ class SFModDataExtract {
                 if (prov.FileToRecipe.ContainsKey(uf.File)) {
                     // add recipe for each machine it can be produced in
                     foreach (GameDataRecipe rec in prov.FileToRecipe[uf.File].ToGameDataRecipe()) {
-                        while (baseGameData.Recipes.Contains(rec) || !modGameData.Recipes.Add(rec)) {
+                        if (baseGameData.Recipes.Contains(rec)) {
+                            rec.Name = SFModUtility.IncrementAltRecipeName(rec.Name);
+                        }
+                        while (!modGameData.Recipes.Add(rec)) {
                             rec.Name = SFModUtility.IncrementAltRecipeName(rec.Name);
                         }
                     }
                 }
                 else if (prov.FileToMachine.ContainsKey(uf.File)) {
                     GameDataMachine mch = prov.FileToMachine[uf.File].ToGameDataMachine();
-                    while (baseGameData.Machines.Contains(mch) || !modGameData.Machines.Add(mch)) {
+                    if (baseGameData.Machines.Contains(mch)) {
+                        mch.Name = SFModUtility.IncrementAltRecipeName(mch.Name);
+                    }
+                    while (!modGameData.Machines.Add(mch)) {
                         mch.Name = SFModUtility.IncrementAltRecipeName(mch.Name);
                     }
                     SKBitmap[]? mchIcon = prov.FileToMachine[uf.File].Icon;
@@ -598,7 +604,10 @@ class SFModDataExtract {
                 }
                 else if (prov.FileToPart.ContainsKey(uf.File)) {
                     GameDataItem part = prov.FileToPart[uf.File].ToGameDataItem();
-                    while (baseGameData.Parts.Contains(part) || !modGameData.Parts.Add(part)) {
+                    if (baseGameData.Parts.Contains(part)) {
+                        part.Name = SFModUtility.IncrementAltRecipeName(part.Name);
+                    }
+                    while (!modGameData.Parts.Add(part)) {
                         part.Name = SFModUtility.IncrementAltRecipeName(part.Name);
                     }
                     SKBitmap[]? partIcon = prov.FileToPart[uf.File].Icon;
