@@ -1,0 +1,5308 @@
+{
+  "Machines": [
+    {
+      "Name": "Smelter",
+      "Tier": "0-2",
+      "AveragePower": "-4",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 1,
+      "ProductionShardMultiplier": "1",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Iron Rod", "Amount": "5"},
+        {"Part": "Wire", "Amount": "8"}
+      ]
+    },
+    {
+      "Name": "FICSMAS Gift Tree",
+      "Tier": "0-3",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "FICSMAS Gift", "Amount": "50"},
+        {"Part": "FICSMAS Tree Branch", "Amount": "100"},
+        {"Part": "Red FICSMAS Ornament", "Amount": "30"},
+        {"Part": "Blue FICSMAS Ornament", "Amount": "30"}
+      ]
+    },
+    {
+      "Name": "Constructor",
+      "Tier": "0-3",
+      "AveragePower": "-4",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 1,
+      "ProductionShardMultiplier": "1",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Reinforced Iron Plate", "Amount": "2"},
+        {"Part": "Cable", "Amount": "8"}
+      ]
+    },
+    {
+      "Name": "Storage Container",
+      "Tier": "0-5",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Iron Plate", "Amount": "10"},
+        {"Part": "Iron Rod", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Miner Mk.1",
+      "Tier": "0-5",
+      "AveragePower": "-5",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Portable Miner", "Amount": "1"},
+        {"Part": "Iron Plate", "Amount": "10"},
+        {"Part": "Concrete", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Space Elevator",
+      "Tier": "0-6",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Concrete", "Amount": "500"},
+        {"Part": "Iron Plate", "Amount": "250"},
+        {"Part": "Iron Rod", "Amount": "400"},
+        {"Part": "Wire", "Amount": "1500"}
+      ]
+    },
+    {
+      "Name": "Biomass Burner",
+      "Tier": "0-6",
+      "AveragePower": "30",
+      "OverclockPowerExponent": "1",
+      "Cost": [
+        {"Part": "Iron Plate", "Amount": "15"},
+        {"Part": "Iron Rod", "Amount": "15"},
+        {"Part": "Wire", "Amount": "25"}
+      ]
+    },
+    {
+      "Name": "Assembler",
+      "Tier": "2-1",
+      "AveragePower": "-15",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 2,
+      "ProductionShardMultiplier": "1/2",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Reinforced Iron Plate", "Amount": "8"},
+        {"Part": "Rotor", "Amount": "4"},
+        {"Part": "Cable", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "AWESOME Sink",
+      "Tier": "2-4",
+      "AveragePower": "-30",
+      "Cost": [
+        {"Part": "Reinforced Iron Plate", "Amount": "15"},
+        {"Part": "Cable", "Amount": "30"},
+        {"Part": "Concrete", "Amount": "45"}
+      ]
+    },
+    {
+      "Name": "Fluid Buffer",
+      "Tier": "3-1",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Copper Sheet", "Amount": "10"},
+        {"Part": "Modular Frame", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Water Extractor",
+      "Tier": "3-1",
+      "AveragePower": "-20",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Copper Sheet", "Amount": "20"},
+        {"Part": "Reinforced Iron Plate", "Amount": "10"},
+        {"Part": "Rotor", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Coal-Powered Generator",
+      "Tier": "3-1",
+      "AveragePower": "75",
+      "OverclockPowerExponent": "1",
+      "Cost": [
+        {"Part": "Reinforced Iron Plate", "Amount": "20"},
+        {"Part": "Rotor", "Amount": "10"},
+        {"Part": "Cable", "Amount": "30"}
+      ]
+    },
+    {
+      "Name": "Foundry",
+      "Tier": "3-3",
+      "AveragePower": "-16",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 2,
+      "ProductionShardMultiplier": "1/2",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Modular Frame", "Amount": "10"},
+        {"Part": "Rotor", "Amount": "10"},
+        {"Part": "Concrete", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Industrial Storage Container",
+      "Tier": "4-2",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Steel Beam", "Amount": "20"},
+        {"Part": "Steel Pipe", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Miner Mk.2",
+      "Tier": "4-3",
+      "AveragePower": "-15",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Portable Miner", "Amount": "2"},
+        {"Part": "Encased Industrial Beam", "Amount": "10"},
+        {"Part": "Steel Pipe", "Amount": "20"},
+        {"Part": "Modular Frame", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Refinery",
+      "Tier": "5-2",
+      "AveragePower": "-30",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 2,
+      "ProductionShardMultiplier": "1/2",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Motor", "Amount": "10"},
+        {"Part": "Encased Industrial Beam", "Amount": "10"},
+        {"Part": "Steel Pipe", "Amount": "30"},
+        {"Part": "Copper Sheet", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Oil Extractor",
+      "Tier": "5-2",
+      "AveragePower": "-40",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Motor", "Amount": "15"},
+        {"Part": "Encased Industrial Beam", "Amount": "20"},
+        {"Part": "Cable", "Amount": "60"}
+      ]
+    },
+    {
+      "Name": "Packager",
+      "Tier": "5-4",
+      "AveragePower": "-10",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Steel Beam", "Amount": "20"},
+        {"Part": "Rubber", "Amount": "10"},
+        {"Part": "Plastic", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Industrial Fluid Buffer",
+      "Tier": "5-5",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Encased Industrial Beam", "Amount": "5"},
+        {"Part": "Copper Sheet", "Amount": "10"},
+        {"Part": "Plastic", "Amount": "25"}
+      ]
+    },
+    {
+      "Name": "Fuel-Powered Generator",
+      "Tier": "5-5",
+      "AveragePower": "250",
+      "OverclockPowerExponent": "1",
+      "Cost": [
+        {"Part": "Motor", "Amount": "15"},
+        {"Part": "Encased Industrial Beam", "Amount": "15"},
+        {"Part": "Copper Sheet", "Amount": "30"},
+        {"Part": "Rubber", "Amount": "50"},
+        {"Part": "Quickwire", "Amount": "50"}
+      ]
+    },
+    {
+      "Name": "Manufacturer",
+      "Tier": "6-1",
+      "AveragePower": "-55",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 4,
+      "ProductionShardMultiplier": "1/4",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Motor", "Amount": "10"},
+        {"Part": "Modular Frame", "Amount": "20"},
+        {"Part": "Plastic", "Amount": "50"},
+        {"Part": "Cable", "Amount": "50"}
+      ]
+    },
+    {
+      "Name": "Geothermal Generator",
+      "Tier": "6-1",
+      "MinPower": "100",
+      "AveragePower": "200",
+      "Cost": [
+        {"Part": "Motor", "Amount": "10"},
+        {"Part": "High-Speed Connector", "Amount": "25"},
+        {"Part": "Modular Frame", "Amount": "25"},
+        {"Part": "Copper Sheet", "Amount": "50"},
+        {"Part": "Wire", "Amount": "250"}
+      ]
+    },
+    {
+      "Name": "Blender",
+      "Tier": "7-5",
+      "AveragePower": "-75",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 4,
+      "ProductionShardMultiplier": "1/4",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Computer", "Amount": "10"},
+        {"Part": "Heavy Modular Frame", "Amount": "10"},
+        {"Part": "Motor", "Amount": "20"},
+        {"Part": "Aluminum Casing", "Amount": "50"}
+      ]
+    },
+    {
+      "Name": "Nuclear Power Plant",
+      "Tier": "8-2",
+      "AveragePower": "2500",
+      "OverclockPowerExponent": "1",
+      "Cost": [
+        {"Part": "Supercomputer", "Amount": "10"},
+        {"Part": "Heavy Modular Frame", "Amount": "25"},
+        {"Part": "Alclad Aluminum Sheet", "Amount": "100"},
+        {"Part": "Cable", "Amount": "200"},
+        {"Part": "Concrete", "Amount": "250"}
+      ]
+    },
+    {
+      "Name": "Resource Well Extractor",
+      "Tier": "8-3",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Steel Beam", "Amount": "10"},
+        {"Part": "Aluminum Casing", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Resource Well Pressurizer",
+      "Tier": "8-3",
+      "AveragePower": "-150",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Radio Control Unit", "Amount": "10"},
+        {"Part": "Heavy Modular Frame", "Amount": "25"},
+        {"Part": "Motor", "Amount": "50"},
+        {"Part": "Alclad Aluminum Sheet", "Amount": "50"},
+        {"Part": "Rubber", "Amount": "100"}
+      ]
+    },
+    {
+      "Name": "Miner Mk.3",
+      "Tier": "8-4",
+      "AveragePower": "-45",
+      "OverclockPowerExponent": "1321929/1000000",
+      "Cost": [
+        {"Part": "Portable Miner", "Amount": "3"},
+        {"Part": "Steel Pipe", "Amount": "50"},
+        {"Part": "Supercomputer", "Amount": "5"},
+        {"Part": "Fused Modular Frame", "Amount": "10"},
+        {"Part": "Turbo Motor", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Particle Accelerator",
+      "Tier": "8-5",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 4,
+      "ProductionShardMultiplier": "1/4",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Turbo Motor", "Amount": "10"},
+        {"Part": "Supercomputer", "Amount": "10"},
+        {"Part": "Fused Modular Frame", "Amount": "25"},
+        {"Part": "Cooling System", "Amount": "50"},
+        {"Part": "Quickwire", "Amount": "500"}
+      ]
+    },
+    {
+      "Name": "Alien Power Augmenter",
+      "Tier": "9-1",
+      "AveragePower": "0",
+      "BasePower": "500",
+      "BasePowerBoost": "1/10",
+      "FueledBasePowerBoost": "3/10",
+      "Cost": [
+        {"Part": "Somersloop", "Amount": "10"},
+        {"Part": "SAM Fluctuator", "Amount": "50"},
+        {"Part": "Cable", "Amount": "100"},
+        {"Part": "Encased Industrial Beam", "Amount": "50"},
+        {"Part": "Motor", "Amount": "25"},
+        {"Part": "Computer", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Converter",
+      "Tier": "9-1",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 2,
+      "ProductionShardMultiplier": "1/2",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Fused Modular Frame", "Amount": "10"},
+        {"Part": "Cooling System", "Amount": "25"},
+        {"Part": "Radio Control Unit", "Amount": "50"},
+        {"Part": "SAM Fluctuator", "Amount": "100"}
+      ]
+    },
+    {
+      "Name": "Dimensional Depot Uploader",
+      "Tier": "9-1",
+      "AveragePower": "0",
+      "Cost": [
+        {"Part": "Mercer Sphere", "Amount": "1"},
+        {"Part": "SAM Fluctuator", "Amount": "10"},
+        {"Part": "Modular Frame", "Amount": "10"},
+        {"Part": "Wire", "Amount": "100"}
+      ]
+    },
+    {
+      "Name": "Quantum Encoder",
+      "Tier": "9-2",
+      "OverclockPowerExponent": "1321929/1000000",
+      "MaxProductionShards": 4,
+      "ProductionShardMultiplier": "1/4",
+      "ProductionShardPowerExponent": "2",
+      "Cost": [
+        {"Part": "Turbo Motor", "Amount": "20"},
+        {"Part": "Supercomputer", "Amount": "20"},
+        {"Part": "Cooling System", "Amount": "50"},
+        {"Part": "Time Crystal", "Amount": "50"},
+        {"Part": "Ficsite Trigon", "Amount": "100"}
+      ]
+    }
+  ],
+  "MultiMachines": [
+    {
+      "Name": "Miner",
+      "ShowPpm": true,
+      "AutoRound": false,
+      "DefaultMax": "60",
+      "Machines": [
+        {
+          "Name": "Miner Mk.1",
+          "PartsRatio": "60",
+          "Default": true
+        },
+        {
+          "Name": "Miner Mk.2",
+          "PartsRatio": "120"
+        },
+        {
+          "Name": "Miner Mk.3",
+          "PartsRatio": "240"
+        }
+      ],
+      "Capacities": [
+        {
+          "Name": "Impure",
+          "PartsRatio": "1/2",
+          "Color": 13775920
+        },
+        {
+          "Name": "Normal",
+          "Default": true
+        },
+        {
+          "Name": "Pure",
+          "PartsRatio": "2",
+          "Color": 8433977
+        }
+      ]
+    },
+    {
+      "Name": "Oil Extractor",
+      "ShowPpm": true,
+      "AutoRound": false,
+      "DefaultMax": "120",
+      "Capacities": [
+        {
+          "Name": "Impure",
+          "PartsRatio": "1/2",
+          "Color": 13775920
+        },
+        {
+          "Name": "Normal",
+          "Default": true
+        },
+        {
+          "Name": "Pure",
+          "PartsRatio": "2",
+          "Color": 8433977
+        }
+      ]
+    },
+    {
+      "Name": "Resource Well Extractor",
+      "ShowPpm": true,
+      "DefaultMax": "60",
+      "Capacities": [
+        {
+          "Name": "Impure",
+          "PartsRatio": "1/2",
+          "Color": 13775920
+        },
+        {
+          "Name": "Normal",
+          "Default": true
+        },
+        {
+          "Name": "Pure",
+          "PartsRatio": "2",
+          "Color": 8433977
+        }
+      ]
+    },
+    {
+      "Name": "Storage Container",
+      "Machines": [
+        {
+          "Name": "Storage Container",
+          "Default": true
+        },
+        {
+          "Name": "Industrial Storage Container"
+        },
+        {
+          "Name": "Fluid Buffer"
+        },
+        {
+          "Name": "Industrial Fluid Buffer"
+        }
+      ],
+      "Capacities": [
+        {
+          "Name": "Partially Full",
+          "Default": true,
+          "Description": "<html>Partially Full, also Partially Empty:<br/>Extra parts can be either added or taken from this.<br/>This means that it will neither back up nor be short on parts.<br/>This means the inputs and outputs do not rely on each other which allows them to be calculated independently.<br/>You can use this setting to separate parts of your factory for independent calculations.</html>"
+        },
+        {
+          "Name": "Full",
+          "Color": 8433977,
+          "Description": "<html>Full:<br/>Extra parts can be taken from this, but more parts cannot be added than are taken.<br/>This means that it will never be short on parts but can back up.<br/>This means the output does not rely on the input, but the input does rely on the output.<br/>You may be able to get improved calculations using this setting (but not as good as Partially Full).</html>"
+        },
+        {
+          "Name": "Empty",
+          "Color": 13775920,
+          "Description": "<html>Empty:<br/>Extra parts can be added to this, but more parts cannot be taken than are added.<br/>This means that it will never back up but can be short on parts.<br/>This means the input does not rely on the output, but the output does rely on the input.<br/>You may be able to get improved calculations using this setting (but not as good as Partially Full).</html>"
+        },
+        {
+          "Name": "Input = Output",
+          "PartsRatio": "480",
+          "Color": 16311334,
+          "Description": "<html>Input = Output:<br/>The input and outputs must match exactly.<br/>This makes it the same as using a splurger but with a different icon.</html>"
+        }
+      ]
+    },
+    {
+      "Name": "Dimensional Depot Uploader",
+      "ShowPpm": true,
+      "DefaultMax": "",
+      "Capacities": [
+        {
+          "Name": "15/min",
+          "PartsRatio": "15",
+          "Default": true
+        },
+        {
+          "Name": "30/min",
+          "PartsRatio": "30",
+          "Color": 13775920
+        },
+        {
+          "Name": "60/min",
+          "PartsRatio": "60",
+          "Color": 16311334
+        },
+        {
+          "Name": "120/min",
+          "PartsRatio": "120",
+          "Color": 8433977
+        },
+        {
+          "Name": "240/min",
+          "PartsRatio": "240",
+          "Color": 12330744
+        }
+      ]
+    },
+    {
+      "Name": "AWESOME Sink",
+      "ShowPpm": true,
+      "DefaultMax": "",
+      "Capacities": [
+        {
+          "Name": "Mk.1 Belt",
+          "PartsRatio": "60",
+          "Default": true
+        },
+        {
+          "Name": "Mk.2 Belt",
+          "PartsRatio": "120",
+          "Color": 13775920
+        },
+        {
+          "Name": "Mk.3 Belt",
+          "PartsRatio": "270",
+          "Color": 16311334
+        },
+        {
+          "Name": "Mk.4 Belt",
+          "PartsRatio": "480",
+          "Color": 8433977
+        },
+        {
+          "Name": "Mk.5 Belt",
+          "PartsRatio": "780",
+          "Color": 2504952
+        },
+        {
+          "Name": "Mk.6 Belt",
+          "PartsRatio": "1200",
+          "Color": 12330744
+        }
+      ]
+    },
+    {
+      "Name": "Geothermal Generator",
+      "DefaultMax": "1",
+      "Capacities": [
+        {
+          "Name": "Impure",
+          "PowerRatio": "1/2",
+          "Color": 13775920
+        },
+        {
+          "Name": "Normal",
+          "Default": true
+        },
+        {
+          "Name": "Pure",
+          "PowerRatio": "2",
+          "Color": 8433977
+        }
+      ]
+    },
+    {
+      "Name": "Space Elevator",
+      "ShowPpm": false,
+      "DefaultMax": "1"
+    }
+  ],
+  "Parts": [
+    {
+      "Name": "Iron Ingot",
+      "Tier": "0-0",
+      "SinkPoints": 2
+    },
+    {
+      "Name": "Leaves",
+      "Tier": "0-0",
+      "SinkPoints": 3
+    },
+    {
+      "Name": "Iron Rod",
+      "Tier": "0-0",
+      "SinkPoints": 4
+    },
+    {
+      "Name": "Iron Plate",
+      "Tier": "0-0",
+      "SinkPoints": 6
+    },
+    {
+      "Name": "Mycelia",
+      "Tier": "0-0",
+      "SinkPoints": 10
+    },
+    {
+      "Name": "Wood",
+      "Tier": "0-0",
+      "SinkPoints": 30
+    },
+    {
+      "Name": "Blue Power Slug",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Hatcher Remains",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Hog Remains",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Mercer Sphere",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Purple Power Slug",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Somersloop",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Spitter Remains",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Stinger Remains",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Yellow Power Slug",
+      "Tier": "0-0",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Copper Ingot",
+      "Tier": "0-2",
+      "SinkPoints": 6
+    },
+    {
+      "Name": "Wire",
+      "Tier": "0-2",
+      "SinkPoints": 6
+    },
+    {
+      "Name": "Cable",
+      "Tier": "0-2",
+      "SinkPoints": 24
+    },
+    {
+      "Name": "Blue FICSMAS Ornament",
+      "Tier": "0-3",
+      "SinkPoints": 1
+    },
+    {
+      "Name": "FICSMAS Gift",
+      "Tier": "0-3",
+      "SinkPoints": 1
+    },
+    {
+      "Name": "FICSMAS Tree Branch",
+      "Tier": "0-3",
+      "SinkPoints": 2
+    },
+    {
+      "Name": "Red FICSMAS Ornament",
+      "Tier": "0-3",
+      "SinkPoints": 2
+    },
+    {
+      "Name": "Screw",
+      "Tier": "0-3",
+      "SinkPoints": 2
+    },
+    {
+      "Name": "FICSMAS Bow",
+      "Tier": "0-3",
+      "SinkPoints": 4
+    },
+    {
+      "Name": "FICSMAS Actual Snow",
+      "Tier": "0-3",
+      "SinkPoints": 5
+    },
+    {
+      "Name": "Candy Cane",
+      "Tier": "0-3",
+      "SinkPoints": 6
+    },
+    {
+      "Name": "Iron Rebar",
+      "Tier": "0-3",
+      "SinkPoints": 8
+    },
+    {
+      "Name": "Biomass",
+      "Tier": "0-3",
+      "SinkPoints": 12
+    },
+    {
+      "Name": "Concrete",
+      "Tier": "0-3",
+      "SinkPoints": 12
+    },
+    {
+      "Name": "Snowball",
+      "Tier": "0-3",
+      "SinkPoints": 30
+    },
+    {
+      "Name": "Reinforced Iron Plate",
+      "Tier": "0-3",
+      "SinkPoints": 120
+    },
+    {
+      "Name": "Alien DNA Capsule",
+      "Tier": "0-3",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Alien Protein",
+      "Tier": "0-3",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Power Shard",
+      "Tier": "0-3",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Iron Ore",
+      "Tier": "0-5",
+      "SinkPoints": 1
+    },
+    {
+      "Name": "Limestone",
+      "Tier": "0-5",
+      "SinkPoints": 2
+    },
+    {
+      "Name": "Copper Ore",
+      "Tier": "0-5",
+      "SinkPoints": 3
+    },
+    {
+      "Name": "Caterium Ore",
+      "Tier": "0-5",
+      "SinkPoints": 7
+    },
+    {
+      "Name": "Sulfur",
+      "Tier": "0-5",
+      "SinkPoints": 11
+    },
+    {
+      "Name": "Raw Quartz",
+      "Tier": "0-5",
+      "SinkPoints": 15
+    },
+    {
+      "Name": "SAM",
+      "Tier": "0-5",
+      "SinkPoints": 20
+    },
+    {
+      "Name": "Silica",
+      "Tier": "0-5",
+      "SinkPoints": 20
+    },
+    {
+      "Name": "Quartz Crystal",
+      "Tier": "0-5",
+      "SinkPoints": 50
+    },
+    {
+      "Name": "Copper Sheet",
+      "Tier": "2-1",
+      "SinkPoints": 24
+    },
+    {
+      "Name": "Sparkly Fireworks",
+      "Tier": "2-1",
+      "SinkPoints": 32
+    },
+    {
+      "Name": "Fancy Fireworks",
+      "Tier": "2-1",
+      "SinkPoints": 40
+    },
+    {
+      "Name": "Sweet Fireworks",
+      "Tier": "2-1",
+      "SinkPoints": 60
+    },
+    {
+      "Name": "Fabric",
+      "Tier": "2-1",
+      "SinkPoints": 140
+    },
+    {
+      "Name": "Rotor",
+      "Tier": "2-1",
+      "SinkPoints": 140
+    },
+    {
+      "Name": "Shatter Rebar",
+      "Tier": "2-1",
+      "SinkPoints": 332
+    },
+    {
+      "Name": "Modular Frame",
+      "Tier": "2-1",
+      "SinkPoints": 408
+    },
+    {
+      "Name": "Smart Plating",
+      "Tier": "2-1",
+      "SinkPoints": 520
+    },
+    {
+      "Name": "Solid Biofuel",
+      "Tier": "2-2",
+      "SinkPoints": 48
+    },
+    {
+      "Name": "Coal",
+      "Tier": "3-1",
+      "SinkPoints": 3
+    },
+    {
+      "Name": "Black Powder",
+      "Tier": "3-1",
+      "SinkPoints": 14
+    },
+    {
+      "Name": "Water",
+      "Tier": "3-1",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Steel Ingot",
+      "Tier": "3-3",
+      "SinkPoints": 8
+    },
+    {
+      "Name": "Iron FICSMAS Ornament",
+      "Tier": "3-3",
+      "SinkPoints": 18
+    },
+    {
+      "Name": "Steel Pipe",
+      "Tier": "3-3",
+      "SinkPoints": 24
+    },
+    {
+      "Name": "Copper FICSMAS Ornament",
+      "Tier": "3-3",
+      "SinkPoints": 32
+    },
+    {
+      "Name": "Portable Miner",
+      "Tier": "3-3",
+      "SinkPoints": 56
+    },
+    {
+      "Name": "Steel Beam",
+      "Tier": "3-3",
+      "SinkPoints": 64
+    },
+    {
+      "Name": "FICSMAS Ornament Bundle",
+      "Tier": "3-3",
+      "SinkPoints": 100
+    },
+    {
+      "Name": "Nobelisk",
+      "Tier": "3-3",
+      "SinkPoints": 152
+    },
+    {
+      "Name": "Gas Nobelisk",
+      "Tier": "3-3",
+      "SinkPoints": 544
+    },
+    {
+      "Name": "FICSMAS Wreath",
+      "Tier": "3-3",
+      "SinkPoints": 630
+    },
+    {
+      "Name": "Versatile Framework",
+      "Tier": "3-3",
+      "SinkPoints": 1176
+    },
+    {
+      "Name": "FICSMAS Wonder Star",
+      "Tier": "3-3",
+      "SinkPoints": 6540
+    },
+    {
+      "Name": "Stator",
+      "Tier": "4-3",
+      "SinkPoints": 240
+    },
+    {
+      "Name": "Encased Industrial Beam",
+      "Tier": "4-3",
+      "SinkPoints": 528
+    },
+    {
+      "Name": "Automated Wiring",
+      "Tier": "4-3",
+      "SinkPoints": 1440
+    },
+    {
+      "Name": "Motor",
+      "Tier": "4-3",
+      "SinkPoints": 1520
+    },
+    {
+      "Name": "Polymer Resin",
+      "Tier": "5-2",
+      "SinkPoints": 12
+    },
+    {
+      "Name": "Petroleum Coke",
+      "Tier": "5-2",
+      "SinkPoints": 20
+    },
+    {
+      "Name": "Rifle Ammo",
+      "Tier": "5-2",
+      "SinkPoints": 25
+    },
+    {
+      "Name": "Smokeless Powder",
+      "Tier": "5-2",
+      "SinkPoints": 58
+    },
+    {
+      "Name": "Rubber",
+      "Tier": "5-2",
+      "SinkPoints": 60
+    },
+    {
+      "Name": "Plastic",
+      "Tier": "5-2",
+      "SinkPoints": 75
+    },
+    {
+      "Name": "Circuit Board",
+      "Tier": "5-2",
+      "SinkPoints": 696
+    },
+    {
+      "Name": "Cluster Nobelisk",
+      "Tier": "5-2",
+      "SinkPoints": 1376
+    },
+    {
+      "Name": "Crude Oil",
+      "Tier": "5-2",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Fuel",
+      "Tier": "5-2",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Heavy Oil Residue",
+      "Tier": "5-2",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Compacted Coal",
+      "Tier": "5-4",
+      "SinkPoints": 28
+    },
+    {
+      "Name": "Empty Canister",
+      "Tier": "5-4",
+      "SinkPoints": 60
+    },
+    {
+      "Name": "Packaged Water",
+      "Tier": "5-4",
+      "SinkPoints": 130
+    },
+    {
+      "Name": "Empty Fluid Tank",
+      "Tier": "5-4",
+      "SinkPoints": 170
+    },
+    {
+      "Name": "Packaged Heavy Oil Residue",
+      "Tier": "5-4",
+      "SinkPoints": 180
+    },
+    {
+      "Name": "Packaged Oil",
+      "Tier": "5-4",
+      "SinkPoints": 180
+    },
+    {
+      "Name": "Packaged Fuel",
+      "Tier": "5-4",
+      "SinkPoints": 270
+    },
+    {
+      "Name": "Packaged Liquid Biofuel",
+      "Tier": "5-4",
+      "SinkPoints": 370
+    },
+    {
+      "Name": "Packaged Turbofuel",
+      "Tier": "5-4",
+      "SinkPoints": 570
+    },
+    {
+      "Name": "Packaged Rocket Fuel",
+      "Tier": "5-4",
+      "SinkPoints": 1028
+    },
+    {
+      "Name": "Packaged Ionized Fuel",
+      "Tier": "5-4",
+      "SinkPoints": 5246
+    },
+    {
+      "Name": "Ionized Fuel",
+      "Tier": "5-4",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Liquid Biofuel",
+      "Tier": "5-4",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Rocket Fuel",
+      "Tier": "5-4",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Turbofuel",
+      "Tier": "5-4",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Quickwire",
+      "Tier": "5-5",
+      "SinkPoints": 17
+    },
+    {
+      "Name": "Caterium Ingot",
+      "Tier": "5-5",
+      "SinkPoints": 42
+    },
+    {
+      "Name": "Stun Rebar",
+      "Tier": "5-5",
+      "SinkPoints": 186
+    },
+    {
+      "Name": "AI Limiter",
+      "Tier": "5-5",
+      "SinkPoints": 920
+    },
+    {
+      "Name": "Explosive Rebar",
+      "Tier": "6-1",
+      "SinkPoints": 360
+    },
+    {
+      "Name": "Gas Filter",
+      "Tier": "6-1",
+      "SinkPoints": 608
+    },
+    {
+      "Name": "Homing Rifle Ammo",
+      "Tier": "6-1",
+      "SinkPoints": 855
+    },
+    {
+      "Name": "Pulse Nobelisk",
+      "Tier": "6-1",
+      "SinkPoints": 1533
+    },
+    {
+      "Name": "Crystal Oscillator",
+      "Tier": "6-1",
+      "SinkPoints": 3072
+    },
+    {
+      "Name": "High-Speed Connector",
+      "Tier": "6-1",
+      "SinkPoints": 3776
+    },
+    {
+      "Name": "Computer",
+      "Tier": "6-1",
+      "SinkPoints": 8352
+    },
+    {
+      "Name": "Modular Engine",
+      "Tier": "6-1",
+      "SinkPoints": 9960
+    },
+    {
+      "Name": "Heavy Modular Frame",
+      "Tier": "6-1",
+      "SinkPoints": 10800
+    },
+    {
+      "Name": "Adaptive Control Unit",
+      "Tier": "6-1",
+      "SinkPoints": 76368
+    },
+    {
+      "Name": "Bauxite",
+      "Tier": "7-1",
+      "SinkPoints": 8
+    },
+    {
+      "Name": "Aluminum Scrap",
+      "Tier": "7-1",
+      "SinkPoints": 27
+    },
+    {
+      "Name": "Turbo Rifle Ammo",
+      "Tier": "7-1",
+      "SinkPoints": 120
+    },
+    {
+      "Name": "Aluminum Ingot",
+      "Tier": "7-1",
+      "SinkPoints": 131
+    },
+    {
+      "Name": "Packaged Alumina Solution",
+      "Tier": "7-1",
+      "SinkPoints": 160
+    },
+    {
+      "Name": "Alclad Aluminum Sheet",
+      "Tier": "7-1",
+      "SinkPoints": 266
+    },
+    {
+      "Name": "Aluminum Casing",
+      "Tier": "7-1",
+      "SinkPoints": 393
+    },
+    {
+      "Name": "Alumina Solution",
+      "Tier": "7-1",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Iodine-Infused Filter",
+      "Tier": "7-4",
+      "SinkPoints": 2274
+    },
+    {
+      "Name": "Packaged Sulfuric Acid",
+      "Tier": "7-5",
+      "SinkPoints": 152
+    },
+    {
+      "Name": "Battery",
+      "Tier": "7-5",
+      "SinkPoints": 465
+    },
+    {
+      "Name": "Radio Control Unit",
+      "Tier": "7-5",
+      "SinkPoints": 32352
+    },
+    {
+      "Name": "Supercomputer",
+      "Tier": "7-5",
+      "SinkPoints": 97352
+    },
+    {
+      "Name": "Assembly Director System",
+      "Tier": "7-5",
+      "SinkPoints": 500176
+    },
+    {
+      "Name": "Sulfuric Acid",
+      "Tier": "7-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Uranium",
+      "Tier": "8-2",
+      "SinkPoints": 35
+    },
+    {
+      "Name": "Encased Uranium Cell",
+      "Tier": "8-2",
+      "SinkPoints": 147
+    },
+    {
+      "Name": "Electromagnetic Control Rod",
+      "Tier": "8-2",
+      "SinkPoints": 2560
+    },
+    {
+      "Name": "Magnetic Field Generator",
+      "Tier": "8-2",
+      "SinkPoints": 11000
+    },
+    {
+      "Name": "Nuke Nobelisk",
+      "Tier": "8-2",
+      "SinkPoints": 19600
+    },
+    {
+      "Name": "Uranium Fuel Rod",
+      "Tier": "8-2",
+      "SinkPoints": 43468
+    },
+    {
+      "Name": "Uranium Waste",
+      "Tier": "8-2",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Packaged Nitrogen Gas",
+      "Tier": "8-3",
+      "SinkPoints": 312
+    },
+    {
+      "Name": "Heat Sink",
+      "Tier": "8-3",
+      "SinkPoints": 2804
+    },
+    {
+      "Name": "Cooling System",
+      "Tier": "8-3",
+      "SinkPoints": 12006
+    },
+    {
+      "Name": "Fused Modular Frame",
+      "Tier": "8-3",
+      "SinkPoints": 62840
+    },
+    {
+      "Name": "Nitrogen Gas",
+      "Tier": "8-3",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Turbo Motor",
+      "Tier": "8-4",
+      "SinkPoints": 240496
+    },
+    {
+      "Name": "Thermal Propulsion Rocket",
+      "Tier": "8-4",
+      "SinkPoints": 728508
+    },
+    {
+      "Name": "Copper Powder",
+      "Tier": "8-5",
+      "SinkPoints": 72
+    },
+    {
+      "Name": "Packaged Nitric Acid",
+      "Tier": "8-5",
+      "SinkPoints": 412
+    },
+    {
+      "Name": "Plutonium Fuel Rod",
+      "Tier": "8-5",
+      "SinkPoints": 153184
+    },
+    {
+      "Name": "Pressure Conversion Cube",
+      "Tier": "8-5",
+      "SinkPoints": 255088
+    },
+    {
+      "Name": "Nuclear Pasta",
+      "Tier": "8-5",
+      "SinkPoints": 538976
+    },
+    {
+      "Name": "Dissolved Silica",
+      "Tier": "8-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Encased Plutonium Cell",
+      "Tier": "8-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Nitric Acid",
+      "Tier": "8-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Non-Fissile Uranium",
+      "Tier": "8-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Plutonium Pellet",
+      "Tier": "8-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Plutonium Waste",
+      "Tier": "8-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Reanimated SAM",
+      "Tier": "9-1",
+      "SinkPoints": 160
+    },
+    {
+      "Name": "Diamonds",
+      "Tier": "9-1",
+      "SinkPoints": 240
+    },
+    {
+      "Name": "Time Crystal",
+      "Tier": "9-1",
+      "SinkPoints": 960
+    },
+    {
+      "Name": "Ficsite Trigon",
+      "Tier": "9-1",
+      "SinkPoints": 1291
+    },
+    {
+      "Name": "Ficsite Ingot",
+      "Tier": "9-1",
+      "SinkPoints": 1936
+    },
+    {
+      "Name": "SAM Fluctuator",
+      "Tier": "9-1",
+      "SinkPoints": 1968
+    },
+    {
+      "Name": "Biochemical Sculptor",
+      "Tier": "9-1",
+      "SinkPoints": 301778
+    },
+    {
+      "Name": "Alien Power Matrix",
+      "Tier": "9-2",
+      "SinkPoints": 210
+    },
+    {
+      "Name": "Dark Matter Crystal",
+      "Tier": "9-2",
+      "SinkPoints": 1780
+    },
+    {
+      "Name": "Superposition Oscillator",
+      "Tier": "9-2",
+      "SinkPoints": 37292
+    },
+    {
+      "Name": "Neural-Quantum Processor",
+      "Tier": "9-2",
+      "SinkPoints": 248034
+    },
+    {
+      "Name": "AI Expansion Server",
+      "Tier": "9-2",
+      "SinkPoints": 597652
+    },
+    {
+      "Name": "Dark Matter Residue",
+      "Tier": "9-2",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Excited Photonic Matter",
+      "Tier": "9-2",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Singularity Cell",
+      "Tier": "9-4",
+      "SinkPoints": 114675
+    },
+    {
+      "Name": "Ballistic Warp Drive",
+      "Tier": "9-4",
+      "SinkPoints": 2895334
+    },
+    {
+      "Name": "Ficsonium",
+      "Tier": "9-5",
+      "SinkPoints": 0
+    },
+    {
+      "Name": "Ficsonium Fuel Rod",
+      "Tier": "9-5",
+      "SinkPoints": 0
+    }
+  ],
+  "Recipes": [
+    {
+      "Name": "Iron Ore",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Limestone",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Limestone", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Copper Ore",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Copper Ore", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Caterium Ore",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Caterium Ore", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Sulfur",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Sulfur", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Raw Quartz",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "SAM",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "SAM", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Coal",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "3-1",
+      "Parts": [
+        {"Part": "Coal", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Water",
+      "Machine": "Water Extractor",
+      "BatchTime": "60",
+      "Tier": "3-1",
+      "Parts": [
+        {"Part": "Water", "Amount": "120"}
+      ]
+    },
+    {
+      "Name": "Well Water",
+      "Machine": "Resource Well Extractor",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Water", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Crude Oil",
+      "Machine": "Oil Extractor",
+      "BatchTime": "1",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Oil Well",
+      "Machine": "Resource Well Extractor",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Bauxite",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Bauxite", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Uranium",
+      "Machine": "Miner",
+      "BatchTime": "60",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Uranium", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Nitrogen Gas",
+      "Machine": "Resource Well Extractor",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Nitrogen Gas", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Excited Photonic Matter",
+      "Machine": "Converter",
+      "BatchTime": "3",
+      "Tier": "9-2",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Excited Photonic Matter", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Iron Ingot",
+      "Machine": "Smelter",
+      "BatchTime": "2",
+      "Tier": "0-0",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-1"},
+        {"Part": "Iron Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Basic Iron Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-5"},
+        {"Part": "Limestone", "Amount": "-8"},
+        {"Part": "Iron Ingot", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Iron Alloy Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-8"},
+        {"Part": "Copper Ore", "Amount": "-2"},
+        {"Part": "Iron Ingot", "Amount": "15"}
+      ]
+    },
+    {
+      "Name": "Pure Iron Ingot",
+      "Machine": "Refinery",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-7"},
+        {"Part": "Water", "Amount": "-4"},
+        {"Part": "Iron Ingot", "Amount": "13"}
+      ]
+    },
+    {
+      "Name": "Leached Iron ingot",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-5"},
+        {"Part": "Sulfuric Acid", "Amount": "-1"},
+        {"Part": "Iron Ingot", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Leaves Biomass Burner",
+      "Machine": "Biomass Burner",
+      "BatchTime": "1/2",
+      "Tier": "0-6",
+      "Parts": [
+        {"Part": "Leaves", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Iron Rod",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-0",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-1"},
+        {"Part": "Iron Rod", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Steel Rod",
+      "Machine": "Constructor",
+      "BatchTime": "5",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Ingot", "Amount": "-1"},
+        {"Part": "Iron Rod", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Aluminum Rod",
+      "Machine": "Constructor",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Ingot", "Amount": "-1"},
+        {"Part": "Iron Rod", "Amount": "7"}
+      ]
+    },
+    {
+      "Name": "Iron Plate",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "0-0",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-3"},
+        {"Part": "Iron Plate", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Steel Cast Plate",
+      "Machine": "Foundry",
+      "BatchTime": "4",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-1"},
+        {"Part": "Steel Ingot", "Amount": "-1"},
+        {"Part": "Iron Plate", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Coated Iron Plate",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-5"},
+        {"Part": "Plastic", "Amount": "-1"},
+        {"Part": "Iron Plate", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Mycelia Biomass Burner",
+      "Machine": "Biomass Burner",
+      "BatchTime": "2/3",
+      "Tier": "0-6",
+      "Parts": [
+        {"Part": "Mycelia", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Wood Biomass Burner",
+      "Machine": "Biomass Burner",
+      "BatchTime": "10/3",
+      "Tier": "0-6",
+      "Parts": [
+        {"Part": "Wood", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Copper Ingot",
+      "Machine": "Smelter",
+      "BatchTime": "2",
+      "Tier": "0-2",
+      "Parts": [
+        {"Part": "Copper Ore", "Amount": "-1"},
+        {"Part": "Copper Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Copper Alloy Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Copper Ore", "Amount": "-5"},
+        {"Part": "Iron Ore", "Amount": "-5"},
+        {"Part": "Copper Ingot", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Pure Copper Ingot",
+      "Machine": "Refinery",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Copper Ore", "Amount": "-6"},
+        {"Part": "Water", "Amount": "-4"},
+        {"Part": "Copper Ingot", "Amount": "15"}
+      ]
+    },
+    {
+      "Name": "Tempered Copper Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Copper Ore", "Amount": "-5"},
+        {"Part": "Petroleum Coke", "Amount": "-8"},
+        {"Part": "Copper Ingot", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Leached Copper Ingot",
+      "Machine": "Refinery",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Copper Ore", "Amount": "-9"},
+        {"Part": "Sulfuric Acid", "Amount": "-5"},
+        {"Part": "Copper Ingot", "Amount": "22"}
+      ]
+    },
+    {
+      "Name": "Wire",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-2",
+      "Parts": [
+        {"Part": "Copper Ingot", "Amount": "-1"},
+        {"Part": "Wire", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Iron Wire",
+      "Machine": "Constructor",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-5"},
+        {"Part": "Wire", "Amount": "9"}
+      ]
+    },
+    {
+      "Name": "Caterium Wire",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Caterium Ingot", "Amount": "-1"},
+        {"Part": "Wire", "Amount": "8"}
+      ]
+    },
+    {
+      "Name": "Fused Wire",
+      "Machine": "Assembler",
+      "BatchTime": "20",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Copper Ingot", "Amount": "-4"},
+        {"Part": "Caterium Ingot", "Amount": "-1"},
+        {"Part": "Wire", "Amount": "30"}
+      ]
+    },
+    {
+      "Name": "Cable",
+      "Machine": "Constructor",
+      "BatchTime": "2",
+      "Tier": "0-2",
+      "Parts": [
+        {"Part": "Wire", "Amount": "-2"},
+        {"Part": "Cable", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Coated Cable",
+      "Machine": "Refinery",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Wire", "Amount": "-5"},
+        {"Part": "Heavy Oil Residue", "Amount": "-2"},
+        {"Part": "Cable", "Amount": "9"}
+      ]
+    },
+    {
+      "Name": "Insulated Cable",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Wire", "Amount": "-9"},
+        {"Part": "Rubber", "Amount": "-6"},
+        {"Part": "Cable", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Quickwire Cable",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Quickwire", "Amount": "-3"},
+        {"Part": "Rubber", "Amount": "-2"},
+        {"Part": "Cable", "Amount": "11"}
+      ]
+    },
+    {
+      "Name": "Screw",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Iron Rod", "Amount": "-1"},
+        {"Part": "Screw", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Cast Screw",
+      "Machine": "Constructor",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-5"},
+        {"Part": "Screw", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Steel Screw",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Beam", "Amount": "-1"},
+        {"Part": "Screw", "Amount": "52"}
+      ]
+    },
+    {
+      "Name": "Iron Rebar",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Iron Rod", "Amount": "-1"},
+        {"Part": "Iron Rebar", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Biomass (Alien Protein)",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Alien Protein", "Amount": "-1"},
+        {"Part": "Biomass", "Amount": "100"}
+      ]
+    },
+    {
+      "Name": "Biomass (Mycelia)",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Mycelia", "Amount": "-1"},
+        {"Part": "Biomass", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Biomass (Leaves)",
+      "Machine": "Constructor",
+      "BatchTime": "5",
+      "Tier": "0-6",
+      "Parts": [
+        {"Part": "Leaves", "Amount": "-10"},
+        {"Part": "Biomass", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Biomass (Wood)",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-6",
+      "Parts": [
+        {"Part": "Wood", "Amount": "-4"},
+        {"Part": "Biomass", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Biomass Burner",
+      "Machine": "Biomass Burner",
+      "BatchTime": "6",
+      "Tier": "0-6",
+      "Parts": [
+        {"Part": "Biomass", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Concrete",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Limestone", "Amount": "-3"},
+        {"Part": "Concrete", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Fine Concrete",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Silica", "Amount": "-3"},
+        {"Part": "Limestone", "Amount": "-12"},
+        {"Part": "Concrete", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Rubber Concrete",
+      "Machine": "Assembler",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Limestone", "Amount": "-10"},
+        {"Part": "Rubber", "Amount": "-2"},
+        {"Part": "Concrete", "Amount": "9"}
+      ]
+    },
+    {
+      "Name": "Wet Concrete",
+      "Machine": "Refinery",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Limestone", "Amount": "-6"},
+        {"Part": "Water", "Amount": "-5"},
+        {"Part": "Concrete", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Reinforced Iron Plate",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Iron Plate", "Amount": "-6"},
+        {"Part": "Screw", "Amount": "-12"},
+        {"Part": "Reinforced Iron Plate", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Bolted Iron Plate",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Iron Plate", "Amount": "-18"},
+        {"Part": "Screw", "Amount": "-50"},
+        {"Part": "Reinforced Iron Plate", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Stitched Iron Plate",
+      "Machine": "Assembler",
+      "BatchTime": "32",
+      "Alternate": true,
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Iron Plate", "Amount": "-10"},
+        {"Part": "Wire", "Amount": "-20"},
+        {"Part": "Reinforced Iron Plate", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Adhered Iron Plate",
+      "Machine": "Assembler",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Iron Plate", "Amount": "-3"},
+        {"Part": "Rubber", "Amount": "-1"},
+        {"Part": "Reinforced Iron Plate", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Alien DNA Capsule",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Alien Protein", "Amount": "-1"},
+        {"Part": "Alien DNA Capsule", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Hatcher Protein",
+      "Machine": "Constructor",
+      "BatchTime": "3",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Hatcher Remains", "Amount": "-1"},
+        {"Part": "Alien Protein", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Hog Protein",
+      "Machine": "Constructor",
+      "BatchTime": "3",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Hog Remains", "Amount": "-1"},
+        {"Part": "Alien Protein", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Spitter Protein",
+      "Machine": "Constructor",
+      "BatchTime": "3",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Spitter Remains", "Amount": "-1"},
+        {"Part": "Alien Protein", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Stinger Protein",
+      "Machine": "Constructor",
+      "BatchTime": "3",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Stinger Remains", "Amount": "-1"},
+        {"Part": "Alien Protein", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Power Shard (1)",
+      "Machine": "Constructor",
+      "BatchTime": "8",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Blue Power Slug", "Amount": "-1"},
+        {"Part": "Power Shard", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Power Shard (2)",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Yellow Power Slug", "Amount": "-1"},
+        {"Part": "Power Shard", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Power Shard (5)",
+      "Machine": "Constructor",
+      "BatchTime": "24",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "Purple Power Slug", "Amount": "-1"},
+        {"Part": "Power Shard", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Iron Ore (Limestone)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Limestone", "Amount": "-24"},
+        {"Part": "Iron Ore", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Limestone (Sulfur)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Sulfur", "Amount": "-2"},
+        {"Part": "Limestone", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Copper Ore (Quartz)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Raw Quartz", "Amount": "-10"},
+        {"Part": "Copper Ore", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Copper Ore (Sulfur)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Sulfur", "Amount": "-12"},
+        {"Part": "Copper Ore", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Caterium Ore (Copper)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Copper Ore", "Amount": "-15"},
+        {"Part": "Caterium Ore", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Caterium Ore (Quartz)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Raw Quartz", "Amount": "-12"},
+        {"Part": "Caterium Ore", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Sulfur (Coal)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Coal", "Amount": "-20"},
+        {"Part": "Sulfur", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Sulfur (Iron)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Iron Ore", "Amount": "-30"},
+        {"Part": "Sulfur", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Raw Quartz (Bauxite)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Bauxite", "Amount": "-10"},
+        {"Part": "Raw Quartz", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Raw Quartz (Coal)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Coal", "Amount": "-24"},
+        {"Part": "Raw Quartz", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Silica",
+      "Machine": "Constructor",
+      "BatchTime": "8",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "-3"},
+        {"Part": "Silica", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Cheap Silica",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "-3"},
+        {"Part": "Limestone", "Amount": "-5"},
+        {"Part": "Silica", "Amount": "7"}
+      ]
+    },
+    {
+      "Name": "Quartz Crystal",
+      "Machine": "Constructor",
+      "BatchTime": "8",
+      "Tier": "0-5",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "-5"},
+        {"Part": "Quartz Crystal", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Fused Quartz Crystal",
+      "Machine": "Foundry",
+      "BatchTime": "20",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "-25"},
+        {"Part": "Coal", "Amount": "-12"},
+        {"Part": "Quartz Crystal", "Amount": "18"}
+      ]
+    },
+    {
+      "Name": "Pure Quartz Crystal",
+      "Machine": "Refinery",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "-9"},
+        {"Part": "Water", "Amount": "-5"},
+        {"Part": "Quartz Crystal", "Amount": "7"}
+      ]
+    },
+    {
+      "Name": "Copper Sheet",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Copper Ingot", "Amount": "-2"},
+        {"Part": "Copper Sheet", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Steamed Copper Sheet",
+      "Machine": "Refinery",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Copper Ingot", "Amount": "-3"},
+        {"Part": "Water", "Amount": "-3"},
+        {"Part": "Copper Sheet", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Fabric",
+      "Machine": "Assembler",
+      "BatchTime": "4",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Mycelia", "Amount": "-1"},
+        {"Part": "Biomass", "Amount": "-5"},
+        {"Part": "Fabric", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Polyester Fabric",
+      "Machine": "Refinery",
+      "BatchTime": "2",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Polymer Resin", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-1"},
+        {"Part": "Fabric", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Rotor",
+      "Machine": "Assembler",
+      "BatchTime": "15",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Iron Rod", "Amount": "-5"},
+        {"Part": "Screw", "Amount": "-25"},
+        {"Part": "Rotor", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Copper Rotor",
+      "Machine": "Assembler",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Copper Sheet", "Amount": "-6"},
+        {"Part": "Screw", "Amount": "-52"},
+        {"Part": "Rotor", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Steel Rotor",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Pipe", "Amount": "-2"},
+        {"Part": "Wire", "Amount": "-6"},
+        {"Part": "Rotor", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Shatter Rebar",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Iron Rebar", "Amount": "-2"},
+        {"Part": "Quartz Crystal", "Amount": "-3"},
+        {"Part": "Shatter Rebar", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Modular Frame",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Reinforced Iron Plate", "Amount": "-3"},
+        {"Part": "Iron Rod", "Amount": "-12"},
+        {"Part": "Modular Frame", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Bolted Frame",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Reinforced Iron Plate", "Amount": "-3"},
+        {"Part": "Screw", "Amount": "-56"},
+        {"Part": "Modular Frame", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Steeled Frame",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Reinforced Iron Plate", "Amount": "-2"},
+        {"Part": "Steel Pipe", "Amount": "-10"},
+        {"Part": "Modular Frame", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Smart Plating",
+      "Machine": "Assembler",
+      "BatchTime": "30",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Reinforced Iron Plate", "Amount": "-1"},
+        {"Part": "Rotor", "Amount": "-1"},
+        {"Part": "Smart Plating", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Space Elevator Phase 1",
+      "Machine": "Space Elevator",
+      "BatchTime": "60",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "Smart Plating", "Amount": "-50"}
+      ]
+    },
+    {
+      "Name": "Plastic Smart Plating",
+      "Machine": "Manufacturer",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Reinforced Iron Plate", "Amount": "-1"},
+        {"Part": "Rotor", "Amount": "-1"},
+        {"Part": "Plastic", "Amount": "-3"},
+        {"Part": "Smart Plating", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Solid Biofuel",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "2-2",
+      "Parts": [
+        {"Part": "Biomass", "Amount": "-8"},
+        {"Part": "Solid Biofuel", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Solid Biofuel Biomass Burner",
+      "Machine": "Biomass Burner",
+      "BatchTime": "15",
+      "Tier": "2-2",
+      "Parts": [
+        {"Part": "Solid Biofuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Coal (Iron)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Iron Ore", "Amount": "-18"},
+        {"Part": "Coal", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Coal (Limestone)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Limestone", "Amount": "-36"},
+        {"Part": "Coal", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Biocoal",
+      "Machine": "Constructor",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "3-1",
+      "Parts": [
+        {"Part": "Biomass", "Amount": "-5"},
+        {"Part": "Coal", "Amount": "6"}
+      ]
+    },
+    {
+      "Name": "Charcoal",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Alternate": true,
+      "Tier": "3-1",
+      "Parts": [
+        {"Part": "Wood", "Amount": "-1"},
+        {"Part": "Coal", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Black Powder",
+      "Machine": "Assembler",
+      "BatchTime": "4",
+      "Tier": "3-1",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-1"},
+        {"Part": "Sulfur", "Amount": "-1"},
+        {"Part": "Black Powder", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Fine Black Powder",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Sulfur", "Amount": "-1"},
+        {"Part": "Compacted Coal", "Amount": "-2"},
+        {"Part": "Black Powder", "Amount": "6"}
+      ]
+    },
+    {
+      "Name": "Coal Generator",
+      "Machine": "Coal-Powered Generator",
+      "BatchTime": "4",
+      "Tier": "3-1",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-3"}
+      ]
+    },
+    {
+      "Name": "Distilled Silica",
+      "Machine": "Blender",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Dissolved Silica", "Amount": "-12"},
+        {"Part": "Limestone", "Amount": "-5"},
+        {"Part": "Water", "Amount": "-10"},
+        {"Part": "Silica", "Amount": "27"},
+        {"Part": "Water", "Amount": "8"}
+      ]
+    },
+    {
+      "Name": "Steel Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "4",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-3"},
+        {"Part": "Coal", "Amount": "-3"},
+        {"Part": "Steel Ingot", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Solid Steel Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-2"},
+        {"Part": "Coal", "Amount": "-2"},
+        {"Part": "Steel Ingot", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Coke Steel Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-15"},
+        {"Part": "Petroleum Coke", "Amount": "-15"},
+        {"Part": "Steel Ingot", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Compacted Steel Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Iron Ore", "Amount": "-2"},
+        {"Part": "Compacted Coal", "Amount": "-1"},
+        {"Part": "Steel Ingot", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Steel Pipe",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Ingot", "Amount": "-3"},
+        {"Part": "Steel Pipe", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Iron Pipe",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Iron Ingot", "Amount": "-20"},
+        {"Part": "Steel Pipe", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Molded Steel Pipe",
+      "Machine": "Foundry",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Ingot", "Amount": "-5"},
+        {"Part": "Concrete", "Amount": "-3"},
+        {"Part": "Steel Pipe", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Automated Miner",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Pipe", "Amount": "-4"},
+        {"Part": "Iron Plate", "Amount": "-4"},
+        {"Part": "Portable Miner", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Steel Beam",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Ingot", "Amount": "-4"},
+        {"Part": "Steel Beam", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Molded Beam",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Steel Ingot", "Amount": "-24"},
+        {"Part": "Concrete", "Amount": "-16"},
+        {"Part": "Steel Beam", "Amount": "9"}
+      ]
+    },
+    {
+      "Name": "Aluminum Beam",
+      "Machine": "Constructor",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Ingot", "Amount": "-3"},
+        {"Part": "Steel Beam", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Nobelisk",
+      "Machine": "Assembler",
+      "BatchTime": "6",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Black Powder", "Amount": "-2"},
+        {"Part": "Steel Pipe", "Amount": "-2"},
+        {"Part": "Nobelisk", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Gas Nobelisk",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Nobelisk", "Amount": "-1"},
+        {"Part": "Biomass", "Amount": "-10"},
+        {"Part": "Gas Nobelisk", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Versatile Framework",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Modular Frame", "Amount": "-1"},
+        {"Part": "Steel Beam", "Amount": "-12"},
+        {"Part": "Versatile Framework", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Flexible Framework",
+      "Machine": "Manufacturer",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Modular Frame", "Amount": "-1"},
+        {"Part": "Steel Beam", "Amount": "-6"},
+        {"Part": "Rubber", "Amount": "-8"},
+        {"Part": "Versatile Framework", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Stator",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "4-3",
+      "Parts": [
+        {"Part": "Steel Pipe", "Amount": "-3"},
+        {"Part": "Wire", "Amount": "-8"},
+        {"Part": "Stator", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Quickwire Stator",
+      "Machine": "Assembler",
+      "BatchTime": "15",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Steel Pipe", "Amount": "-4"},
+        {"Part": "Quickwire", "Amount": "-15"},
+        {"Part": "Stator", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Encased Industrial Beam",
+      "Machine": "Assembler",
+      "BatchTime": "10",
+      "Tier": "4-3",
+      "Parts": [
+        {"Part": "Steel Beam", "Amount": "-3"},
+        {"Part": "Concrete", "Amount": "-6"},
+        {"Part": "Encased Industrial Beam", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Encased Industrial Pipe",
+      "Machine": "Assembler",
+      "BatchTime": "15",
+      "Alternate": true,
+      "Tier": "4-3",
+      "Parts": [
+        {"Part": "Steel Pipe", "Amount": "-6"},
+        {"Part": "Concrete", "Amount": "-5"},
+        {"Part": "Encased Industrial Beam", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Automated Wiring",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "4-3",
+      "Parts": [
+        {"Part": "Stator", "Amount": "-1"},
+        {"Part": "Cable", "Amount": "-20"},
+        {"Part": "Automated Wiring", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Space Elevator Phase 2",
+      "Machine": "Space Elevator",
+      "BatchTime": "60",
+      "Tier": "4-3",
+      "Parts": [
+        {"Part": "Smart Plating", "Amount": "-1000"},
+        {"Part": "Versatile Framework", "Amount": "-1000"},
+        {"Part": "Automated Wiring", "Amount": "-100"}
+      ]
+    },
+    {
+      "Name": "Automated Speed Wiring",
+      "Machine": "Manufacturer",
+      "BatchTime": "32",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Stator", "Amount": "-2"},
+        {"Part": "Wire", "Amount": "-40"},
+        {"Part": "High-Speed Connector", "Amount": "-1"},
+        {"Part": "Automated Wiring", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Motor",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "4-3",
+      "Parts": [
+        {"Part": "Rotor", "Amount": "-2"},
+        {"Part": "Stator", "Amount": "-2"},
+        {"Part": "Motor", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Rigor Motor",
+      "Machine": "Manufacturer",
+      "BatchTime": "48",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Rotor", "Amount": "-3"},
+        {"Part": "Stator", "Amount": "-3"},
+        {"Part": "Crystal Oscillator", "Amount": "-1"},
+        {"Part": "Motor", "Amount": "6"}
+      ]
+    },
+    {
+      "Name": "Electric Motor",
+      "Machine": "Assembler",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Electromagnetic Control Rod", "Amount": "-1"},
+        {"Part": "Rotor", "Amount": "-2"},
+        {"Part": "Motor", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Petroleum Coke",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Heavy Oil Residue", "Amount": "-4"},
+        {"Part": "Petroleum Coke", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Petroleum Coke Generator",
+      "Machine": "Coal-Powered Generator",
+      "BatchTime": "12/5",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Petroleum Coke", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-9/5"}
+      ]
+    },
+    {
+      "Name": "Rifle Ammo",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Copper Sheet", "Amount": "-3"},
+        {"Part": "Smokeless Powder", "Amount": "-2"},
+        {"Part": "Rifle Ammo", "Amount": "15"}
+      ]
+    },
+    {
+      "Name": "Smokeless Powder",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Black Powder", "Amount": "-2"},
+        {"Part": "Heavy Oil Residue", "Amount": "-1"},
+        {"Part": "Smokeless Powder", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Residual Rubber",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Polymer Resin", "Amount": "-4"},
+        {"Part": "Water", "Amount": "-4"},
+        {"Part": "Rubber", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Recycled Rubber",
+      "Machine": "Refinery",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Plastic", "Amount": "-6"},
+        {"Part": "Fuel", "Amount": "-6"},
+        {"Part": "Rubber", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Residual Plastic",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Polymer Resin", "Amount": "-6"},
+        {"Part": "Water", "Amount": "-2"},
+        {"Part": "Plastic", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Recycled Plastic",
+      "Machine": "Refinery",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Rubber", "Amount": "-6"},
+        {"Part": "Fuel", "Amount": "-6"},
+        {"Part": "Plastic", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Circuit Board",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Copper Sheet", "Amount": "-2"},
+        {"Part": "Plastic", "Amount": "-4"},
+        {"Part": "Circuit Board", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Electrode Circuit Board",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Rubber", "Amount": "-4"},
+        {"Part": "Petroleum Coke", "Amount": "-8"},
+        {"Part": "Circuit Board", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Silicon Circuit Board",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Copper Sheet", "Amount": "-11"},
+        {"Part": "Silica", "Amount": "-11"},
+        {"Part": "Circuit Board", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Caterium Circuit Board",
+      "Machine": "Assembler",
+      "BatchTime": "48",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Plastic", "Amount": "-10"},
+        {"Part": "Quickwire", "Amount": "-30"},
+        {"Part": "Circuit Board", "Amount": "7"}
+      ]
+    },
+    {
+      "Name": "Cluster Nobelisk",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Nobelisk", "Amount": "-3"},
+        {"Part": "Smokeless Powder", "Amount": "-4"},
+        {"Part": "Cluster Nobelisk", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Fuel",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-6"},
+        {"Part": "Fuel", "Amount": "4"},
+        {"Part": "Polymer Resin", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Residual Fuel",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Heavy Oil Residue", "Amount": "-6"},
+        {"Part": "Fuel", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Fuel Generator",
+      "Machine": "Fuel-Powered Generator",
+      "BatchTime": "3",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Fuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Diluted Fuel",
+      "Machine": "Blender",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Heavy Oil Residue", "Amount": "-5"},
+        {"Part": "Water", "Amount": "-10"},
+        {"Part": "Fuel", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Plastic",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-3"},
+        {"Part": "Plastic", "Amount": "2"},
+        {"Part": "Heavy Oil Residue", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Rubber",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-3"},
+        {"Part": "Rubber", "Amount": "2"},
+        {"Part": "Heavy Oil Residue", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Heavy Oil Residue",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-3"},
+        {"Part": "Heavy Oil Residue", "Amount": "4"},
+        {"Part": "Polymer Resin", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Polymer Resin",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "5-2",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-6"},
+        {"Part": "Polymer Resin", "Amount": "13"},
+        {"Part": "Heavy Oil Residue", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Compacted Coal Generator",
+      "Machine": "Coal-Powered Generator",
+      "BatchTime": "42/5",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Compacted Coal", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-63/10"}
+      ]
+    },
+    {
+      "Name": "Compacted Coal",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-5"},
+        {"Part": "Sulfur", "Amount": "-5"},
+        {"Part": "Compacted Coal", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Empty Canister",
+      "Machine": "Constructor",
+      "BatchTime": "4",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Plastic", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Unpackage Fuel",
+      "Machine": "Packager",
+      "BatchTime": "2",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Fuel", "Amount": "-2"},
+        {"Part": "Fuel", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Unpackage Heavy Oil Residue",
+      "Machine": "Packager",
+      "BatchTime": "6",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Heavy Oil Residue", "Amount": "-2"},
+        {"Part": "Heavy Oil Residue", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Unpackage Oil",
+      "Machine": "Packager",
+      "BatchTime": "2",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Oil", "Amount": "-2"},
+        {"Part": "Crude Oil", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Unpackage Water",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Water", "Amount": "-2"},
+        {"Part": "Water", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Coated Iron Canister",
+      "Machine": "Assembler",
+      "BatchTime": "4",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Iron Plate", "Amount": "-2"},
+        {"Part": "Copper Sheet", "Amount": "-1"},
+        {"Part": "Empty Canister", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Steel Canister",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Steel Ingot", "Amount": "-4"},
+        {"Part": "Empty Canister", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Packaged Water",
+      "Machine": "Packager",
+      "BatchTime": "2",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Water", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Water", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Empty Fluid Tank",
+      "Machine": "Constructor",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Aluminum Ingot", "Amount": "-1"},
+        {"Part": "Empty Fluid Tank", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Packaged Heavy Oil Residue",
+      "Machine": "Packager",
+      "BatchTime": "4",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Heavy Oil Residue", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Heavy Oil Residue", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Packaged Oil",
+      "Machine": "Packager",
+      "BatchTime": "4",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Oil", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Packaged Fuel",
+      "Machine": "Packager",
+      "BatchTime": "3",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Fuel", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Fuel", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Diluted Packaged Fuel",
+      "Machine": "Refinery",
+      "BatchTime": "2",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Heavy Oil Residue", "Amount": "-1"},
+        {"Part": "Packaged Water", "Amount": "-2"},
+        {"Part": "Packaged Fuel", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Packaged Liquid Biofuel",
+      "Machine": "Packager",
+      "BatchTime": "3",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Liquid Biofuel", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Liquid Biofuel", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Packaged Liquid Biofuel Biomass Burner",
+      "Machine": "Biomass Burner",
+      "BatchTime": "25",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Liquid Biofuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Packaged Turbofuel",
+      "Machine": "Packager",
+      "BatchTime": "6",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Turbofuel", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Turbofuel", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Packaged Rocket Fuel",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Rocket Fuel", "Amount": "-2"},
+        {"Part": "Empty Fluid Tank", "Amount": "-1"},
+        {"Part": "Packaged Rocket Fuel", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Packaged Ionized Fuel",
+      "Machine": "Packager",
+      "BatchTime": "3",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Ionized Fuel", "Amount": "-4"},
+        {"Part": "Empty Fluid Tank", "Amount": "-2"},
+        {"Part": "Packaged Ionized Fuel", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Ionized Fuel",
+      "Machine": "Refinery",
+      "BatchTime": "24",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Rocket Fuel", "Amount": "-16"},
+        {"Part": "Power Shard", "Amount": "-1"},
+        {"Part": "Ionized Fuel", "Amount": "16"},
+        {"Part": "Compacted Coal", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Unpackage Ionized Fuel",
+      "Machine": "Packager",
+      "BatchTime": "3",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Ionized Fuel", "Amount": "-2"},
+        {"Part": "Ionized Fuel", "Amount": "4"},
+        {"Part": "Empty Fluid Tank", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Ionized Fuel Generator",
+      "Machine": "Fuel-Powered Generator",
+      "BatchTime": "20",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Ionized Fuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Dark-Ion Fuel",
+      "Machine": "Converter",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "9-2",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Packaged Rocket Fuel", "Amount": "-12"},
+        {"Part": "Dark Matter Crystal", "Amount": "-4"},
+        {"Part": "Ionized Fuel", "Amount": "10"},
+        {"Part": "Compacted Coal", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Liquid Biofuel",
+      "Machine": "Refinery",
+      "BatchTime": "4",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Solid Biofuel", "Amount": "-6"},
+        {"Part": "Water", "Amount": "-3"},
+        {"Part": "Liquid Biofuel", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Unpackage Liquid Biofuel",
+      "Machine": "Packager",
+      "BatchTime": "2",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Liquid Biofuel", "Amount": "-2"},
+        {"Part": "Liquid Biofuel", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Liquid Biofuel Generator",
+      "Machine": "Fuel-Powered Generator",
+      "BatchTime": "3",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Liquid Biofuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Unpackage Rocket Fuel",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Rocket Fuel", "Amount": "-1"},
+        {"Part": "Rocket Fuel", "Amount": "2"},
+        {"Part": "Empty Fluid Tank", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Rocket Fuel Generator",
+      "Machine": "Fuel-Powered Generator",
+      "BatchTime": "72/5",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Rocket Fuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Rocket Fuel",
+      "Machine": "Blender",
+      "BatchTime": "6",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Turbofuel", "Amount": "-6"},
+        {"Part": "Nitric Acid", "Amount": "-1"},
+        {"Part": "Rocket Fuel", "Amount": "10"},
+        {"Part": "Compacted Coal", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Nitro Rocket Fuel",
+      "Machine": "Blender",
+      "BatchTime": "12/5",
+      "Alternate": true,
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Fuel", "Amount": "-4"},
+        {"Part": "Nitrogen Gas", "Amount": "-3"},
+        {"Part": "Sulfur", "Amount": "-4"},
+        {"Part": "Coal", "Amount": "-2"},
+        {"Part": "Rocket Fuel", "Amount": "6"},
+        {"Part": "Compacted Coal", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Turbofuel",
+      "Machine": "Refinery",
+      "BatchTime": "16",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Fuel", "Amount": "-6"},
+        {"Part": "Compacted Coal", "Amount": "-4"},
+        {"Part": "Turbofuel", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Unpackage Turbofuel",
+      "Machine": "Packager",
+      "BatchTime": "6",
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Packaged Turbofuel", "Amount": "-2"},
+        {"Part": "Turbofuel", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Turbofuel Generator",
+      "Machine": "Fuel-Powered Generator",
+      "BatchTime": "8",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Turbofuel", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Turbo Heavy Fuel",
+      "Machine": "Refinery",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-4",
+      "Parts": [
+        {"Part": "Heavy Oil Residue", "Amount": "-5"},
+        {"Part": "Compacted Coal", "Amount": "-4"},
+        {"Part": "Turbofuel", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Turbo Blend Fuel",
+      "Machine": "Blender",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Fuel", "Amount": "-2"},
+        {"Part": "Heavy Oil Residue", "Amount": "-4"},
+        {"Part": "Sulfur", "Amount": "-3"},
+        {"Part": "Petroleum Coke", "Amount": "-3"},
+        {"Part": "Turbofuel", "Amount": "6"}
+      ]
+    },
+    {
+      "Name": "Quickwire",
+      "Machine": "Constructor",
+      "BatchTime": "5",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Caterium Ingot", "Amount": "-1"},
+        {"Part": "Quickwire", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Fused Quickwire",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Caterium Ingot", "Amount": "-1"},
+        {"Part": "Copper Ingot", "Amount": "-5"},
+        {"Part": "Quickwire", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Caterium Ingot",
+      "Machine": "Smelter",
+      "BatchTime": "4",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Caterium Ore", "Amount": "-3"},
+        {"Part": "Caterium Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Pure Caterium Ingot",
+      "Machine": "Refinery",
+      "BatchTime": "5",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Caterium Ore", "Amount": "-2"},
+        {"Part": "Water", "Amount": "-2"},
+        {"Part": "Caterium Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Tempered Caterium Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Caterium Ore", "Amount": "-6"},
+        {"Part": "Petroleum Coke", "Amount": "-2"},
+        {"Part": "Caterium Ingot", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Leached Caterium Ingot",
+      "Machine": "Refinery",
+      "BatchTime": "10",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Caterium Ore", "Amount": "-9"},
+        {"Part": "Sulfuric Acid", "Amount": "-5"},
+        {"Part": "Caterium Ingot", "Amount": "6"}
+      ]
+    },
+    {
+      "Name": "Stun Rebar",
+      "Machine": "Assembler",
+      "BatchTime": "6",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Iron Rebar", "Amount": "-1"},
+        {"Part": "Quickwire", "Amount": "-5"},
+        {"Part": "Stun Rebar", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "AI Limiter",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Copper Sheet", "Amount": "-5"},
+        {"Part": "Quickwire", "Amount": "-20"},
+        {"Part": "AI Limiter", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Plastic AI Limiter",
+      "Machine": "Assembler",
+      "BatchTime": "15",
+      "Alternate": true,
+      "Tier": "5-5",
+      "Parts": [
+        {"Part": "Quickwire", "Amount": "-30"},
+        {"Part": "Plastic", "Amount": "-7"},
+        {"Part": "AI Limiter", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Explosive Rebar",
+      "Machine": "Manufacturer",
+      "BatchTime": "12",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Iron Rebar", "Amount": "-2"},
+        {"Part": "Smokeless Powder", "Amount": "-2"},
+        {"Part": "Steel Pipe", "Amount": "-2"},
+        {"Part": "Explosive Rebar", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Gas Filter",
+      "Machine": "Manufacturer",
+      "BatchTime": "8",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Fabric", "Amount": "-2"},
+        {"Part": "Coal", "Amount": "-4"},
+        {"Part": "Iron Plate", "Amount": "-2"},
+        {"Part": "Gas Filter", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Homing Rifle Ammo",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Rifle Ammo", "Amount": "-20"},
+        {"Part": "High-Speed Connector", "Amount": "-1"},
+        {"Part": "Homing Rifle Ammo", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Pulse Nobelisk",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Nobelisk", "Amount": "-5"},
+        {"Part": "Crystal Oscillator", "Amount": "-1"},
+        {"Part": "Pulse Nobelisk", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Crystal Oscillator",
+      "Machine": "Manufacturer",
+      "BatchTime": "120",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Quartz Crystal", "Amount": "-36"},
+        {"Part": "Cable", "Amount": "-28"},
+        {"Part": "Reinforced Iron Plate", "Amount": "-5"},
+        {"Part": "Crystal Oscillator", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Insulated Crystal Oscillator",
+      "Machine": "Manufacturer",
+      "BatchTime": "32",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Quartz Crystal", "Amount": "-10"},
+        {"Part": "Rubber", "Amount": "-7"},
+        {"Part": "AI Limiter", "Amount": "-1"},
+        {"Part": "Crystal Oscillator", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "High-Speed Connector",
+      "Machine": "Manufacturer",
+      "BatchTime": "16",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Quickwire", "Amount": "-56"},
+        {"Part": "Cable", "Amount": "-10"},
+        {"Part": "Circuit Board", "Amount": "-1"},
+        {"Part": "High-Speed Connector", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Silicon High-Speed Connector",
+      "Machine": "Manufacturer",
+      "BatchTime": "40",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Quickwire", "Amount": "-60"},
+        {"Part": "Silica", "Amount": "-25"},
+        {"Part": "Circuit Board", "Amount": "-2"},
+        {"Part": "High-Speed Connector", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Computer",
+      "Machine": "Manufacturer",
+      "BatchTime": "24",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Circuit Board", "Amount": "-4"},
+        {"Part": "Cable", "Amount": "-8"},
+        {"Part": "Plastic", "Amount": "-16"},
+        {"Part": "Computer", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Caterium Computer",
+      "Machine": "Manufacturer",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Circuit Board", "Amount": "-4"},
+        {"Part": "Quickwire", "Amount": "-14"},
+        {"Part": "Rubber", "Amount": "-6"},
+        {"Part": "Computer", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Crystal Computer",
+      "Machine": "Assembler",
+      "BatchTime": "36",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Circuit Board", "Amount": "-3"},
+        {"Part": "Crystal Oscillator", "Amount": "-1"},
+        {"Part": "Computer", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Modular Engine",
+      "Machine": "Manufacturer",
+      "BatchTime": "60",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Motor", "Amount": "-2"},
+        {"Part": "Rubber", "Amount": "-15"},
+        {"Part": "Smart Plating", "Amount": "-2"},
+        {"Part": "Modular Engine", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Heavy Modular Frame",
+      "Machine": "Manufacturer",
+      "BatchTime": "30",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Modular Frame", "Amount": "-5"},
+        {"Part": "Steel Pipe", "Amount": "-20"},
+        {"Part": "Encased Industrial Beam", "Amount": "-5"},
+        {"Part": "Screw", "Amount": "-120"},
+        {"Part": "Heavy Modular Frame", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Heavy Encased Frame",
+      "Machine": "Manufacturer",
+      "BatchTime": "64",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Modular Frame", "Amount": "-8"},
+        {"Part": "Encased Industrial Beam", "Amount": "-10"},
+        {"Part": "Steel Pipe", "Amount": "-36"},
+        {"Part": "Concrete", "Amount": "-22"},
+        {"Part": "Heavy Modular Frame", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Heavy Flexible Frame",
+      "Machine": "Manufacturer",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Modular Frame", "Amount": "-5"},
+        {"Part": "Encased Industrial Beam", "Amount": "-3"},
+        {"Part": "Rubber", "Amount": "-20"},
+        {"Part": "Screw", "Amount": "-104"},
+        {"Part": "Heavy Modular Frame", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Adaptive Control Unit",
+      "Machine": "Manufacturer",
+      "BatchTime": "60",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Automated Wiring", "Amount": "-5"},
+        {"Part": "Circuit Board", "Amount": "-5"},
+        {"Part": "Heavy Modular Frame", "Amount": "-1"},
+        {"Part": "Computer", "Amount": "-2"},
+        {"Part": "Adaptive Control Unit", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Space Elevator Phase 3",
+      "Machine": "Space Elevator",
+      "BatchTime": "60",
+      "Tier": "6-1",
+      "Parts": [
+        {"Part": "Versatile Framework", "Amount": "-2500"},
+        {"Part": "Modular Engine", "Amount": "-500"},
+        {"Part": "Adaptive Control Unit", "Amount": "-100"}
+      ]
+    },
+    {
+      "Name": "Geothermal Generator",
+      "Machine": "Geothermal Generator",
+      "BatchTime": "0",
+      "Tier": "6-1",
+      "Parts": []
+    },
+    {
+      "Name": "Bauxite (Caterium)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Caterium Ore", "Amount": "-15"},
+        {"Part": "Bauxite", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Bauxite (Copper)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Copper Ore", "Amount": "-18"},
+        {"Part": "Bauxite", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Aluminum Scrap",
+      "Machine": "Refinery",
+      "BatchTime": "1",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Alumina Solution", "Amount": "-4"},
+        {"Part": "Coal", "Amount": "-2"},
+        {"Part": "Aluminum Scrap", "Amount": "6"},
+        {"Part": "Water", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Electrode Aluminum Scrap",
+      "Machine": "Refinery",
+      "BatchTime": "4",
+      "Alternate": true,
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Alumina Solution", "Amount": "-12"},
+        {"Part": "Petroleum Coke", "Amount": "-4"},
+        {"Part": "Aluminum Scrap", "Amount": "20"},
+        {"Part": "Water", "Amount": "7"}
+      ]
+    },
+    {
+      "Name": "Instant Scrap",
+      "Machine": "Blender",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Bauxite", "Amount": "-15"},
+        {"Part": "Coal", "Amount": "-10"},
+        {"Part": "Sulfuric Acid", "Amount": "-5"},
+        {"Part": "Water", "Amount": "-6"},
+        {"Part": "Aluminum Scrap", "Amount": "30"},
+        {"Part": "Water", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Packaged Turbo Rifle Ammo",
+      "Machine": "Manufacturer",
+      "BatchTime": "12",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Rifle Ammo", "Amount": "-25"},
+        {"Part": "Aluminum Casing", "Amount": "-3"},
+        {"Part": "Packaged Turbofuel", "Amount": "-3"},
+        {"Part": "Turbo Rifle Ammo", "Amount": "50"}
+      ]
+    },
+    {
+      "Name": "Turbo Rifle Ammo",
+      "Machine": "Blender",
+      "BatchTime": "12",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Rifle Ammo", "Amount": "-25"},
+        {"Part": "Aluminum Casing", "Amount": "-3"},
+        {"Part": "Turbofuel", "Amount": "-3"},
+        {"Part": "Turbo Rifle Ammo", "Amount": "50"}
+      ]
+    },
+    {
+      "Name": "Aluminum Ingot",
+      "Machine": "Foundry",
+      "BatchTime": "4",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Scrap", "Amount": "-6"},
+        {"Part": "Silica", "Amount": "-5"},
+        {"Part": "Aluminum Ingot", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Pure Aluminum Ingot",
+      "Machine": "Smelter",
+      "BatchTime": "2",
+      "Alternate": true,
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Scrap", "Amount": "-2"},
+        {"Part": "Aluminum Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Packaged Alumina Solution",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Alumina Solution", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Alumina Solution", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Alclad Aluminum Sheet",
+      "Machine": "Assembler",
+      "BatchTime": "6",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Ingot", "Amount": "-3"},
+        {"Part": "Copper Ingot", "Amount": "-1"},
+        {"Part": "Alclad Aluminum Sheet", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Aluminum Casing",
+      "Machine": "Constructor",
+      "BatchTime": "2",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Ingot", "Amount": "-3"},
+        {"Part": "Aluminum Casing", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Alclad Casing",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Aluminum Ingot", "Amount": "-20"},
+        {"Part": "Copper Ingot", "Amount": "-10"},
+        {"Part": "Aluminum Casing", "Amount": "15"}
+      ]
+    },
+    {
+      "Name": "Alumina Solution",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Bauxite", "Amount": "-12"},
+        {"Part": "Water", "Amount": "-18"},
+        {"Part": "Alumina Solution", "Amount": "12"},
+        {"Part": "Silica", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Unpackage Alumina Solution",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Packaged Alumina Solution", "Amount": "-2"},
+        {"Part": "Alumina Solution", "Amount": "2"},
+        {"Part": "Empty Canister", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Sloppy Alumina",
+      "Machine": "Refinery",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "7-1",
+      "Parts": [
+        {"Part": "Bauxite", "Amount": "-10"},
+        {"Part": "Water", "Amount": "-10"},
+        {"Part": "Alumina Solution", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Iodine-Infused Filter",
+      "Machine": "Manufacturer",
+      "BatchTime": "16",
+      "Tier": "7-4",
+      "Parts": [
+        {"Part": "Gas Filter", "Amount": "-1"},
+        {"Part": "Quickwire", "Amount": "-8"},
+        {"Part": "Aluminum Casing", "Amount": "-1"},
+        {"Part": "Iodine-Infused Filter", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Packaged Sulfuric Acid",
+      "Machine": "Packager",
+      "BatchTime": "3",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Sulfuric Acid", "Amount": "-2"},
+        {"Part": "Empty Canister", "Amount": "-2"},
+        {"Part": "Packaged Sulfuric Acid", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Battery",
+      "Machine": "Blender",
+      "BatchTime": "3",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Sulfuric Acid", "Amount": "-5/2"},
+        {"Part": "Alumina Solution", "Amount": "-2"},
+        {"Part": "Aluminum Casing", "Amount": "-1"},
+        {"Part": "Battery", "Amount": "1"},
+        {"Part": "Water", "Amount": "3/2"}
+      ]
+    },
+    {
+      "Name": "Classic Battery",
+      "Machine": "Manufacturer",
+      "BatchTime": "8",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Sulfur", "Amount": "-6"},
+        {"Part": "Alclad Aluminum Sheet", "Amount": "-7"},
+        {"Part": "Plastic", "Amount": "-8"},
+        {"Part": "Wire", "Amount": "-12"},
+        {"Part": "Battery", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Radio Control Unit",
+      "Machine": "Manufacturer",
+      "BatchTime": "48",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Aluminum Casing", "Amount": "-32"},
+        {"Part": "Crystal Oscillator", "Amount": "-1"},
+        {"Part": "Computer", "Amount": "-2"},
+        {"Part": "Radio Control Unit", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Radio Control System",
+      "Machine": "Manufacturer",
+      "BatchTime": "40",
+      "Alternate": true,
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Crystal Oscillator", "Amount": "-1"},
+        {"Part": "Circuit Board", "Amount": "-10"},
+        {"Part": "Aluminum Casing", "Amount": "-60"},
+        {"Part": "Rubber", "Amount": "-30"},
+        {"Part": "Radio Control Unit", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Radio Connection Unit",
+      "Machine": "Manufacturer",
+      "BatchTime": "16",
+      "Alternate": true,
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Heat Sink", "Amount": "-4"},
+        {"Part": "High-Speed Connector", "Amount": "-2"},
+        {"Part": "Quartz Crystal", "Amount": "-12"},
+        {"Part": "Radio Control Unit", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Supercomputer",
+      "Machine": "Manufacturer",
+      "BatchTime": "32",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Computer", "Amount": "-4"},
+        {"Part": "AI Limiter", "Amount": "-2"},
+        {"Part": "High-Speed Connector", "Amount": "-3"},
+        {"Part": "Plastic", "Amount": "-28"},
+        {"Part": "Supercomputer", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Super-State Computer",
+      "Machine": "Manufacturer",
+      "BatchTime": "25",
+      "Alternate": true,
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Computer", "Amount": "-3"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-1"},
+        {"Part": "Battery", "Amount": "-10"},
+        {"Part": "Wire", "Amount": "-25"},
+        {"Part": "Supercomputer", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "OC Supercomputer",
+      "Machine": "Assembler",
+      "BatchTime": "20",
+      "Alternate": true,
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Radio Control Unit", "Amount": "-2"},
+        {"Part": "Cooling System", "Amount": "-2"},
+        {"Part": "Supercomputer", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Assembly Director System",
+      "Machine": "Assembler",
+      "BatchTime": "80",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Adaptive Control Unit", "Amount": "-2"},
+        {"Part": "Supercomputer", "Amount": "-1"},
+        {"Part": "Assembly Director System", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Sulfuric Acid",
+      "Machine": "Refinery",
+      "BatchTime": "6",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Sulfur", "Amount": "-5"},
+        {"Part": "Water", "Amount": "-5"},
+        {"Part": "Sulfuric Acid", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Unpackage Sulfuric Acid",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "7-5",
+      "Parts": [
+        {"Part": "Packaged Sulfuric Acid", "Amount": "-1"},
+        {"Part": "Sulfuric Acid", "Amount": "1"},
+        {"Part": "Empty Canister", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Uranium Ore (Bauxite)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Bauxite", "Amount": "-48"},
+        {"Part": "Uranium", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Encased Uranium Cell",
+      "Machine": "Blender",
+      "BatchTime": "12",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Uranium", "Amount": "-10"},
+        {"Part": "Concrete", "Amount": "-3"},
+        {"Part": "Sulfuric Acid", "Amount": "-8"},
+        {"Part": "Encased Uranium Cell", "Amount": "5"},
+        {"Part": "Sulfuric Acid", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Infused Uranium Cell",
+      "Machine": "Manufacturer",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Uranium", "Amount": "-5"},
+        {"Part": "Silica", "Amount": "-3"},
+        {"Part": "Sulfur", "Amount": "-5"},
+        {"Part": "Quickwire", "Amount": "-15"},
+        {"Part": "Encased Uranium Cell", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Electromagnetic Control Rod",
+      "Machine": "Assembler",
+      "BatchTime": "30",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Stator", "Amount": "-3"},
+        {"Part": "AI Limiter", "Amount": "-2"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Electromagnetic Connection Rod",
+      "Machine": "Assembler",
+      "BatchTime": "15",
+      "Alternate": true,
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Stator", "Amount": "-2"},
+        {"Part": "High-Speed Connector", "Amount": "-1"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Magnetic Field Generator",
+      "Machine": "Assembler",
+      "BatchTime": "120",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Versatile Framework", "Amount": "-5"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-2"},
+        {"Part": "Magnetic Field Generator", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Nuke Nobelisk",
+      "Machine": "Manufacturer",
+      "BatchTime": "120",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Nobelisk", "Amount": "-5"},
+        {"Part": "Encased Uranium Cell", "Amount": "-20"},
+        {"Part": "Smokeless Powder", "Amount": "-10"},
+        {"Part": "AI Limiter", "Amount": "-6"},
+        {"Part": "Nuke Nobelisk", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Uranium Fuel Rod",
+      "Machine": "Manufacturer",
+      "BatchTime": "150",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Encased Uranium Cell", "Amount": "-50"},
+        {"Part": "Encased Industrial Beam", "Amount": "-3"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-5"},
+        {"Part": "Uranium Fuel Rod", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Uranium Fuel Unit",
+      "Machine": "Manufacturer",
+      "BatchTime": "300",
+      "Alternate": true,
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Encased Uranium Cell", "Amount": "-100"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-10"},
+        {"Part": "Crystal Oscillator", "Amount": "-3"},
+        {"Part": "Rotor", "Amount": "-10"},
+        {"Part": "Uranium Fuel Rod", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Uranium Nuclear Power Plant",
+      "Machine": "Nuclear Power Plant",
+      "BatchTime": "300",
+      "Tier": "8-2",
+      "Parts": [
+        {"Part": "Uranium Fuel Rod", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-1200"},
+        {"Part": "Uranium Waste", "Amount": "50"}
+      ]
+    },
+    {
+      "Name": "Packaged Nitrogen Gas",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Nitrogen Gas", "Amount": "-4"},
+        {"Part": "Empty Fluid Tank", "Amount": "-1"},
+        {"Part": "Packaged Nitrogen Gas", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Heat Sink",
+      "Machine": "Assembler",
+      "BatchTime": "8",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Alclad Aluminum Sheet", "Amount": "-5"},
+        {"Part": "Copper Sheet", "Amount": "-3"},
+        {"Part": "Heat Sink", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Heat Exchanger",
+      "Machine": "Assembler",
+      "BatchTime": "6",
+      "Alternate": true,
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Aluminum Casing", "Amount": "-3"},
+        {"Part": "Rubber", "Amount": "-3"},
+        {"Part": "Heat Sink", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Cooling System",
+      "Machine": "Blender",
+      "BatchTime": "10",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Heat Sink", "Amount": "-2"},
+        {"Part": "Rubber", "Amount": "-2"},
+        {"Part": "Water", "Amount": "-5"},
+        {"Part": "Nitrogen Gas", "Amount": "-25"},
+        {"Part": "Cooling System", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Cooling Device",
+      "Machine": "Blender",
+      "BatchTime": "24",
+      "Alternate": true,
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Heat Sink", "Amount": "-4"},
+        {"Part": "Motor", "Amount": "-1"},
+        {"Part": "Nitrogen Gas", "Amount": "-24"},
+        {"Part": "Cooling System", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Fused Modular Frame",
+      "Machine": "Blender",
+      "BatchTime": "40",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Heavy Modular Frame", "Amount": "-1"},
+        {"Part": "Aluminum Casing", "Amount": "-50"},
+        {"Part": "Nitrogen Gas", "Amount": "-25"},
+        {"Part": "Fused Modular Frame", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Heat-Fused Frame",
+      "Machine": "Blender",
+      "BatchTime": "20",
+      "Alternate": true,
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Heavy Modular Frame", "Amount": "-1"},
+        {"Part": "Aluminum Ingot", "Amount": "-50"},
+        {"Part": "Nitric Acid", "Amount": "-8"},
+        {"Part": "Fuel", "Amount": "-10"},
+        {"Part": "Fused Modular Frame", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Unpackage Nitrogen Gas",
+      "Machine": "Packager",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": [
+        {"Part": "Packaged Nitrogen Gas", "Amount": "-1"},
+        {"Part": "Nitrogen Gas", "Amount": "4"},
+        {"Part": "Empty Fluid Tank", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Nitrogen Gas (Bauxite)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Bauxite", "Amount": "-10"},
+        {"Part": "Nitrogen Gas", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Nitrogen Gas (Caterium)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-1"},
+        {"Part": "Caterium Ore", "Amount": "-12"},
+        {"Part": "Nitrogen Gas", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Resource Well Pressurizer",
+      "Machine": "Resource Well Pressurizer",
+      "BatchTime": "1",
+      "Tier": "8-3",
+      "Parts": []
+    },
+    {
+      "Name": "Turbo Motor",
+      "Machine": "Manufacturer",
+      "BatchTime": "32",
+      "Tier": "8-4",
+      "Parts": [
+        {"Part": "Cooling System", "Amount": "-4"},
+        {"Part": "Radio Control Unit", "Amount": "-2"},
+        {"Part": "Motor", "Amount": "-4"},
+        {"Part": "Rubber", "Amount": "-24"},
+        {"Part": "Turbo Motor", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Turbo Electric Motor",
+      "Machine": "Manufacturer",
+      "BatchTime": "64",
+      "Alternate": true,
+      "Tier": "8-4",
+      "Parts": [
+        {"Part": "Motor", "Amount": "-7"},
+        {"Part": "Radio Control Unit", "Amount": "-9"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-5"},
+        {"Part": "Rotor", "Amount": "-7"},
+        {"Part": "Turbo Motor", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Turbo Pressure Motor",
+      "Machine": "Manufacturer",
+      "BatchTime": "32",
+      "Alternate": true,
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Motor", "Amount": "-4"},
+        {"Part": "Pressure Conversion Cube", "Amount": "-1"},
+        {"Part": "Packaged Nitrogen Gas", "Amount": "-24"},
+        {"Part": "Stator", "Amount": "-8"},
+        {"Part": "Turbo Motor", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Thermal Propulsion Rocket",
+      "Machine": "Manufacturer",
+      "BatchTime": "120",
+      "Tier": "8-4",
+      "Parts": [
+        {"Part": "Modular Engine", "Amount": "-5"},
+        {"Part": "Turbo Motor", "Amount": "-2"},
+        {"Part": "Cooling System", "Amount": "-6"},
+        {"Part": "Fused Modular Frame", "Amount": "-2"},
+        {"Part": "Thermal Propulsion Rocket", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Copper Powder",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Copper Ingot", "Amount": "-30"},
+        {"Part": "Copper Powder", "Amount": "5"}
+      ]
+    },
+    {
+      "Name": "Packaged Nitric Acid",
+      "Machine": "Packager",
+      "BatchTime": "2",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Nitric Acid", "Amount": "-1"},
+        {"Part": "Empty Fluid Tank", "Amount": "-1"},
+        {"Part": "Packaged Nitric Acid", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Plutonium Fuel Rod",
+      "Machine": "Manufacturer",
+      "BatchTime": "240",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Encased Plutonium Cell", "Amount": "-30"},
+        {"Part": "Steel Beam", "Amount": "-18"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-6"},
+        {"Part": "Heat Sink", "Amount": "-10"},
+        {"Part": "Plutonium Fuel Rod", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Plutonium Fuel Unit",
+      "Machine": "Assembler",
+      "BatchTime": "120",
+      "Alternate": true,
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Encased Plutonium Cell", "Amount": "-20"},
+        {"Part": "Pressure Conversion Cube", "Amount": "-1"},
+        {"Part": "Plutonium Fuel Rod", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Pressure Conversion Cube",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Fused Modular Frame", "Amount": "-1"},
+        {"Part": "Radio Control Unit", "Amount": "-2"},
+        {"Part": "Pressure Conversion Cube", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Nuclear Pasta",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "120",
+      "Tier": "8-5",
+      "MinPower": "-1500",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Copper Powder", "Amount": "-200"},
+        {"Part": "Pressure Conversion Cube", "Amount": "-1"},
+        {"Part": "Nuclear Pasta", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Space Elevator Phase 4",
+      "Machine": "Space Elevator",
+      "BatchTime": "60",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Assembly Director System", "Amount": "-500"},
+        {"Part": "Magnetic Field Generator", "Amount": "-500"},
+        {"Part": "Nuclear Pasta", "Amount": "-100"},
+        {"Part": "Thermal Propulsion Rocket", "Amount": "-250"}
+      ]
+    },
+    {
+      "Name": "Quartz Purification",
+      "Machine": "Refinery",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Raw Quartz", "Amount": "-24"},
+        {"Part": "Nitric Acid", "Amount": "-2"},
+        {"Part": "Quartz Crystal", "Amount": "15"},
+        {"Part": "Dissolved Silica", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Encased Plutonium Cell",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Plutonium Pellet", "Amount": "-2"},
+        {"Part": "Concrete", "Amount": "-4"},
+        {"Part": "Encased Plutonium Cell", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Instant Plutonium Cell",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "120",
+      "Alternate": true,
+      "Tier": "8-5",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Non-Fissile Uranium", "Amount": "-150"},
+        {"Part": "Aluminum Casing", "Amount": "-20"},
+        {"Part": "Encased Plutonium Cell", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Nitric Acid",
+      "Machine": "Blender",
+      "BatchTime": "6",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Nitrogen Gas", "Amount": "-12"},
+        {"Part": "Water", "Amount": "-3"},
+        {"Part": "Iron Plate", "Amount": "-1"},
+        {"Part": "Nitric Acid", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Unpackage Nitric Acid",
+      "Machine": "Packager",
+      "BatchTime": "3",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Packaged Nitric Acid", "Amount": "-1"},
+        {"Part": "Nitric Acid", "Amount": "1"},
+        {"Part": "Empty Fluid Tank", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Non-Fissile Uranium",
+      "Machine": "Blender",
+      "BatchTime": "24",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Uranium Waste", "Amount": "-15"},
+        {"Part": "Silica", "Amount": "-10"},
+        {"Part": "Nitric Acid", "Amount": "-6"},
+        {"Part": "Sulfuric Acid", "Amount": "-6"},
+        {"Part": "Non-Fissile Uranium", "Amount": "20"},
+        {"Part": "Water", "Amount": "6"}
+      ]
+    },
+    {
+      "Name": "Fertile Uranium",
+      "Machine": "Blender",
+      "BatchTime": "12",
+      "Alternate": true,
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Uranium", "Amount": "-5"},
+        {"Part": "Uranium Waste", "Amount": "-5"},
+        {"Part": "Nitric Acid", "Amount": "-3"},
+        {"Part": "Sulfuric Acid", "Amount": "-5"},
+        {"Part": "Non-Fissile Uranium", "Amount": "20"},
+        {"Part": "Water", "Amount": "8"}
+      ]
+    },
+    {
+      "Name": "Plutonium Pellet",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "60",
+      "Tier": "8-5",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Non-Fissile Uranium", "Amount": "-100"},
+        {"Part": "Uranium Waste", "Amount": "-25"},
+        {"Part": "Plutonium Pellet", "Amount": "30"}
+      ]
+    },
+    {
+      "Name": "Plutonium Nuclear Power Plant",
+      "Machine": "Nuclear Power Plant",
+      "BatchTime": "600",
+      "Tier": "8-5",
+      "Parts": [
+        {"Part": "Plutonium Fuel Rod", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-2400"},
+        {"Part": "Plutonium Waste", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Reanimated SAM",
+      "Machine": "Constructor",
+      "BatchTime": "2",
+      "Tier": "9-1",
+      "Parts": [
+        {"Part": "SAM", "Amount": "-4"},
+        {"Part": "Reanimated SAM", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Diamonds",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "2",
+      "Tier": "9-1",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-20"},
+        {"Part": "Diamonds", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Cloudy Diamonds",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "9-1",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-12"},
+        {"Part": "Limestone", "Amount": "-24"},
+        {"Part": "Diamonds", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Oil-Based Diamonds",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "9-1",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Crude Oil", "Amount": "-10"},
+        {"Part": "Diamonds", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "Petroleum Diamonds",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "2",
+      "Alternate": true,
+      "Tier": "9-1",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Petroleum Coke", "Amount": "-24"},
+        {"Part": "Diamonds", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Pink Diamonds",
+      "Machine": "Converter",
+      "BatchTime": "4",
+      "Alternate": true,
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-8"},
+        {"Part": "Quartz Crystal", "Amount": "-3"},
+        {"Part": "Diamonds", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Turbo Diamonds",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "9-1",
+      "MinPower": "-750",
+      "AveragePower": "-500",
+      "Parts": [
+        {"Part": "Coal", "Amount": "-30"},
+        {"Part": "Packaged Turbofuel", "Amount": "-2"},
+        {"Part": "Diamonds", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Time Crystal",
+      "Machine": "Converter",
+      "BatchTime": "10",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Diamonds", "Amount": "-2"},
+        {"Part": "Time Crystal", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Ficsite Trigon",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "Parts": [
+        {"Part": "Ficsite Ingot", "Amount": "-1"},
+        {"Part": "Ficsite Trigon", "Amount": "3"}
+      ]
+    },
+    {
+      "Name": "Ficsite Ingot (Aluminum)",
+      "Machine": "Converter",
+      "BatchTime": "2",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-2"},
+        {"Part": "Aluminum Ingot", "Amount": "-4"},
+        {"Part": "Ficsite Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Ficsite Ingot (Caterium)",
+      "Machine": "Converter",
+      "BatchTime": "4",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-3"},
+        {"Part": "Caterium Ingot", "Amount": "-4"},
+        {"Part": "Ficsite Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Ficsite Ingot (Iron)",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-4"},
+        {"Part": "Iron Ingot", "Amount": "-24"},
+        {"Part": "Ficsite Ingot", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "SAM Fluctuator",
+      "Machine": "Manufacturer",
+      "BatchTime": "6",
+      "Tier": "9-1",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-6"},
+        {"Part": "Wire", "Amount": "-5"},
+        {"Part": "Steel Pipe", "Amount": "-3"},
+        {"Part": "SAM Fluctuator", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Biochemical Sculptor",
+      "Machine": "Blender",
+      "BatchTime": "120",
+      "Tier": "9-1",
+      "Parts": [
+        {"Part": "Assembly Director System", "Amount": "-1"},
+        {"Part": "Ficsite Trigon", "Amount": "-80"},
+        {"Part": "Water", "Amount": "-20"},
+        {"Part": "Biochemical Sculptor", "Amount": "4"}
+      ]
+    },
+    {
+      "Name": "Alien Power Augmenter",
+      "Machine": "Alien Power Augmenter",
+      "BatchTime": "12",
+      "Tier": "9-2",
+      "Parts": [
+        {"Part": "Alien Power Matrix", "Amount": "-1"}
+      ]
+    },
+    {
+      "Name": "Dark Matter Crystal",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "2",
+      "Tier": "9-2",
+      "MinPower": "-1500",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Diamonds", "Amount": "-1"},
+        {"Part": "Dark Matter Residue", "Amount": "-5"},
+        {"Part": "Dark Matter Crystal", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Dark Matter Crystallization",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "3",
+      "Alternate": true,
+      "Tier": "9-2",
+      "MinPower": "-1500",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Dark Matter Residue", "Amount": "-10"},
+        {"Part": "Dark Matter Crystal", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Dark Matter Trap",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "2",
+      "Alternate": true,
+      "Tier": "9-2",
+      "MinPower": "-1500",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Time Crystal", "Amount": "-1"},
+        {"Part": "Dark Matter Residue", "Amount": "-5"},
+        {"Part": "Dark Matter Crystal", "Amount": "2"}
+      ]
+    },
+    {
+      "Name": "AI Expansion Server",
+      "Machine": "Quantum Encoder",
+      "BatchTime": "15",
+      "Tier": "9-2",
+      "MinPower": "-2000",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Magnetic Field Generator", "Amount": "-1"},
+        {"Part": "Neural-Quantum Processor", "Amount": "-1"},
+        {"Part": "Superposition Oscillator", "Amount": "-1"},
+        {"Part": "Excited Photonic Matter", "Amount": "-25"},
+        {"Part": "AI Expansion Server", "Amount": "1"},
+        {"Part": "Dark Matter Residue", "Amount": "25"}
+      ]
+    },
+    {
+      "Name": "Alien Power Matrix",
+      "Machine": "Quantum Encoder",
+      "BatchTime": "24",
+      "Tier": "9-2",
+      "MinPower": "-2000",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "SAM Fluctuator", "Amount": "-5"},
+        {"Part": "Power Shard", "Amount": "-3"},
+        {"Part": "Superposition Oscillator", "Amount": "-3"},
+        {"Part": "Excited Photonic Matter", "Amount": "-24"},
+        {"Part": "Alien Power Matrix", "Amount": "1"},
+        {"Part": "Dark Matter Residue", "Amount": "24"}
+      ]
+    },
+    {
+      "Name": "Dark Matter Residue",
+      "Machine": "Converter",
+      "BatchTime": "6",
+      "Tier": "9-2",
+      "MinPower": "-400",
+      "AveragePower": "-250",
+      "Parts": [
+        {"Part": "Reanimated SAM", "Amount": "-5"},
+        {"Part": "Dark Matter Residue", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Neural-Quantum Processor",
+      "Machine": "Quantum Encoder",
+      "BatchTime": "20",
+      "Tier": "9-2",
+      "MinPower": "-2000",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Time Crystal", "Amount": "-5"},
+        {"Part": "Supercomputer", "Amount": "-1"},
+        {"Part": "Ficsite Trigon", "Amount": "-15"},
+        {"Part": "Excited Photonic Matter", "Amount": "-25"},
+        {"Part": "Neural-Quantum Processor", "Amount": "1"},
+        {"Part": "Dark Matter Residue", "Amount": "25"}
+      ]
+    },
+    {
+      "Name": "Superposition Oscillator",
+      "Machine": "Quantum Encoder",
+      "BatchTime": "12",
+      "Tier": "9-2",
+      "MinPower": "-2000",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Dark Matter Crystal", "Amount": "-6"},
+        {"Part": "Crystal Oscillator", "Amount": "-1"},
+        {"Part": "Alclad Aluminum Sheet", "Amount": "-9"},
+        {"Part": "Excited Photonic Matter", "Amount": "-25"},
+        {"Part": "Superposition Oscillator", "Amount": "1"},
+        {"Part": "Dark Matter Residue", "Amount": "25"}
+      ]
+    },
+    {
+      "Name": "Synthetic Power Shard",
+      "Machine": "Quantum Encoder",
+      "BatchTime": "12",
+      "Tier": "9-2",
+      "MinPower": "-2000",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Time Crystal", "Amount": "-2"},
+        {"Part": "Dark Matter Crystal", "Amount": "-2"},
+        {"Part": "Quartz Crystal", "Amount": "-12"},
+        {"Part": "Excited Photonic Matter", "Amount": "-12"},
+        {"Part": "Power Shard", "Amount": "1"},
+        {"Part": "Dark Matter Residue", "Amount": "12"}
+      ]
+    },
+    {
+      "Name": "Singularity Cell",
+      "Machine": "Manufacturer",
+      "BatchTime": "60",
+      "Tier": "9-4",
+      "Parts": [
+        {"Part": "Nuclear Pasta", "Amount": "-1"},
+        {"Part": "Dark Matter Crystal", "Amount": "-20"},
+        {"Part": "Iron Plate", "Amount": "-100"},
+        {"Part": "Concrete", "Amount": "-200"},
+        {"Part": "Singularity Cell", "Amount": "10"}
+      ]
+    },
+    {
+      "Name": "Ballistic Warp Drive",
+      "Machine": "Manufacturer",
+      "BatchTime": "60",
+      "Tier": "9-4",
+      "Parts": [
+        {"Part": "Thermal Propulsion Rocket", "Amount": "-1"},
+        {"Part": "Singularity Cell", "Amount": "-5"},
+        {"Part": "Superposition Oscillator", "Amount": "-2"},
+        {"Part": "Dark Matter Crystal", "Amount": "-40"},
+        {"Part": "Ballistic Warp Drive", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Space Elevator Phase 5",
+      "Machine": "Space Elevator",
+      "BatchTime": "60",
+      "Tier": "9-4",
+      "Parts": [
+        {"Part": "Nuclear Pasta", "Amount": "-1000"},
+        {"Part": "Biochemical Sculptor", "Amount": "-1000"},
+        {"Part": "AI Expansion Server", "Amount": "-256"},
+        {"Part": "Ballistic Warp Drive", "Amount": "-200"}
+      ]
+    },
+    {
+      "Name": "Ficsonium",
+      "Machine": "Particle Accelerator",
+      "BatchTime": "6",
+      "Tier": "9-5",
+      "MinPower": "-1500",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Plutonium Waste", "Amount": "-1"},
+        {"Part": "Singularity Cell", "Amount": "-1"},
+        {"Part": "Dark Matter Residue", "Amount": "-20"},
+        {"Part": "Ficsonium", "Amount": "1"}
+      ]
+    },
+    {
+      "Name": "Ficsonium Fuel Rod",
+      "Machine": "Quantum Encoder",
+      "BatchTime": "24",
+      "Tier": "9-5",
+      "MinPower": "-2000",
+      "AveragePower": "-1000",
+      "Parts": [
+        {"Part": "Ficsonium", "Amount": "-2"},
+        {"Part": "Electromagnetic Control Rod", "Amount": "-2"},
+        {"Part": "Ficsite Trigon", "Amount": "-40"},
+        {"Part": "Excited Photonic Matter", "Amount": "-20"},
+        {"Part": "Ficsonium Fuel Rod", "Amount": "1"},
+        {"Part": "Dark Matter Residue", "Amount": "20"}
+      ]
+    },
+    {
+      "Name": "Ficsonium Nuclear Power Plant",
+      "Machine": "Nuclear Power Plant",
+      "BatchTime": "60",
+      "Tier": "9-5",
+      "Parts": [
+        {"Part": "Ficsonium Fuel Rod", "Amount": "-1"},
+        {"Part": "Water", "Amount": "-240"}
+      ]
+    },
+    {
+      "Name": "FICSMAS Gift",
+      "Machine": "FICSMAS Gift Tree",
+      "BatchTime": "4",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Blue FICSMAS Ornament",
+      "Machine": "Smelter",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "-1"},
+        {"Part": "Blue FICSMAS Ornament", "Amount": "2"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "FICSMAS Tree Branch",
+      "Machine": "Constructor",
+      "BatchTime": "6",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "-1"},
+        {"Part": "FICSMAS Tree Branch", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Red FICSMAS Ornament",
+      "Machine": "Smelter",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "-1"},
+        {"Part": "Red FICSMAS Ornament", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "FICSMAS Bow",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "-2"},
+        {"Part": "FICSMAS Bow", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "FICSMAS Actual Snow",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "-5"},
+        {"Part": "FICSMAS Actual Snow", "Amount": "2"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Candy Cane",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Gift", "Amount": "-3"},
+        {"Part": "Candy Cane", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Snowball",
+      "Machine": "Constructor",
+      "BatchTime": "12",
+      "Tier": "0-3",
+      "Parts": [
+        {"Part": "FICSMAS Actual Snow", "Amount": "-3"},
+        {"Part": "Snowball", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Sparkly Fireworks",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "FICSMAS Tree Branch", "Amount": "-3"},
+        {"Part": "FICSMAS Actual Snow", "Amount": "-2"},
+        {"Part": "Sparkly Fireworks", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Fancy Fireworks",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "FICSMAS Tree Branch", "Amount": "-4"},
+        {"Part": "FICSMAS Bow", "Amount": "-3"},
+        {"Part": "Fancy Fireworks", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Sweet Fireworks",
+      "Machine": "Assembler",
+      "BatchTime": "24",
+      "Tier": "2-1",
+      "Parts": [
+        {"Part": "FICSMAS Tree Branch", "Amount": "-6"},
+        {"Part": "Candy Cane", "Amount": "-3"},
+        {"Part": "Sweet Fireworks", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Iron FICSMAS Ornament",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Blue FICSMAS Ornament", "Amount": "-3"},
+        {"Part": "Iron Ingot", "Amount": "-3"},
+        {"Part": "Iron FICSMAS Ornament", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "Copper FICSMAS Ornament",
+      "Machine": "Foundry",
+      "BatchTime": "12",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Red FICSMAS Ornament", "Amount": "-2"},
+        {"Part": "Copper Ingot", "Amount": "-2"},
+        {"Part": "Copper FICSMAS Ornament", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "FICSMAS Ornament Bundle",
+      "Machine": "Assembler",
+      "BatchTime": "12",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "Copper FICSMAS Ornament", "Amount": "-1"},
+        {"Part": "Iron FICSMAS Ornament", "Amount": "-1"},
+        {"Part": "FICSMAS Ornament Bundle", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "FICSMAS Wreath",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "FICSMAS Tree Branch", "Amount": "-15"},
+        {"Part": "FICSMAS Ornament Bundle", "Amount": "-6"},
+        {"Part": "FICSMAS Wreath", "Amount": "2"}
+      ],
+      "Ficsmas": true
+    },
+    {
+      "Name": "FICSMAS Wonder Star",
+      "Machine": "Assembler",
+      "BatchTime": "60",
+      "Tier": "3-3",
+      "Parts": [
+        {"Part": "FICSMAS Wreath", "Amount": "-5"},
+        {"Part": "Candy Cane", "Amount": "-20"},
+        {"Part": "FICSMAS Wonder Star", "Amount": "1"}
+      ],
+      "Ficsmas": true
+    }
+  ]
+}

@@ -42,16 +42,6 @@ public class Program {
         }
 
         if (outputExists) {
-            string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-            string? directoryPortion = Path.GetDirectoryName(OutputFilePath);
-            if (directoryPortion == null) {
-                throw new Exception("Output file does not exist at a valid path, could not make backup file");
-            }
-            string BackupFilePath = Path.Combine(
-                directoryPortion,
-                Path.GetFileNameWithoutExtension(OutputFilePath) + timestamp + Path.GetExtension(OutputFilePath)
-            );
-            File.Copy(OutputFilePath, BackupFilePath);
             FilePaths = FilePaths.Append(OutputFilePath);
         }
 
@@ -60,7 +50,7 @@ public class Program {
             // Console.WriteLine($"{data.Machines.Count()},{data.MultiMachines.Count()},{data.Parts.Count()},{data.Recipes.Count()}");
             data = data.Union(GameData.ReadGameData(filePath));
         }
-        data.WriteGameData(OutputFilePath);
+        data.WriteGameData(OutputFilePath, outputExists);
     }
 }
 
@@ -69,6 +59,7 @@ public class GameDataRecipePart : IEquatable<GameDataRecipePart> {
     public required string Amount;
 
     public bool Equals(GameDataRecipePart? other) => Part.Equals(other?.Part);
+    public override int GetHashCode() => HashCode.Combine(Part);
 }
 
 public class GameDataMMMachine : IEquatable<GameDataRecipe> {
@@ -77,6 +68,7 @@ public class GameDataMMMachine : IEquatable<GameDataRecipe> {
     public bool? Default;
 
     public bool Equals(GameDataRecipe? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataMMCapacity : IEquatable<GameDataMMCapacity> {
@@ -86,6 +78,7 @@ public class GameDataMMCapacity : IEquatable<GameDataMMCapacity> {
     public int? Color;
 
     public bool Equals(GameDataMMCapacity? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataMachine : IEquatable<GameDataMachine> {
@@ -103,6 +96,7 @@ public class GameDataMachine : IEquatable<GameDataMachine> {
     public string? FueledBasePowerBoost;
 
     public bool Equals(GameDataMachine? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataMultiMachine : IEquatable<GameDataMultiMachine> {
@@ -114,6 +108,7 @@ public class GameDataMultiMachine : IEquatable<GameDataMultiMachine> {
     public IEnumerable<GameDataMMCapacity>? Capacities;
 
     public bool Equals(GameDataMultiMachine? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataItem : IEquatable<GameDataItem> {
@@ -122,6 +117,7 @@ public class GameDataItem : IEquatable<GameDataItem> {
     public required int? SinkPoints;
 
     public bool Equals(GameDataItem? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameDataRecipe : IEquatable<GameDataRecipe> {
@@ -136,6 +132,7 @@ public class GameDataRecipe : IEquatable<GameDataRecipe> {
     public bool? Ficsmas;
 
     public bool Equals(GameDataRecipe? other) => Name.Equals(other?.Name);
+    public override int GetHashCode() => HashCode.Combine(Name);
 }
 
 public class GameData {
@@ -159,7 +156,19 @@ public class GameData {
         }
     }
 
-    public void WriteGameData(string filename) {
+    public void WriteGameData(string filename, bool backup = true) {
+        if (backup) {
+            string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
+            string? directoryPortion = Path.GetDirectoryName(filename);
+            if (directoryPortion == null) {
+                throw new Exception("Output file does not exist at a valid path, could not make backup file");
+            }
+            string BackupFilePath = Path.Combine(
+                directoryPortion,
+                Path.GetFileNameWithoutExtension(filename) + timestamp + Path.GetExtension(filename)
+            );
+            File.Copy(filename, BackupFilePath);
+        }
         File.WriteAllText(filename, JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
     }
 
