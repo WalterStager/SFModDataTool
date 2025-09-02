@@ -42,16 +42,6 @@ public class Program {
         }
 
         if (outputExists) {
-            string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-            string? directoryPortion = Path.GetDirectoryName(OutputFilePath);
-            if (directoryPortion == null) {
-                throw new Exception("Output file does not exist at a valid path, could not make backup file");
-            }
-            string BackupFilePath = Path.Combine(
-                directoryPortion,
-                Path.GetFileNameWithoutExtension(OutputFilePath) + timestamp + Path.GetExtension(OutputFilePath)
-            );
-            File.Copy(OutputFilePath, BackupFilePath);
             FilePaths = FilePaths.Append(OutputFilePath);
         }
 
@@ -60,7 +50,7 @@ public class Program {
             // Console.WriteLine($"{data.Machines.Count()},{data.MultiMachines.Count()},{data.Parts.Count()},{data.Recipes.Count()}");
             data = data.Union(GameData.ReadGameData(filePath));
         }
-        data.WriteGameData(OutputFilePath);
+        data.WriteGameData(OutputFilePath, outputExists);
     }
 }
 
@@ -166,7 +156,19 @@ public class GameData {
         }
     }
 
-    public void WriteGameData(string filename) {
+    public void WriteGameData(string filename, bool backup = true) {
+        if (backup) {
+            string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
+            string? directoryPortion = Path.GetDirectoryName(filename);
+            if (directoryPortion == null) {
+                throw new Exception("Output file does not exist at a valid path, could not make backup file");
+            }
+            string BackupFilePath = Path.Combine(
+                directoryPortion,
+                Path.GetFileNameWithoutExtension(filename) + timestamp + Path.GetExtension(filename)
+            );
+            File.Copy(filename, BackupFilePath);
+        }
         File.WriteAllText(filename, JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
     }
 

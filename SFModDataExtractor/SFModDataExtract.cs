@@ -20,8 +20,8 @@ namespace SFModDataExtractor;
 class SFModDataExtractorConfig {
     public string satisfactory_path = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Satisfactory\\";
     public bool save_icons = true;
-    public bool write_to_modeler_after_extracting = false; // unimplemented
-    public string? modeler_path = null; // unimplemented
+    public bool write_to_modeler_after_extracting = false;
+    public string modeler_path = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Satisfactory Modeler\\";
 }
 
 class SFModDataProvider {
@@ -616,15 +616,19 @@ class SFModDataExtract {
         Console.WriteLine($"BuildableRecipes {prov.FileToBuildingRecipe.Count}");
 
         GameData baseGameData = GameData.ReadGameData("game_data_base.json");
+        Dictionary<string, GameData> modGameDataDic = new Dictionary<string, GameData>();
+        Dictionary<string, List<(string, SKBitmap[])>> modIconsDic = new Dictionary<string, List<(string, SKBitmap[])>>();
 
         foreach ((string modName, HashSet<UassetFile> modFiles) in prov.FilesByMod) {
             List<(string, SKBitmap[])> iconsToSave = new List<(string, SKBitmap[])>();
+            modIconsDic.Add(modName, iconsToSave);
             GameData modGameData = new GameData {
                 Machines = new HashSet<GameDataMachine>(),
                 MultiMachines = new HashSet<GameDataMultiMachine>(),
                 Parts = new HashSet<GameDataItem>(),
                 Recipes = new HashSet<GameDataRecipe>()
             };
+            modGameDataDic.Add(modName, modGameData);
 
             foreach (UassetFile uf in modFiles) {
                 if (prov.FileToRecipe.ContainsKey(uf.File)) {
@@ -721,5 +725,42 @@ class SFModDataExtract {
                 }
             }
         }
+
+        if (prov.config.write_to_modeler_after_extracting) {
+            if (!Path.Exists(prov.config.modeler_path)) {
+                throw new Exception($"Invalid modeler path {prov.config.modeler_path} does not exist");
+            }
+
+            GameData combinedGameData = new GameData {
+                Machines = new HashSet<GameDataMachine>(),
+                MultiMachines = new HashSet<GameDataMultiMachine>(),
+                Parts = new HashSet<GameDataItem>(),
+                Recipes = new HashSet<GameDataRecipe>()
+            };
+
+            combinedGameData = combinedGameData.Union(baseGameData);
+
+            foreach ((string modName, GameData modGameData) in modGameDataDic) {
+                combinedGameData = combinedGameData.Union(modGameData);
+            }
+
+            combinedGameData.WriteGameData(Path.Combine(prov.config.modeler_path, "game_data", "game_data.json"), true);
+
+            if (prov.config.save_icons) {
+                string icon_folder_path = Path.Combine(prov.config.modeler_path, "images", "icons");
+                foreach ((string modName, List<(string, SKBitmap[])> modIcons) in modIconsDic) {
+                    foreach ((string iconName, SKBitmap[] iconData) in modIcons) {
+                        string savePath = Path.Combine(icon_folder_path, $"{iconName.Replace(" ", "_")}.png");
+                        foreach (SKBitmap bitmap in iconData) {
+                            SKData bytes = bitmap.Encode(SKEncodedImageFormat.Png, 100);
+                            if (!Path.Exists(savePath)) {
+                                File.WriteAllBytes(savePath, bytes.ToArray());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
