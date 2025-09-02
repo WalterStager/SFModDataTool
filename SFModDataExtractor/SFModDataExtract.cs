@@ -410,6 +410,7 @@ class SFModDataExtract {
         if (prov.AlreadyParsedFiles.Contains(uf)) {
             return;
         }
+        prov.AlreadyParsedFiles.Add(uf);
 
         int? majorTier = uf.GetInt("Properties.mTechTier");
         int? menuPrio = (int?)uf.GetDouble("Properties.mMenuPriority");
@@ -437,8 +438,6 @@ class SFModDataExtract {
                 }
             }
         }
-
-        prov.AlreadyParsedFiles.Add(uf);
     }
 
     public void ReadSinkPoints(UassetFile uf) {
@@ -468,6 +467,44 @@ class SFModDataExtract {
         }
     }
 
+    public void ParseResearchTree(UassetFile uf) {
+        if (prov.AlreadyParsedFiles.Contains(uf)) {
+            return;
+        }
+        prov.AlreadyParsedFiles.Add(uf);
+
+        JToken? nodesToken = uf.GetToken("Properties.mNodes");
+        if (nodesToken != null) {
+            foreach (JToken nodeToken in nodesToken.Children()) {
+                string? nodeObjPath = nodeToken.SelectToken("ObjectPath")?.ToString();
+                if (nodeObjPath == null) {
+                    continue;
+                }
+                // maybe it could be a different file
+                UassetFile nodeFile = prov.NormalizeAndMatchPath(nodeObjPath);
+                int nodeObjIndex = SFModUtility.GetAssetPathIndex(nodeObjPath);
+                JToken? dataStructToken = nodeFile.GetToken("Properties.mNodeDataStruct", exportIndex: nodeObjIndex);
+                if (dataStructToken == null) {
+                    continue;
+                }
+                JToken? schemFileObjPath = null;
+                foreach (JToken dataStructTokenChild in dataStructToken.Children().Values()) {
+                    schemFileObjPath = dataStructTokenChild.SelectToken("ObjectPath");
+                    if (schemFileObjPath != null) {
+                        break;
+                    }
+                }
+
+                if (schemFileObjPath == null || schemFileObjPath.ToString() == "") {
+                    continue;
+                }
+
+                UassetFile schemFile = prov.NormalizeAndMatchPath(schemFileObjPath.ToString());
+                ParseSchematic(schemFile);
+            }
+        }
+    }
+
     public void ParseGameWorld(UassetFile uf) {
         string? sinkPointsPath = uf.GetString("Properties.mResourceSinkItemPointsTable.AssetPathName");
         if (sinkPointsPath != null) {
@@ -482,6 +519,17 @@ class SFModDataExtract {
                 if (objPath != null) {
                     UassetFile schemFile = prov.NormalizeAndMatchPath(objPath);
                     ParseSchematic(schemFile);
+                }
+            }
+        }
+
+        JToken? researchTreesToken = uf.GetToken("Properties.mResearchTrees");
+        if (researchTreesToken != null) {
+            foreach (JToken researchTreeToken in researchTreesToken.Children()) {
+                string? objPath = researchTreeToken.SelectToken("ObjectPath")?.ToString();
+                if (objPath != null) {
+                    UassetFile researchTreeFile = prov.NormalizeAndMatchPath(objPath);
+                    ParseResearchTree(researchTreeFile);
                 }
             }
         }
